@@ -5,7 +5,7 @@ import setupMock, {
 } from '@/utils/setup-mock';
 
 import { MockParams } from '@/types/mock';
-import { isLogin } from '@/utils/auth';
+import { isLogon } from '@/utils/auth';
 
 setupMock({
   setup() {
@@ -13,7 +13,7 @@ setupMock({
 
     // 用户信息
     Mock.mock(new RegExp('/api/user/info'), () => {
-      if (isLogin()) {
+      if (isLogon()) {
         const role = window.localStorage.getItem('userRole') || 'admin';
         return successResponseWrap({
           name: '王立群',
@@ -38,31 +38,35 @@ setupMock({
       return failResponseWrap(null, '未登录', 50008);
     });
 
-    // 登录
-    Mock.mock(new RegExp('/api/user/login'), (params: MockParams) => {
-      const { username, password } = JSON.parse(params.body);
-      if (!username) {
-        return failResponseWrap(null, '用户名不能为空', 50000);
+    // User Logon
+    Mock.mock(new RegExp('/api/user/logon'), (params: MockParams) => {
+      const { personalID, securityNumber } = JSON.parse(params.body);
+      if (!personalID) {
+        return failResponseWrap(null, 'Personal ID cannot be empty', 50000);
       }
-      if (!password) {
-        return failResponseWrap(null, '密码不能为空', 50000);
+      if (!securityNumber) {
+        return failResponseWrap(null, 'Security number cannot be empty', 50000);
       }
-      if (username === 'admin' && password === 'admin') {
+      if (personalID === '1234567890' && securityNumber === '12345') {
         window.localStorage.setItem('userRole', 'admin');
         return successResponseWrap({
           token: '12345',
         });
       }
-      if (username === 'user' && password === 'user') {
+      if (personalID === '0987654321' && securityNumber === '54321') {
         window.localStorage.setItem('userRole', 'user');
         return successResponseWrap({
           token: '54321',
         });
       }
-      return failResponseWrap(null, '账号或者密码错误', 50000);
+      return failResponseWrap(
+        null,
+        'Incorrect personal ID or security number',
+        50000
+      );
     });
 
-    // 登出
+    // User Logout
     Mock.mock(new RegExp('/api/user/logout'), () => {
       return successResponseWrap(null);
     });

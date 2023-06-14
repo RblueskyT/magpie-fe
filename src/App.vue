@@ -24,3 +24,9 @@
     }
   });
 </script>
+
+<style lang="less">
+  #nprogress .bar {
+    background: #a1151e !important;
+  }
+</style>

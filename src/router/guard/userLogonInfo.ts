@@ -2,13 +2,13 @@ import type { Router, LocationQueryRaw } from 'vue-router';
 import NProgress from 'nprogress'; // progress bar
 
 import { useUserStore } from '@/store';
-import { isLogin } from '@/utils/auth';
+import { isLogon } from '@/utils/auth';
 
-export default function setupUserLoginInfoGuard(router: Router) {
+export default function setupUserLogonInfoGuard(router: Router) {
   router.beforeEach(async (to, from, next) => {
     NProgress.start();
     const userStore = useUserStore();
-    if (isLogin()) {
+    if (isLogon()) {
       if (userStore.role) {
         next();
       } else {
@@ -18,7 +18,7 @@ export default function setupUserLoginInfoGuard(router: Router) {
         } catch (error) {
           await userStore.logout();
           next({
-            name: 'login',
+            name: 'logon',
             query: {
               redirect: to.name,
               ...to.query,
@@ -27,12 +27,12 @@ export default function setupUserLoginInfoGuard(router: Router) {
         }
       }
     } else {
-      if (to.name === 'login') {
+      if (to.name === 'logon') {
         next();
         return;
       }
       next({
-        name: 'login',
+        name: 'logon',
         query: {
           redirect: to.name,
           ...to.query,

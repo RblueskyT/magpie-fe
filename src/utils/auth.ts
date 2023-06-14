@@ -1,6 +1,6 @@
 const TOKEN_KEY = 'token';
 
-const isLogin = () => {
+const isLogon = () => {
   return !!localStorage.getItem(TOKEN_KEY);
 };
 
@@ -16,4 +16,4 @@ const clearToken = () => {
   localStorage.removeItem(TOKEN_KEY);
 };
 
-export { isLogin, getToken, setToken, clearToken };
+export { isLogon, getToken, setToken, clearToken };

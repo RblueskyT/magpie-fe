@@ -13,13 +13,14 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      redirect: 'login',
+      redirect: 'logon',
     },
     {
-      path: '/login',
-      name: 'login',
-      component: () => import('@/views/login/index.vue'),
+      path: '/logon',
+      name: 'logon',
+      component: () => import('@/views/logon/index.vue'),
       meta: {
+        title: 'Magpie - Log on',
         requiresAuth: false,
       },
     },

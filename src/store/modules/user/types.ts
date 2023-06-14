@@ -1,5 +1,7 @@
 export type RoleType = '' | '*' | 'admin' | 'user';
+export type AccountType = 0 | 1 | 2 | 3;
 export interface UserState {
+  // TODO: NEED TO BE MODIFIED
   name?: string;
   avatar?: string;
   job?: string;
@@ -16,4 +18,6 @@ export interface UserState {
   accountId?: string;
   certification?: number;
   role: RoleType;
+  // New Types
+  accountType?: AccountType;
 }
