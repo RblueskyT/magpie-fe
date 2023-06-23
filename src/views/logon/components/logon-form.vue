@@ -166,7 +166,7 @@
         await userStore.logon(values as LogonData);
         const { redirect, ...othersQuery } = router.currentRoute.value.query;
         router.push({
-          name: (redirect as string) || 'Workplace',
+          name: (redirect as string) || 'banking-services',
           query: {
             ...othersQuery,
           },

@@ -24,6 +24,15 @@ const router = createRouter({
         requiresAuth: false,
       },
     },
+    {
+      path: '/banking-services',
+      name: 'banking-services',
+      component: () => import('@/views/banking-services/index.vue'),
+      meta: {
+        title: 'Magpie - Personal Banking Services',
+        requiresAuth: true,
+      },
+    },
     ...appRoutes,
     REDIRECT_MAIN,
     NOT_FOUND_ROUTE,
