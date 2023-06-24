@@ -26,6 +26,7 @@ export default function setupUserLogonInfoGuard(router: Router) {
           });
         }
       }
+      NProgress.done();
     } else {
       if (to.name === 'logon') {
         next();
@@ -38,7 +39,7 @@ export default function setupUserLogonInfoGuard(router: Router) {
           ...to.query,
         } as LocationQueryRaw,
       });
+      NProgress.done();
     }
-    NProgress.done();
   });
 }
