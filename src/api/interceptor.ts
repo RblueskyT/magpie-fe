@@ -53,7 +53,7 @@ axios.interceptors.response.use(
         Modal.error({
           title: 'Confirm logout',
           content:
-            'You have been logged out, you can cancel to stay on this page, or log in again',
+            'You have been logged out, you can cancel to stay on this page, or log on again',
           okText: 'Re-Logon',
           async onOk() {
             const userStore = useUserStore();

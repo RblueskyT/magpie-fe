@@ -1,34 +1,17 @@
 import { defineStore } from 'pinia';
 import {
+  LogonData,
   logon as userLogon,
   logout as userLogout,
   getUserInfo,
-  LogonData,
 } from '@/api/user';
 import { setToken, clearToken } from '@/utils/auth';
-import { removeRouteListener } from '@/utils/route-listener';
 import { UserState } from './types';
-import useAppStore from '../app';
 
 const useUserStore = defineStore('user', {
   state: (): UserState => ({
-    name: undefined,
-    avatar: undefined,
-    job: undefined,
-    organization: undefined,
-    location: undefined,
-    email: undefined,
-    introduction: undefined,
-    personalWebsite: undefined,
-    jobName: undefined,
-    organizationName: undefined,
-    locationName: undefined,
-    phone: undefined,
-    registrationDate: undefined,
-    accountId: undefined,
-    certification: undefined,
-    role: '',
-    accountType: undefined,
+    group: 0,
+    bankAccounts: [],
   }),
 
   getters: {
@@ -38,12 +21,6 @@ const useUserStore = defineStore('user', {
   },
 
   actions: {
-    switchRoles() {
-      return new Promise((resolve) => {
-        this.role = this.role === 'user' ? 'admin' : 'user';
-        resolve(this.role);
-      });
-    },
     // Set user's information
     setInfo(partial: Partial<UserState>) {
       this.$patch(partial);
@@ -72,11 +49,8 @@ const useUserStore = defineStore('user', {
       }
     },
     logoutCallBack() {
-      const appStore = useAppStore();
       this.resetInfo();
       clearToken();
-      removeRouteListener();
-      appStore.clearServerMenu();
     },
     // Logout
     async logout() {

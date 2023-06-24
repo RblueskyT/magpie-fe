@@ -1,23 +1,14 @@
-export type RoleType = '' | '*' | 'admin' | 'user';
-export type AccountType = 0 | 1 | 2 | 3;
+export type GroupNumber = 0 | 1 | 2 | 3 | 4;
+
+export interface BankAccountProps {
+  bankAccountType: string;
+  sortCode: string;
+  accountNumber: string;
+  balance: number;
+  balanceInclPending: number;
+}
+
 export interface UserState {
-  // TODO: NEED TO BE MODIFIED
-  name?: string;
-  avatar?: string;
-  job?: string;
-  organization?: string;
-  location?: string;
-  email?: string;
-  introduction?: string;
-  personalWebsite?: string;
-  jobName?: string;
-  organizationName?: string;
-  locationName?: string;
-  phone?: string;
-  registrationDate?: string;
-  accountId?: string;
-  certification?: number;
-  role: RoleType;
-  // New Types
-  accountType?: AccountType;
+  group?: GroupNumber; // Group number used in the controlled experiment
+  bankAccounts?: BankAccountProps[]; // Mock bank accounts
 }

@@ -9,7 +9,7 @@ export default function setupUserLogonInfoGuard(router: Router) {
     NProgress.start();
     const userStore = useUserStore();
     if (isLogon()) {
-      if (userStore.role) {
+      if (userStore.group !== 0) {
         next();
       } else {
         try {
@@ -39,5 +39,6 @@ export default function setupUserLogonInfoGuard(router: Router) {
         } as LocationQueryRaw,
       });
     }
+    NProgress.done();
   });
 }
