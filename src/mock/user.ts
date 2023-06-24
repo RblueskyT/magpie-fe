@@ -15,7 +15,7 @@ setupMock({
     Mock.mock(new RegExp('/api/user/info'), () => {
       if (isLogon()) {
         return successResponseWrap({
-          group: 0,
+          group: 1,
           bankAccounts: [
             {
               bankAccountType: 'BASIC BANK ACCOUNT',

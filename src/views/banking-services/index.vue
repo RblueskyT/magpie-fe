@@ -49,11 +49,22 @@
 </template>
 
 <script lang="ts" setup>
-  import { ref } from 'vue';
+  import { computed, ref, provide, readonly } from 'vue';
+  import { useUserStore } from '@/store';
   import Home from './components/home.vue';
   import NavBar from './components/navbar.vue';
 
+  const userStore = useUserStore();
+  const group = computed(() => {
+    return userStore.group;
+  });
+  const bankAccounts = computed(() => {
+    return userStore.bankAccounts;
+  });
   const bottomMenuKey = ref(['0']);
+
+  provide('group', readonly(group));
+  provide('bankAccounts', readonly(bankAccounts));
 </script>
 
 <style lang="less" scoped>
