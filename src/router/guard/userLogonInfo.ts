@@ -30,6 +30,7 @@ export default function setupUserLogonInfoGuard(router: Router) {
     } else {
       if (to.name === 'logon') {
         next();
+        NProgress.done();
         return;
       }
       next({

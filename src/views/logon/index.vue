@@ -13,13 +13,13 @@
                     <a-space direction="vertical" :size="0" fill>
                       <a-row>
                         <a-col :span="24">
-                          <a-avatar class="app-logo" :size="64">
+                          <a-avatar class="app-logo" :size="56">
                             <img
                               style="
                                 width: 44px;
                                 height: 44px;
-                                margin-top: 8px;
-                                margin-left: 8px;
+                                margin-top: 4px;
+                                margin-left: 4px;
                               "
                               src="@/assets/images/magpie-logo-red.png"
                               alt="Magpie Logo"
@@ -38,6 +38,7 @@
                               font-family: 'Trebuchet MS', 'Lucida Sans Unicode',
                                 'Lucida Grande', 'Lucida Sans', Arial,
                                 sans-serif;
+                              line-height: 1;
                             "
                           >
                             Magpie
@@ -131,7 +132,6 @@
     margin: 0 auto;
     background-color: white;
     border: 1px solid white;
-    box-shadow: 0 2px 12px #0000001a;
   }
 
   .fscs-logo {
