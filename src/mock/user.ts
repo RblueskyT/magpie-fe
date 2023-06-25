@@ -3,39 +3,12 @@ import setupMock, {
   successResponseWrap,
   failResponseWrap,
 } from '@/utils/setup-mock';
-
 import { MockParams } from '@/types/mock';
 import { isLogon } from '@/utils/auth';
 
 setupMock({
   setup() {
-    // Mock.XHR.prototype.withCredentials = true;
-
-    // User Info
-    Mock.mock(new RegExp('/api/user/info'), () => {
-      if (isLogon()) {
-        return successResponseWrap({
-          group: 1,
-          bankAccounts: [
-            {
-              bankAccountType: 'BASIC BANK ACCOUNT',
-              sortCode: '00-00-00',
-              accountNumber: '12345678',
-              balance: 2370.31,
-              balanceInclPending: 1000.35,
-            },
-            {
-              bankAccountType: 'BASIC TOP-UP DEBIT CARD',
-              sortCode: '01-02-03',
-              accountNumber: '87654321',
-              balance: 3870.62,
-              balanceInclPending: 1702.93,
-            },
-          ],
-        });
-      }
-      return failResponseWrap(null, 'not logged on', 50008);
-    });
+    // Mock.XHR.prototype.withCredentials = true; // Unused - this option is to solve a bug in some versions of Mock.js
 
     // User Logon
     Mock.mock(new RegExp('/api/user/logon'), (params: MockParams) => {
@@ -61,6 +34,32 @@ setupMock({
     // User Logout
     Mock.mock(new RegExp('/api/user/logout'), () => {
       return successResponseWrap(null);
+    });
+
+    // User Info
+    Mock.mock(new RegExp('/api/user/info'), () => {
+      if (isLogon()) {
+        return successResponseWrap({
+          group: 1,
+          bankAccounts: [
+            {
+              bankAccountType: 'BASIC BANK ACCOUNT',
+              sortCode: '00-00-00',
+              accountNumber: '12345678',
+              balance: 2370.31,
+              balanceInclPending: 1000.35,
+            },
+            {
+              bankAccountType: 'BASIC TOP-UP DEBIT CARD',
+              sortCode: '01-02-03',
+              accountNumber: '87654321',
+              balance: 3870.62,
+              balanceInclPending: 1702.93,
+            },
+          ],
+        });
+      }
+      return failResponseWrap(null, 'not logged on', 50008);
     });
   },
 });
