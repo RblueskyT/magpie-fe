@@ -1,5 +1,5 @@
 <template>
-  <div class="home-container">
+  <div v-if="homePageLoading == false" class="home-container">
     <a-space direction="vertical" :size="16" fill>
       <a-card
         v-for="(itemAccount, indexAccount) in bankAccounts"
@@ -51,12 +51,16 @@
       </a-card>
     </a-space>
   </div>
+  <div v-if="homePageLoading == true" class="home-spin-container">
+    <a-spin :size="48" tip="Loading ..." />
+  </div>
 </template>
 
 <script lang="ts" setup>
   import { inject } from 'vue';
 
   const bankAccounts: any = inject('bankAccounts');
+  const homePageLoading: any = inject('homePageLoading');
   const numberFormatter = (value: string) => {
     const values = value.split('.');
     values[0] = values[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
@@ -69,5 +73,11 @@
     padding: 8px 8px;
     height: 100%;
     overflow-y: auto;
+  }
+  .home-spin-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
   }
 </style>

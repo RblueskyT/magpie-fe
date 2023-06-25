@@ -55,11 +55,13 @@
     return userStore.bankAccounts;
   });
   const bottomMenuKey = ref(['0']);
+  const homePageLoading = ref(false);
   const paymentDrawerVisibleFlag = ref(false);
 
   provide('group', readonly(group));
   provide('bankAccounts', readonly(bankAccounts));
   provide('bottomMenuKey', bottomMenuKey);
+  provide('homePageLoading', homePageLoading);
   provide('paymentDrawerVisibleFlag', paymentDrawerVisibleFlag);
 </script>
 
