@@ -5,7 +5,7 @@
       <a-layout-content>
         <div class="app-inner-container">
           <a-card class="app-inner-card" :bordered="false">
-            <div class="app-inner-content">
+            <div id="drawerContainer" class="app-inner-content">
               <a-layout>
                 <a-layout-header>
                   <NavBar />
@@ -23,6 +23,20 @@
       </a-layout-content>
       <a-layout-footer></a-layout-footer>
     </a-layout>
+    <!-- DETAILS, PAY, TRANSFER -->
+    <a-drawer
+      v-model:visible="paymentDrawerVisibleFlag"
+      placement="right"
+      :mask="false"
+      :closable="false"
+      width="500"
+      popup-container="#drawerContainer"
+      :esc-to-close="false"
+      :header="false"
+      :footer="false"
+    >
+      <div>TODO</div>
+    </a-drawer>
   </div>
 </template>
 
@@ -41,10 +55,12 @@
     return userStore.bankAccounts;
   });
   const bottomMenuKey = ref(['0']);
+  const paymentDrawerVisibleFlag = ref(false);
 
   provide('group', readonly(group));
   provide('bankAccounts', readonly(bankAccounts));
   provide('bottomMenuKey', bottomMenuKey);
+  provide('paymentDrawerVisibleFlag', paymentDrawerVisibleFlag);
 </script>
 
 <style lang="less" scoped>
@@ -68,6 +84,11 @@
 
   .app-inner-card :deep(.arco-card-body) {
     padding: 0px;
+  }
+
+  .app-inner-content {
+    position: relative;
+    overflow: hidden;
   }
 
   .app-inner-content :deep(.arco-layout) {
@@ -98,5 +119,9 @@
     background-color: white;
     height: 80px;
     border-top: 1px solid var(--color-neutral-3);
+  }
+
+  .app-inner-content :deep(.arco-drawer-body) {
+    padding: 0px;
   }
 </style>
