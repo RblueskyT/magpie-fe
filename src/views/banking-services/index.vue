@@ -11,7 +11,7 @@
                   <NavBar />
                 </a-layout-header>
                 <a-layout-content>
-                  <MainContent />
+                  <Home />
                 </a-layout-content>
                 <a-layout-footer>
                   <BottomMenu />
@@ -44,7 +44,7 @@
   import { computed, ref, provide, readonly } from 'vue';
   import { useUserStore } from '@/store';
   import NavBar from './components/navbar.vue';
-  import MainContent from './components/main-content.vue';
+  import Home from './components/home.vue';
   import BottomMenu from './components/bottom-menu.vue';
 
   const userStore = useUserStore();
