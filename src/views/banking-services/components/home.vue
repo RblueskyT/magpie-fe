@@ -34,7 +34,7 @@
             <a-col :span="24" style="text-align: left">
               <a-typography-title
                 :heading="5"
-                style="margin: 0; color: #4e5969"
+                style="margin: 0; color: #272e3b"
               >
                 £{{ numberFormatter(itemAccount.balance.toString()) }}
               </a-typography-title>
@@ -60,15 +60,11 @@
 
 <script lang="ts" setup>
   import { inject } from 'vue';
+  import numberFormatter from '@/utils/number-formatter';
 
   const bankAccounts: any = inject('bankAccounts');
   const homePageLoading: any = inject('homePageLoading');
   const focusedAccountIdx: any = inject('focusedAccountIdx');
-  const numberFormatter = (value: string) => {
-    const values = value.split('.');
-    values[0] = values[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-    return values.join('.');
-  };
   const setFocusedAccountIdx = (newValue: string) => {
     focusedAccountIdx.value = newValue;
   };

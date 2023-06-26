@@ -46,7 +46,7 @@ setupMock({
               bankAccountType: 'BASIC BANK ACCOUNT',
               sortCode: '00-00-00',
               accountNumber: '12345678',
-              balance: 2370.31,
+              balance: 2370,
               balanceInclPending: 1000.35,
             },
             {

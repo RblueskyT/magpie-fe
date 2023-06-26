@@ -6,6 +6,7 @@
 
 <script lang="ts" setup>
   import { inject, reactive } from 'vue';
+  import numberFormatter from '@/utils/number-formatter';
 
   const bankAccounts: any = inject('bankAccounts');
   const paymentForm = reactive({
@@ -16,11 +17,6 @@
     date: '',
     paymentPurpose: '',
   });
-  const numberFormatter = (value: string) => {
-    const values = value.split('.');
-    values[0] = values[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-    return values.join('.');
-  };
 </script>
 
 <style lang="less" scoped>

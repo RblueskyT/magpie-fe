@@ -61,6 +61,14 @@
   const homePageLoading = ref(false);
   const drawerVisibleFlag = ref(false);
   const focusedAccountIdx = ref(''); // this is used for the control of the 'DETAILS' panel
+  const balanceFormatter = () => {
+    for (let i = 0; i < (bankAccounts.value as any).length; i += 1) {
+      (bankAccounts.value as any)[i].balance.toFixed(2);
+      (bankAccounts.value as any)[i].balanceInclPending.toFixed(2);
+    }
+  };
+
+  balanceFormatter();
 
   // Check whether to open the drawer - details
   watch(focusedAccountIdx, () => {

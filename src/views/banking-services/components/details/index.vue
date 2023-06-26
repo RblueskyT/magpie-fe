@@ -4,8 +4,9 @@
       <a-layout-header>
         <NavBar />
       </a-layout-header>
-      <!-- TODO -->
-      <a-layout-content> test </a-layout-content>
+      <a-layout-content>
+        <Overview />
+      </a-layout-content>
       <!-- TODO -->
       <a-layout-footer> test </a-layout-footer>
     </a-layout>
@@ -15,6 +16,7 @@
 <script lang="ts" setup>
   import { computed, provide, inject, readonly } from 'vue';
   import NavBar from './components/navbar.vue';
+  import Overview from './components/overview.vue';
 
   const bankAccounts: any = inject('bankAccounts');
   const focusedAccountIdx: any = inject('focusedAccountIdx');
@@ -55,7 +57,7 @@
     display: flex;
     flex-direction: column;
     background-color: white;
-    height: 720px;
+    height: 750px;
     border-top: 1px solid var(--color-neutral-3);
   }
 </style>
