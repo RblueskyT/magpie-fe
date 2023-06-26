@@ -23,13 +23,7 @@
             £{{ numberFormatter(focusedAccount.balanceInclPending.toString()) }}
           </a-typography-title>
           <a-typography-text style="font-size: 16px; color: #86909c">
-            £{{
-              numberFormatter(
-                (
-                  focusedAccount.balance - focusedAccount.balanceInclPending
-                ).toString()
-              )
-            }}
+            £{{ numberFormatter(computePending().toString()) }}
           </a-typography-text>
         </a-space>
       </a-col>
@@ -39,9 +33,15 @@
 
 <script lang="ts" setup>
   import { inject } from 'vue';
+  import Decimal from 'decimal.js';
   import numberFormatter from '@/utils/number-formatter';
 
   const focusedAccount: any = inject('focusedAccount');
+  const computePending = () => {
+    const balanceOne = new Decimal(focusedAccount.value.balance);
+    const balanceTwo = new Decimal(focusedAccount.value.balanceInclPending);
+    return balanceOne.minus(balanceTwo);
+  };
 </script>
 
 <style lang="less" scoped>
