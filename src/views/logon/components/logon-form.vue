@@ -1,6 +1,6 @@
 <template>
   <div class="logon-form-wrapper">
-    <div class="logon-form-error-msg">
+    <div class="logon-form-error-msg" style="margin-bottom: 8px">
       <a-alert
         v-show="errorMessage.length > 0"
         type="error"

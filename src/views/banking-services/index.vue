@@ -44,7 +44,9 @@
 
 <script lang="ts" setup>
   import { computed, ref, watch, provide, readonly } from 'vue';
+  import { Message } from '@arco-design/web-vue';
   import { useUserStore } from '@/store';
+  import { queryAccountList } from '@/api/banking-services';
   import NavBar from './components/navbar.vue';
   import Home from './components/home.vue';
   import BottomMenu from './components/bottom-menu.vue';
@@ -54,13 +56,31 @@
   const group = computed(() => {
     return userStore.group;
   });
-  const bankAccounts = computed(() => {
-    return userStore.bankAccounts;
-  });
+  const bankAccounts: any = ref([]);
   const bottomMenuKey = ref(['0']);
   const homePageLoading = ref(false);
   const drawerVisibleFlag = ref(false);
   const focusedAccountIdx = ref(''); // this is used for the control of the 'DETAILS' panel
+  const listBankAccounts = async () => {
+    homePageLoading.value = true;
+    try {
+      const resData = await queryAccountList();
+      if ((resData as any).code === 20000) {
+        bankAccounts.value.splice(0, bankAccounts.value.length);
+        bankAccounts.value = (resData as any).data.bankAccounts;
+      } else {
+        Message.error(
+          'Sorry, the list of accounts cannot be retrieved at this time'
+        );
+      }
+    } catch (error) {
+      Message.error('Sorry, an unknown error has occurred');
+    } finally {
+      homePageLoading.value = false;
+    }
+  };
+
+  listBankAccounts();
 
   // Check whether to open the drawer - details
   watch(focusedAccountIdx, () => {
