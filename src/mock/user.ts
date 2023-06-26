@@ -4,7 +4,6 @@ import setupMock, {
   failResponseWrap,
 } from '@/utils/setup-mock';
 import { MockParams } from '@/types/mock';
-import { isLogon } from '@/utils/auth';
 
 setupMock({
   setup() {
@@ -22,8 +21,10 @@ setupMock({
       if (personalID === '1234567890' && securityNumber === '12345') {
         return successResponseWrap({
           token: '12345',
+          group: 1,
         });
       }
+      // TODO: other test accounts
       return failResponseWrap(
         null,
         'Incorrect personal ID or security number',
@@ -34,32 +35,6 @@ setupMock({
     // User Logout
     Mock.mock(new RegExp('/api/user/logout'), () => {
       return successResponseWrap(null);
-    });
-
-    // User Info
-    Mock.mock(new RegExp('/api/user/info'), () => {
-      if (isLogon()) {
-        return successResponseWrap({
-          group: 1,
-          bankAccounts: [
-            {
-              bankAccountType: 'BASIC BANK ACCOUNT',
-              sortCode: '00-00-00',
-              accountNumber: '12345678',
-              balance: 2370,
-              balanceInclPending: 1000.35,
-            },
-            {
-              bankAccountType: 'BASIC TOP-UP DEBIT CARD',
-              sortCode: '01-02-03',
-              accountNumber: '87654321',
-              balance: 3870.62,
-              balanceInclPending: 1702.93,
-            },
-          ],
-        });
-      }
-      return failResponseWrap(null, 'not logged on', 50008);
     });
   },
 });

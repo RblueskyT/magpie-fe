@@ -46,10 +46,7 @@ axios.interceptors.response.use(
       //   duration: 5 * 1000,
       // });
       // 50008: Illegal token; 50012: Other clients logged in; 50014: Token expired;
-      if (
-        [50008, 50012, 50014].includes(res.code) &&
-        response.config.url !== '/api/user/info'
-      ) {
+      if ([50008, 50012, 50014].includes(res.code)) {
         Modal.error({
           title: 'Confirm logout',
           content:

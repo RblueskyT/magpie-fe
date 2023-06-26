@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { UserState } from '@/store/modules/user/types';
 
 export interface LogonData {
   personalID: string;
@@ -8,6 +7,7 @@ export interface LogonData {
 
 export interface LogonRes {
   token: string;
+  group: 1 | 2 | 3 | 4;
 }
 
 export function logon(data: LogonData) {
@@ -16,8 +16,4 @@ export function logon(data: LogonData) {
 
 export function logout() {
   return axios.post<LogonRes>('/api/user/logout');
-}
-
-export function getUserInfo() {
-  return axios.post<UserState>('/api/user/info');
 }

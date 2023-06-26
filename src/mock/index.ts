@@ -1,7 +1,7 @@
 import Mock from 'mockjs';
 
 import './user';
-import './payment';
+import './banking-services';
 
 Mock.setup({
   timeout: '600-1000',

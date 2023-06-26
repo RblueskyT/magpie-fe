@@ -10,6 +10,31 @@ setupMock({
   setup() {
     // Mock.XHR.prototype.withCredentials = true; // Unused - this option is to solve a bug in some versions of Mock.js
 
+    // Query bank accounts
+    Mock.mock(new RegExp('/api/account/list'), () => {
+      if (isLogon()) {
+        return successResponseWrap({
+          bankAccounts: [
+            {
+              bankAccountType: 'BASIC BANK ACCOUNT',
+              sortCode: '00-00-00',
+              accountNumber: '12345678',
+              balance: 2370,
+              balanceInclPending: 1000.35,
+            },
+            {
+              bankAccountType: 'EVERYDAY BANK ACCOUNT',
+              sortCode: '01-02-03',
+              accountNumber: '87654321',
+              balance: 3870.62,
+              balanceInclPending: 1702.93,
+            },
+          ],
+        });
+      }
+      return failResponseWrap(null, 'not logged on', 50008);
+    });
+
     // Query Payee List
     Mock.mock(new RegExp('/api/payee/list'), () => {
       if (isLogon()) {

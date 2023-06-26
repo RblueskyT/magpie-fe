@@ -12,19 +12,13 @@ export default function setupUserLogonInfoGuard(router: Router) {
       if (userStore.group !== 0) {
         next();
       } else {
-        try {
-          await userStore.info();
-          next();
-        } catch (error) {
-          await userStore.logout();
-          next({
-            name: 'logon',
-            query: {
-              redirect: to.name,
-              ...to.query,
-            } as LocationQueryRaw,
-          });
-        }
+        next({
+          name: 'logon',
+          query: {
+            redirect: to.name,
+            ...to.query,
+          } as LocationQueryRaw,
+        });
       }
       NProgress.done();
     } else {

@@ -3,7 +3,6 @@ import {
   LogonData,
   logon as userLogon,
   logout as userLogout,
-  getUserInfo,
 } from '@/api/user';
 import { setToken, clearToken } from '@/utils/auth';
 import { UserState } from './types';
@@ -11,47 +10,42 @@ import { UserState } from './types';
 const useUserStore = defineStore('user', {
   state: (): UserState => ({
     group: 0,
-    bankAccounts: [],
   }),
 
   getters: {
-    userInfo(state: UserState): UserState {
+    userGroup(state: UserState): UserState {
       return { ...state };
     },
   },
 
   actions: {
-    // Set user's information
-    setInfo(partial: Partial<UserState>) {
+    // Set user's group
+    setGroup(partial: Partial<UserState>) {
       this.$patch(partial);
     },
 
-    // Reset user's information
-    resetInfo() {
+    // Reset user's group
+    resetGroup() {
       this.$reset();
-    },
-
-    // Get user's information
-    async info() {
-      const res = await getUserInfo();
-
-      this.setInfo(res.data);
     },
 
     // Logon
     async logon(logonForm: LogonData) {
       try {
         const res = await userLogon(logonForm);
+        this.setGroup({ group: res.data.group });
         setToken(res.data.token);
       } catch (err) {
+        this.resetGroup();
         clearToken();
         throw err;
       }
     },
     logoutCallBack() {
-      this.resetInfo();
+      this.resetGroup();
       clearToken();
     },
+
     // Logout
     async logout() {
       try {
