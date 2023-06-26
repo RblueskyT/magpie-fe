@@ -1,5 +1,5 @@
 <template>
-  <div v-if="homePageLoading == false" class="home-container">
+  <div v-if="homePageLoading === false" class="home-container">
     <a-space direction="vertical" :size="16" fill>
       <a-card
         v-for="(itemAccount, indexAccount) in bankAccounts"
@@ -18,7 +18,9 @@
               </a-typography-title>
             </a-col>
             <a-col :span="8" style="text-align: right">
-              <a-link>Details</a-link>
+              <a-link @click="setFocusedAccountIdx(indexAccount.toString())">
+                Details
+              </a-link>
             </a-col>
           </a-row>
           <a-row>
@@ -51,7 +53,7 @@
       </a-card>
     </a-space>
   </div>
-  <div v-if="homePageLoading == true" class="home-spin-container">
+  <div v-if="homePageLoading === true" class="home-spin-container">
     <a-spin :size="48" tip="Loading ..." />
   </div>
 </template>
@@ -61,10 +63,14 @@
 
   const bankAccounts: any = inject('bankAccounts');
   const homePageLoading: any = inject('homePageLoading');
+  const focusedAccountIdx: any = inject('focusedAccountIdx');
   const numberFormatter = (value: string) => {
     const values = value.split('.');
     values[0] = values[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
     return values.join('.');
+  };
+  const setFocusedAccountIdx = (newValue: string) => {
+    focusedAccountIdx.value = newValue;
   };
 </script>
 

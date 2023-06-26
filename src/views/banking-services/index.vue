@@ -6,17 +6,19 @@
         <div class="app-inner-container">
           <a-card class="app-inner-card" :bordered="false">
             <div id="drawerContainer" class="app-inner-content">
-              <a-layout>
-                <a-layout-header>
-                  <NavBar />
-                </a-layout-header>
-                <a-layout-content>
-                  <Home />
-                </a-layout-content>
-                <a-layout-footer>
-                  <BottomMenu />
-                </a-layout-footer>
-              </a-layout>
+              <div class="home-layout">
+                <a-layout>
+                  <a-layout-header>
+                    <NavBar />
+                  </a-layout-header>
+                  <a-layout-content>
+                    <Home />
+                  </a-layout-content>
+                  <a-layout-footer>
+                    <BottomMenu />
+                  </a-layout-footer>
+                </a-layout>
+              </div>
             </div>
           </a-card>
         </div>
@@ -25,7 +27,7 @@
     </a-layout>
     <!-- DETAILS, PAY, TRANSFER -->
     <a-drawer
-      v-model:visible="paymentDrawerVisibleFlag"
+      v-model:visible="drawerVisibleFlag"
       placement="right"
       :mask="false"
       :closable="false"
@@ -35,17 +37,18 @@
       :header="false"
       :footer="false"
     >
-      <div>TODO</div>
+      <AccountDetails v-if="focusedAccountIdx.length !== 0" />
     </a-drawer>
   </div>
 </template>
 
 <script lang="ts" setup>
-  import { computed, ref, provide, readonly } from 'vue';
+  import { computed, ref, watch, provide, readonly } from 'vue';
   import { useUserStore } from '@/store';
   import NavBar from './components/navbar.vue';
   import Home from './components/home.vue';
   import BottomMenu from './components/bottom-menu.vue';
+  import AccountDetails from './components/details/index.vue';
 
   const userStore = useUserStore();
   const group = computed(() => {
@@ -56,13 +59,36 @@
   });
   const bottomMenuKey = ref(['0']);
   const homePageLoading = ref(false);
-  const paymentDrawerVisibleFlag = ref(false);
+  const drawerVisibleFlag = ref(false);
+  const focusedAccountIdx = ref(''); // this is used for the control of the 'DETAILS' panel
+
+  // Check whether to open the drawer - details
+  watch(focusedAccountIdx, () => {
+    if (
+      bottomMenuKey.value[0] === '0' &&
+      focusedAccountIdx.value.length !== 0
+    ) {
+      drawerVisibleFlag.value = true;
+    } else {
+      drawerVisibleFlag.value = false;
+    }
+  });
+
+  // Check whether to open the drawer - pay and transfer
+  watch(bottomMenuKey, () => {
+    if (bottomMenuKey.value[0] === '1' || bottomMenuKey.value[0] === '2') {
+      drawerVisibleFlag.value = true;
+    } else {
+      drawerVisibleFlag.value = false;
+    }
+  });
 
   provide('group', readonly(group));
   provide('bankAccounts', readonly(bankAccounts));
   provide('bottomMenuKey', bottomMenuKey);
   provide('homePageLoading', homePageLoading);
-  provide('paymentDrawerVisibleFlag', paymentDrawerVisibleFlag);
+  provide('drawerVisibleFlag', drawerVisibleFlag);
+  provide('focusedAccountIdx', focusedAccountIdx);
 </script>
 
 <style lang="less" scoped>
@@ -70,7 +96,7 @@
     height: 100vh;
   }
 
-  .app-container :deep(.arco-layout-content) {
+  .app-container > .arco-layout > .arco-layout-content {
     background-color: rgb(var(--gray-3));
   }
 
@@ -93,11 +119,15 @@
     overflow: hidden;
   }
 
-  .app-inner-content :deep(.arco-layout) {
+  .app-inner-content :deep(.arco-drawer-body) {
+    padding: 0px;
+  }
+
+  .home-layout :deep(.arco-layout) {
     height: 100vh;
   }
 
-  .app-inner-content :deep(.arco-layout-header) {
+  .home-layout :deep(.arco-layout-header) {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -107,13 +137,13 @@
     border-bottom: 1px solid var(--color-neutral-3);
   }
 
-  .app-inner-content :deep(.arco-layout-content) {
+  .home-layout :deep(.arco-layout-content) {
     display: flex;
     flex-direction: column;
     background-color: #f2f3f5;
   }
 
-  .app-inner-content :deep(.arco-layout-footer) {
+  .home-layout :deep(.arco-layout-footer) {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -121,9 +151,5 @@
     background-color: white;
     height: 80px;
     border-top: 1px solid var(--color-neutral-3);
-  }
-
-  .app-inner-content :deep(.arco-drawer-body) {
-    padding: 0px;
   }
 </style>
