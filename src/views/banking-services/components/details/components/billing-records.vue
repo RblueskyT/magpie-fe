@@ -9,7 +9,6 @@
             ].all"
             :key="indexRecord"
             :class="itemRecord.title ? 'date-of-records' : 'record-content'"
-            @click="test()"
           >
             <div v-if="itemRecord.title">
               {{ itemRecord.title }}
@@ -213,10 +212,6 @@
       currentPage.value[accountIdx].out = 1;
     }
   };
-  // TODO: REMOVE
-  const test = () => {
-    console.log('yes');
-  }
 
   getBillingRecords();
 </script>
