@@ -44,9 +44,7 @@
 
 <script lang="ts" setup>
   import { computed, ref, watch, provide, readonly } from 'vue';
-  import { Message } from '@arco-design/web-vue';
   import { useUserStore } from '@/store';
-  import { queryAccountList } from '@/api/banking-services';
   import NavBar from './components/navbar.vue';
   import Home from './components/home.vue';
   import BottomMenu from './components/bottom-menu.vue';
@@ -57,6 +55,10 @@
     return userStore.group;
   });
   const bankAccounts: any = ref([]);
+  const homePageLoading = ref(false);
+  const bottomMenuKey = ref(['0']);
+  const drawerVisibleFlag = ref(false);
+  const focusedAccountIdx = ref(''); // this is used for the control of the 'DETAILS' panel
   const billingRecords: any = ref([
     {
       all: [],
@@ -69,31 +71,18 @@
       out: [],
     },
   ]);
-  const currentPage = ref([0, 0]);
-  const bottomMenuKey = ref(['0']);
-  const homePageLoading = ref(false);
-  const drawerVisibleFlag = ref(false);
-  const focusedAccountIdx = ref(''); // this is used for the control of the 'DETAILS' panel
-  const listBankAccounts = async () => {
-    homePageLoading.value = true;
-    try {
-      const resData = await queryAccountList();
-      if ((resData as any).code === 20000) {
-        bankAccounts.value.splice(0, bankAccounts.value.length);
-        bankAccounts.value = resData.data;
-      } else {
-        Message.error(
-          'Sorry, the list of accounts cannot be retrieved at this time'
-        );
-      }
-    } catch (error) {
-      Message.error('Sorry, an unknown error has occurred');
-    } finally {
-      homePageLoading.value = false;
-    }
-  };
-
-  listBankAccounts();
+  const currentPage = ref([
+    {
+      all: 0,
+      in: 0,
+      out: 0,
+    },
+    {
+      all: 0,
+      in: 0,
+      out: 0,
+    },
+  ]);
 
   // Check whether to open the drawer - details
   watch(focusedAccountIdx, () => {
@@ -118,12 +107,12 @@
 
   provide('group', readonly(group));
   provide('bankAccounts', bankAccounts);
-  provide('billingRecords', billingRecords);
-  provide('currentPage', currentPage);
-  provide('bottomMenuKey', bottomMenuKey);
   provide('homePageLoading', homePageLoading);
+  provide('bottomMenuKey', bottomMenuKey);
   provide('drawerVisibleFlag', drawerVisibleFlag);
   provide('focusedAccountIdx', focusedAccountIdx);
+  provide('billingRecords', billingRecords);
+  provide('currentPage', currentPage);
 </script>
 
 <style lang="less" scoped>

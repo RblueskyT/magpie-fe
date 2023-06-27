@@ -60,6 +60,8 @@
 
 <script lang="ts" setup>
   import { inject } from 'vue';
+  import { Message } from '@arco-design/web-vue';
+  import { queryAccountList } from '@/api/banking-services';
   import numberFormatter from '@/utils/number-formatter';
 
   const bankAccounts: any = inject('bankAccounts');
@@ -68,6 +70,26 @@
   const setFocusedAccountIdx = (newValue: string) => {
     focusedAccountIdx.value = newValue;
   };
+  const listBankAccounts = async () => {
+    homePageLoading.value = true;
+    try {
+      const resData = await queryAccountList();
+      if ((resData as any).code === 20000) {
+        bankAccounts.value.splice(0, bankAccounts.value.length);
+        bankAccounts.value = resData.data;
+      } else {
+        Message.error(
+          'Sorry, the list of accounts cannot be retrieved at this time'
+        );
+      }
+    } catch (error) {
+      Message.error('Sorry, an unknown error has occurred');
+    } finally {
+      homePageLoading.value = false;
+    }
+  };
+
+  listBankAccounts();
 </script>
 
 <style lang="less" scoped>

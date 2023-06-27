@@ -7,8 +7,9 @@
       <a-layout-content>
         <Overview />
       </a-layout-content>
-      <!-- TODO -->
-      <a-layout-footer> test </a-layout-footer>
+      <a-layout-footer>
+        <BillingRecords />
+      </a-layout-footer>
     </a-layout>
   </div>
 </template>
@@ -17,6 +18,7 @@
   import { computed, provide, inject, readonly } from 'vue';
   import NavBar from './components/navbar.vue';
   import Overview from './components/overview.vue';
+  import BillingRecords from './components/billing-records.vue';
 
   const bankAccounts: any = inject('bankAccounts');
   const focusedAccountIdx: any = inject('focusedAccountIdx');
