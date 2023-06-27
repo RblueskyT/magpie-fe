@@ -57,6 +57,19 @@
     return userStore.group;
   });
   const bankAccounts: any = ref([]);
+  const billingRecords: any = ref([
+    {
+      all: [],
+      in: [],
+      out: [],
+    },
+    {
+      all: [],
+      in: [],
+      out: [],
+    },
+  ]);
+  const currentPage = ref([0, 0]);
   const bottomMenuKey = ref(['0']);
   const homePageLoading = ref(false);
   const drawerVisibleFlag = ref(false);
@@ -67,7 +80,7 @@
       const resData = await queryAccountList();
       if ((resData as any).code === 20000) {
         bankAccounts.value.splice(0, bankAccounts.value.length);
-        bankAccounts.value = (resData as any).data.bankAccounts;
+        bankAccounts.value = resData.data;
       } else {
         Message.error(
           'Sorry, the list of accounts cannot be retrieved at this time'
@@ -104,7 +117,9 @@
   });
 
   provide('group', readonly(group));
-  provide('bankAccounts', readonly(bankAccounts));
+  provide('bankAccounts', bankAccounts);
+  provide('billingRecords', billingRecords);
+  provide('currentPage', currentPage);
   provide('bottomMenuKey', bottomMenuKey);
   provide('homePageLoading', homePageLoading);
   provide('drawerVisibleFlag', drawerVisibleFlag);
