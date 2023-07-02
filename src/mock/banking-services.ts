@@ -30,7 +30,7 @@ setupMock({
           },
         ]);
       }
-      return failResponseWrap(null, 'not logged on', 50008);
+      return failResponseWrap(null, 'You are not logged on.', 50008);
     });
 
     // Query account records - all
@@ -189,7 +189,7 @@ setupMock({
               totalNum: 12,
             });
           }
-          return failResponseWrap(null, 'Incorrect page', 50000);
+          return failResponseWrap(null, 'Incorrect page.', 50000);
         }
         if (sortCode === '01-02-03' && accountNumber === '87654321') {
           if (page === 1) {
@@ -224,11 +224,11 @@ setupMock({
               totalNum: 2,
             });
           }
-          return failResponseWrap(null, 'Incorrect page', 50000);
+          return failResponseWrap(null, 'Incorrect page.', 50000);
         }
-        return failResponseWrap(null, 'Unknown account', 50000);
+        return failResponseWrap(null, 'Unknown account.', 50000);
       }
-      return failResponseWrap(null, 'not logged on', 50008);
+      return failResponseWrap(null, 'You are not logged on.', 50008);
     });
 
     // Query account records - in
@@ -259,7 +259,7 @@ setupMock({
               totalNum: 1,
             });
           }
-          return failResponseWrap(null, 'Incorrect page', 50000);
+          return failResponseWrap(null, 'Incorrect page.', 50000);
         }
         if (sortCode === '01-02-03' && accountNumber === '87654321') {
           if (page === 1) {
@@ -285,11 +285,11 @@ setupMock({
               totalNum: 1,
             });
           }
-          return failResponseWrap(null, 'Incorrect page', 50000);
+          return failResponseWrap(null, 'Incorrect page.', 50000);
         }
-        return failResponseWrap(null, 'Unknown account', 50000);
+        return failResponseWrap(null, 'Unknown account.', 50000);
       }
-      return failResponseWrap(null, 'not logged on', 50008);
+      return failResponseWrap(null, 'You are not logged on.', 50008);
     });
 
     // Query account records - out
@@ -439,7 +439,7 @@ setupMock({
               totalNum: 11,
             });
           }
-          return failResponseWrap(null, 'Incorrect page', 50000);
+          return failResponseWrap(null, 'Incorrect page.', 50000);
         }
         if (sortCode === '01-02-03' && accountNumber === '87654321') {
           if (page === 1) {
@@ -465,11 +465,11 @@ setupMock({
               totalNum: 1,
             });
           }
-          return failResponseWrap(null, 'Incorrect page', 50000);
+          return failResponseWrap(null, 'Incorrect page.', 50000);
         }
-        return failResponseWrap(null, 'Unknown account', 50000);
+        return failResponseWrap(null, 'Unknown account.', 50000);
       }
-      return failResponseWrap(null, 'not logged on', 50008);
+      return failResponseWrap(null, 'You are not logged on.', 50008);
     });
 
     // Query Payee List
@@ -492,7 +492,7 @@ setupMock({
           },
         ]);
       }
-      return failResponseWrap(null, 'not logged on', 50008);
+      return failResponseWrap(null, 'You are not logged on.', 50008);
     });
   },
 });

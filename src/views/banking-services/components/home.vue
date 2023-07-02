@@ -82,8 +82,8 @@
           'Sorry, the list of accounts cannot be retrieved at this time'
         );
       }
-    } catch (error) {
-      Message.error('Sorry, an unknown error has occurred');
+    } catch (err) {
+      Message.error((err as Error).message);
     } finally {
       homePageLoading.value = false;
     }

@@ -5,7 +5,23 @@
     :bordered="false"
     :max-height="681"
     hoverable
+    @reach-bottom="fetchMoreBillingRecords"
   >
+    <template
+      v-if="billingRecords[Number(focusedAccountIdx)][props.panel].length > 10"
+      #scroll-loading
+    >
+      <a-empty
+        v-if="reachBottomFlag"
+        description="You don't have more transactions to show."
+        style="padding: 0px; flex-direction: column"
+      >
+        <template #image>
+          <icon-info-circle />
+        </template>
+      </a-empty>
+      <a-spin v-else />
+    </template>
     <template #empty>
       <a-empty description="No data" style="flex-direction: column" />
     </template>
@@ -89,7 +105,7 @@
 </template>
 
 <script lang="ts" setup>
-  import { inject } from 'vue';
+  import { ref, inject } from 'vue';
   import { Message } from '@arco-design/web-vue';
   import {
     queryBillingRecordListAll,
@@ -105,7 +121,9 @@
   const focusedAccount: any = inject('focusedAccount');
   const billingRecords: any = inject('billingRecords');
   const currentPage: any = inject('currentPage');
+  const totalPage: any = inject('totalPage');
   const billingRecordsLoading: any = inject('billingRecordsLoading');
+  const reachBottomFlag = ref(false);
   const listBillingRecords = async (
     enableLoading: boolean,
     accountIdx: number,
@@ -144,21 +162,36 @@
           'Sorry, the billing records cannot be retrieved at this time'
         );
       }
-    } catch (error) {
-      Message.error('Sorry, an unknown error has occurred');
+    } catch (err) {
+      Message.error((err as Error).message);
     } finally {
       billingRecordsLoading.value[props.panel] = false;
+      if (
+        currentPage.value[accountIdx][props.panel] ===
+        totalPage.value[accountIdx][props.panel]
+      ) {
+        reachBottomFlag.value = true;
+      }
     }
   };
-  const getBillingRecords = () => {
+  const fetchMoreBillingRecords = () => {
     const accountIdx = Number(focusedAccountIdx.value);
-    if (currentPage.value[accountIdx][props.panel] === 0) {
-      listBillingRecords(true, accountIdx, 1);
-      currentPage.value[accountIdx][props.panel] = 1;
+    if (
+      currentPage.value[accountIdx][props.panel] <
+      totalPage.value[accountIdx][props.panel]
+    ) {
+      let enableLoading = false;
+      if (currentPage.value[accountIdx][props.panel] === 0) {
+        enableLoading = true;
+      }
+      currentPage.value[accountIdx][props.panel] += 1;
+      listBillingRecords(
+        enableLoading,
+        accountIdx,
+        currentPage.value[accountIdx][props.panel]
+      );
     }
   };
-
-  getBillingRecords();
 </script>
 
 <style lang="less" scoped>

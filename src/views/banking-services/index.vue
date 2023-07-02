@@ -83,6 +83,18 @@
       out: 0,
     },
   ]);
+  const totalPage = ref([
+    {
+      all: 2,
+      in: 1,
+      out: 2,
+    },
+    {
+      all: 1,
+      in: 1,
+      out: 1,
+    },
+  ]);
 
   // Check whether to open the drawer - details
   watch(focusedAccountIdx, () => {
@@ -113,6 +125,7 @@
   provide('focusedAccountIdx', focusedAccountIdx);
   provide('billingRecords', billingRecords);
   provide('currentPage', currentPage);
+  provide('totalPage', readonly(totalPage));
 </script>
 
 <style lang="less" scoped>

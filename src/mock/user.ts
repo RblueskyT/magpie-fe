@@ -13,10 +13,14 @@ setupMock({
     Mock.mock(new RegExp('/api/user/logon'), (params: MockParams) => {
       const { personalID, securityNumber } = JSON.parse(params.body);
       if (!personalID) {
-        return failResponseWrap(null, 'Personal ID cannot be empty', 50000);
+        return failResponseWrap(null, 'Personal ID cannot be empty.', 50000);
       }
       if (!securityNumber) {
-        return failResponseWrap(null, 'Security number cannot be empty', 50000);
+        return failResponseWrap(
+          null,
+          'Security number cannot be empty.',
+          50000
+        );
       }
       if (personalID === '1234567890' && securityNumber === '12345') {
         return successResponseWrap({
@@ -27,7 +31,7 @@ setupMock({
       // TODO: other test accounts
       return failResponseWrap(
         null,
-        'Incorrect personal ID or security number',
+        'Incorrect personal ID or security number.',
         50000
       );
     });
