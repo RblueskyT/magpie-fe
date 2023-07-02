@@ -192,6 +192,17 @@
       );
     }
   };
+  const updateReachBottomFlag = () => {
+    const accountIdx = Number(focusedAccountIdx.value);
+    if (
+      currentPage.value[accountIdx][props.panel] ===
+      totalPage.value[accountIdx][props.panel]
+    ) {
+      reachBottomFlag.value = true;
+    }
+  };
+
+  updateReachBottomFlag();
 </script>
 
 <style lang="less" scoped>
