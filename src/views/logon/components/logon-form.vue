@@ -33,6 +33,7 @@
         <a-input
           v-model="accountInfo.personalID"
           :max-length="{ length: 10, errorOnly: false }"
+          :disabled="loading"
           @input="disableSubmit"
         >
           <template #prefix>
@@ -65,6 +66,7 @@
           placeholder="•••••"
           :max-length="{ length: 5, errorOnly: false }"
           :invisible-button="false"
+          :disabled="loading"
           @input="disableSubmit"
         >
           <template #prefix>
@@ -76,7 +78,7 @@
         <a-checkbox
           checked="rememberPersonalID"
           :model-value="logonConfig.rememberPersonalID"
-          :disabled="logonConfig.thisIsPublicDevice ? true : false"
+          :disabled="logonConfig.thisIsPublicDevice || loading ? true : false"
           @change="setRememberPersonalID as any"
         >
           {{ 'Remember personal ID' }}
@@ -84,6 +86,7 @@
         <a-checkbox
           checked="thisIsPublicDevice"
           :model-value="logonConfig.thisIsPublicDevice"
+          :disabled="loading"
           @change="setThisIsPublicDevice as any"
         >
           {{ "I'm using a public or shared device" }}
@@ -101,7 +104,12 @@
           {{ 'Log on' }}
         </a-button>
       </a-space>
-      <a-typography-text type="danger" style="margin: 0 auto" underline>
+      <a-typography-text
+        type="danger"
+        style="margin: 0 auto"
+        underline
+        :disabled="loading"
+      >
         Forgotten details?
       </a-typography-text>
     </a-form>
