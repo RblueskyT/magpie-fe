@@ -89,8 +89,15 @@
             >
               £{{ numberFormatter(itemRecord.amount.toString()) }}
             </a-typography-text>
-            <a-typography-text type="secondary" style="line-height: 1">
+            <a-typography-text
+              v-if="itemRecord.pending === false"
+              type="secondary"
+              style="line-height: 1"
+            >
               £{{ numberFormatter(itemRecord.balance.toString()) }}
+            </a-typography-text>
+            <a-typography-text v-else type="secondary" style="line-height: 1">
+              {{ itemRecord.date }}
             </a-typography-text>
           </a-space>
         </div>

@@ -42,13 +42,13 @@ setupMock({
             return successResponseWrap({
               dailyRecords: [
                 {
-                  date: '25 Jun 2023',
+                  date: 'Pending',
                   records: [
                     {
                       type: 'Out',
                       payee: 'AMAZON.CO.UK',
                       amount: 499,
-                      date: '25 Jun 2023',
+                      date: '1 Jul 2023',
                       balance: 1385.67,
                       pending: true,
                       remark: 'FAST PAYMENT TO AMAZON.CO.UK',
@@ -301,13 +301,13 @@ setupMock({
             return successResponseWrap({
               dailyRecords: [
                 {
-                  date: '25 Jun 2023',
+                  date: 'Pending',
                   records: [
                     {
                       type: 'Out',
                       payee: 'AMAZON.CO.UK',
                       amount: 499,
-                      date: '25 Jun 2023',
+                      date: '1 Jul 2023',
                       balance: 1385.67,
                       pending: true,
                       remark: 'FAST PAYMENT TO AMAZON.CO.UK',

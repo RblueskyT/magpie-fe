@@ -23,7 +23,9 @@
             £{{ numberFormatter(focusedAccount.balanceInclPending.toString()) }}
           </a-typography-title>
           <a-typography-text style="font-size: 16px; color: #86909c">
-            £{{ numberFormatter(computePending().toString()) }}
+            <span v-if="computePending().positive === false">-</span>£{{
+              numberFormatter(computePending().result.toString())
+            }}
           </a-typography-text>
         </a-space>
       </a-col>
@@ -40,7 +42,13 @@
   const computePending = () => {
     const balanceOne = new Decimal(focusedAccount.value.balance);
     const balanceTwo = new Decimal(focusedAccount.value.balanceInclPending);
-    return balanceOne.minus(balanceTwo);
+    let resultVal = balanceOne.minus(balanceTwo);
+    let positiveFlag = false;
+    if (resultVal <= new Decimal(0)) {
+      resultVal = balanceTwo.minus(balanceOne);
+      positiveFlag = true;
+    }
+    return { result: resultVal, positive: positiveFlag };
   };
 </script>
 
