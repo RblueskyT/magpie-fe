@@ -25,7 +25,7 @@
       </a-layout-content>
       <a-layout-footer></a-layout-footer>
     </a-layout>
-    <!-- DETAILS, PAY, TRANSFER -->
+    <!-- DETAILS, PAY AND TRANSFER -->
     <a-drawer
       v-model:visible="drawerVisibleFlag"
       placement="right"

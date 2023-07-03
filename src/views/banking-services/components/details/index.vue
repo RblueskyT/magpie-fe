@@ -1,5 +1,5 @@
 <template>
-  <div class="details-layout">
+  <div id="detailsDrawerContainer" class="details-layout">
     <a-layout>
       <a-layout-header>
         <NavBar />
@@ -11,22 +11,51 @@
         <BillingRecords />
       </a-layout-footer>
     </a-layout>
+    <!-- TRANSACTION DETAILS AND PAYEE MANAGEMENT -->
+    <a-drawer
+      v-model:visible="detailsDrawerVisibleFlag"
+      placement="right"
+      :mask="false"
+      :closable="false"
+      width="500"
+      popup-container="#detailsDrawerContainer"
+      :esc-to-close="false"
+      :header="false"
+      :footer="false"
+    >
+      <TransactionDetails v-if="detailsDrawerContent === 'transaction'" />
+    </a-drawer>
   </div>
 </template>
 
 <script lang="ts" setup>
-  import { computed, provide, inject, readonly } from 'vue';
+  import { ref, computed, provide, inject, readonly } from 'vue';
   import NavBar from './components/navbar.vue';
   import Overview from './components/overview.vue';
   import BillingRecords from './components/billing-records.vue';
+  import TransactionDetails from './components/transaction-details/index.vue';
 
   const bankAccounts: any = inject('bankAccounts');
   const focusedAccountIdx: any = inject('focusedAccountIdx');
   const focusedAccount = computed(() => {
     return bankAccounts.value[Number(focusedAccountIdx.value)];
   });
+  const detailsDrawerVisibleFlag = ref(false);
+  const detailsDrawerContent = ref(''); // 'transaction' or 'payees'
+  const transactionDetails = ref({
+    type: '',
+    payee: '',
+    amount: 0,
+    date: '',
+    balance: 0,
+    pending: false,
+    remark: '',
+  });
 
   provide('focusedAccount', readonly(focusedAccount));
+  provide('detailsDrawerVisibleFlag', detailsDrawerVisibleFlag);
+  provide('detailsDrawerContent', detailsDrawerContent);
+  provide('transactionDetails', transactionDetails);
 </script>
 
 <style lang="less" scoped>

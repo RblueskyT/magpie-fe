@@ -31,6 +31,7 @@
       ][props.panel]"
       :key="indexRecord"
       :class="itemRecord.title ? 'date-of-records' : 'record-content'"
+      @click="showTransactionDetails(itemRecord)"
     >
       <div v-if="itemRecord.title">
         {{ itemRecord.title }}
@@ -123,6 +124,9 @@
   const currentPage: any = inject('currentPage');
   const totalPage: any = inject('totalPage');
   const billingRecordsLoading: any = inject('billingRecordsLoading');
+  const detailsDrawerVisibleFlag: any = inject('detailsDrawerVisibleFlag');
+  const detailsDrawerContent: any = inject('detailsDrawerContent');
+  const transactionDetails: any = inject('transactionDetails');
   const reachBottomFlag = ref(false);
   const listBillingRecords = async (
     enableLoading: boolean,
@@ -199,6 +203,19 @@
       totalPage.value[accountIdx][props.panel]
     ) {
       reachBottomFlag.value = true;
+    }
+  };
+  const showTransactionDetails = (record: any) => {
+    if (!record.title) {
+      transactionDetails.value.type = record.type;
+      transactionDetails.value.payee = record.payee;
+      transactionDetails.value.amount = record.amount;
+      transactionDetails.value.date = record.date;
+      transactionDetails.value.balance = record.balance;
+      transactionDetails.value.pending = record.pending;
+      transactionDetails.value.remark = record.remark;
+      detailsDrawerContent.value = 'transaction';
+      detailsDrawerVisibleFlag.value = true;
     }
   };
 

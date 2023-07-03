@@ -2,7 +2,6 @@
   <div class="navbar">
     <ul class="left-side">
       <li>
-        <!-- TODO: Actual Function -->
         <a-button
           :style="changeBtnStyle(backBtnHoverFlag)"
           type="outline"
@@ -10,6 +9,7 @@
           size="large"
           @mouseenter="backBtnHoverFlag = true"
           @mouseleave="backBtnHoverFlag = false"
+          @click="goBackToDetails()"
         >
           <template #icon>
             <icon-arrow-left />
@@ -18,36 +18,15 @@
       </li>
     </ul>
     <div class="center-side">
-      <a-space direction="vertical" :size="0" fill>
-        <a-typography-text
-          style="line-height: 26px; font-size: 16px; color: #f53f3f"
-        >
-          {{ focusedAccount.bankAccountType }}
-        </a-typography-text>
-        <a-typography-text
-          style="line-height: 26px; font-size: 14px"
-          type="secondary"
-        >
-          {{ focusedAccount.sortCode }} {{ focusedAccount.accountNumber }}
-        </a-typography-text>
-      </a-space>
+      <a-typography-text
+        style="line-height: 52px; font-size: 16px; color: #1d2129"
+        ellipsis
+      >
+        {{ transactionDetails.payee }}
+      </a-typography-text>
     </div>
     <ul class="right-side">
-      <li>
-        <!-- TODO: Actual Function -->
-        <a-button
-          :style="changeBtnStyle(moreBtnHoverFlag)"
-          type="outline"
-          shape="circle"
-          size="large"
-          @mouseenter="moreBtnHoverFlag = true"
-          @mouseleave="moreBtnHoverFlag = false"
-        >
-          <template #icon>
-            <icon-more-vertical />
-          </template>
-        </a-button>
-      </li>
+      <!-- RESERVED -->
     </ul>
   </div>
 </template>
@@ -55,7 +34,9 @@
 <script lang="ts" setup>
   import { ref, inject } from 'vue';
 
-  const focusedAccount: any = inject('focusedAccount');
+  const detailsDrawerVisibleFlag: any = inject('detailsDrawerVisibleFlag');
+  const detailsDrawerContent: any = inject('detailsDrawerContent');
+  const transactionDetails: any = inject('transactionDetails');
   const defaultNavbarBtnStyle = {
     borderColor: '#ffffff',
     color: '#4e5969',
@@ -67,13 +48,16 @@
     fontSize: '26px',
   };
   const backBtnHoverFlag = ref(false);
-  const moreBtnHoverFlag = ref(false);
 
   const changeBtnStyle = (hoverFlag: boolean) => {
     if (hoverFlag === false) {
       return defaultNavbarBtnStyle;
     }
     return hoverNavbarBtnStyle;
+  };
+  const goBackToDetails = () => {
+    detailsDrawerVisibleFlag.value = false;
+    detailsDrawerContent.value = '';
   };
 </script>
 

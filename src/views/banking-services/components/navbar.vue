@@ -1,8 +1,8 @@
 <template>
   <div class="navbar">
-    <div class="left-side">
-      <!-- RESERVE -->
-    </div>
+    <ul class="left-side">
+      <!-- RESERVED -->
+    </ul>
     <div class="center-side">
       <a-space :size="12">
         <img
@@ -82,7 +82,12 @@
   .left-side {
     width: 100px;
     height: 36px;
+    list-style: none;
     text-align: left;
+    padding-inline-start: 0px;
+    li {
+      margin-left: 12px;
+    }
   }
 
   .center-side {
@@ -96,6 +101,7 @@
     height: 36px;
     list-style: none;
     text-align: right;
+    padding-inline-start: 0px;
     li {
       margin-right: 12px;
     }
