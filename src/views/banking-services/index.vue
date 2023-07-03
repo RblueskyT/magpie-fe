@@ -121,7 +121,6 @@
   provide('bankAccounts', bankAccounts);
   provide('homePageLoading', homePageLoading);
   provide('bottomMenuKey', bottomMenuKey);
-  provide('drawerVisibleFlag', drawerVisibleFlag);
   provide('focusedAccountIdx', focusedAccountIdx);
   provide('billingRecords', billingRecords);
   provide('currentPage', currentPage);

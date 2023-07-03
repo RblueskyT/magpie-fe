@@ -2,7 +2,6 @@
   <div class="navbar">
     <ul class="left-side">
       <li>
-        <!-- TODO: Actual Function -->
         <a-button
           :style="changeBtnStyle(backBtnHoverFlag)"
           type="outline"
@@ -10,6 +9,7 @@
           size="large"
           @mouseenter="backBtnHoverFlag = true"
           @mouseleave="backBtnHoverFlag = false"
+          @click="goBackToHome()"
         >
           <template #icon>
             <icon-arrow-left />
@@ -55,6 +55,7 @@
 <script lang="ts" setup>
   import { ref, inject } from 'vue';
 
+  const focusedAccountIdx: any = inject('focusedAccountIdx');
   const focusedAccount: any = inject('focusedAccount');
   const defaultNavbarBtnStyle = {
     borderColor: '#ffffff',
@@ -74,6 +75,9 @@
       return defaultNavbarBtnStyle;
     }
     return hoverNavbarBtnStyle;
+  };
+  const goBackToHome = () => {
+    focusedAccountIdx.value = '';
   };
 </script>
 
