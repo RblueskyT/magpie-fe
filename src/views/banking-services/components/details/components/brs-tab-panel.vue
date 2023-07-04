@@ -36,7 +36,10 @@
       <div v-if="itemRecord.title">
         {{ itemRecord.title }}
       </div>
-      <a-list-item-meta v-if="!itemRecord.title" :title="itemRecord.payee">
+      <a-list-item-meta
+        v-if="!itemRecord.title"
+        :title="itemRecord.payeeOrPayer"
+      >
         <template #avatar>
           <a-avatar
             v-if="itemRecord.type === 'Out' && itemRecord.pending === false"
@@ -215,7 +218,7 @@
   const showTransactionDetails = (record: any) => {
     if (!record.title) {
       transactionDetails.value.type = record.type;
-      transactionDetails.value.payee = record.payee;
+      transactionDetails.value.payeeOrPayer = record.payeeOrPayer;
       transactionDetails.value.amount = record.amount;
       transactionDetails.value.date = record.date;
       transactionDetails.value.balance = record.balance;

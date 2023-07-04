@@ -22,7 +22,7 @@
         style="line-height: 52px; font-size: 16px; color: #1d2129"
         ellipsis
       >
-        {{ transactionDetails.payee }}
+        {{ transactionDetails.payeeOrPayer }}
       </a-typography-text>
     </div>
     <ul class="right-side">

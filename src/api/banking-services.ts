@@ -1,11 +1,22 @@
 import axios from 'axios';
 
+export interface PayeeProps {
+  name: string;
+  type: 'Personal' | 'Business';
+  sortCode: string;
+  accountNumber: string;
+  reference: string;
+  lastPaidDate: string;
+  lastPaidAmount: number;
+}
+
 export interface BankAccountProps {
   bankAccountType: string;
   sortCode: string;
   accountNumber: string;
   balance: number;
   balanceInclPending: number;
+  payees: PayeeProps[];
 }
 
 export interface BillingRecordsQueryData {
@@ -16,7 +27,7 @@ export interface BillingRecordsQueryData {
 
 export interface SingleBillingRecordProps {
   type: 'In' | 'Out';
-  payee: string;
+  payeeOrPayer: string;
   amount: number;
   date: string;
   balance: number;
@@ -36,14 +47,6 @@ export interface AllBillingRecordsProps {
   totalNum: number;
 }
 
-export interface PayeeProps {
-  name: string;
-  type: 'Personal' | 'Business';
-  sortCode: string;
-  accountNumber: string;
-  reference: string;
-}
-
 export function queryAccountList() {
   return axios.post<BankAccountProps[]>('/api/account/list');
 }
@@ -58,8 +61,4 @@ export function queryBillingRecordListIn(data: BillingRecordsQueryData) {
 
 export function queryBillingRecordListOut(data: BillingRecordsQueryData) {
   return axios.post<AllBillingRecordsProps>('/api/records/list_out', data);
-}
-
-export function queryPayeeList() {
-  return axios.post<PayeeProps[]>('/api/payee/list');
 }

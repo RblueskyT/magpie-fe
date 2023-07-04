@@ -20,6 +20,26 @@ setupMock({
             accountNumber: '12345678',
             balance: 2234.67,
             balanceInclPending: 1385.67,
+            payees: [
+              {
+                name: 'Timbers LTD',
+                type: 'Business',
+                sortCode: '34-45-00',
+                accountNumber: '91908473',
+                reference: 'SN1039455900',
+                lastPaidDate: '1 Jul 2023',
+                lastPaidAmount: 499,
+              },
+              {
+                name: 'Katica Zimman',
+                type: 'Personal',
+                sortCode: '02-43-24',
+                accountNumber: '15932834',
+                reference: 'service charge',
+                lastPaidDate: '18 Jun 2023',
+                lastPaidAmount: 52.12,
+              },
+            ],
           },
           {
             bankAccountType: 'BASIC BANK ACCOUNT',
@@ -27,6 +47,7 @@ setupMock({
             accountNumber: '87654321',
             balance: 2000,
             balanceInclPending: 2000,
+            payees: [],
           },
         ]);
       }
@@ -46,16 +67,16 @@ setupMock({
                   records: [
                     {
                       type: 'Out',
-                      payee: 'AMAZON.CO.UK',
+                      payeeOrPayer: 'TIMBERS LTD',
                       amount: 499,
                       date: '1 Jul 2023',
                       balance: 1385.67,
                       pending: true,
-                      remark: 'FAST PAYMENT TO AMAZON.CO.UK',
+                      remark: 'TRANSFER TO TIMBERS LTD',
                     },
                     {
                       type: 'Out',
-                      payee: 'AMAZON.CO.UK',
+                      payeeOrPayer: 'AMAZON.CO.UK',
                       amount: 350,
                       date: '25 Jun 2023',
                       balance: 1884.67,
@@ -69,7 +90,7 @@ setupMock({
                   records: [
                     {
                       type: 'Out',
-                      payee: 'TESCO STORES 2341',
+                      payeeOrPayer: 'TESCO STORES 2341',
                       amount: 32.43,
                       date: '18 Jun 2023',
                       balance: 2234.67,
@@ -78,16 +99,16 @@ setupMock({
                     },
                     {
                       type: 'Out',
-                      payee: 'SAINSBURYS S/MKTS',
+                      payeeOrPayer: 'KATICA ZIMMAN',
                       amount: 52.12,
                       date: '18 Jun 2023',
                       balance: 2267.1,
                       pending: false,
-                      remark: 'CARD PAYMENT TO SAINSBURYS S/MKTS',
+                      remark: 'TRANSFER TO KATICA ZIMMAN',
                     },
                     {
                       type: 'Out',
-                      payee: 'MCDONALDS',
+                      payeeOrPayer: 'MCDONALDS',
                       amount: 12.32,
                       date: '18 Jun 2023',
                       balance: 2319.22,
@@ -101,7 +122,7 @@ setupMock({
                   records: [
                     {
                       type: 'Out',
-                      payee: 'TESCO STORES 2341',
+                      payeeOrPayer: 'TESCO STORES 2341',
                       amount: 58.43,
                       date: '06 Jun 2023',
                       balance: 2331.54,
@@ -110,7 +131,7 @@ setupMock({
                     },
                     {
                       type: 'Out',
-                      payee: 'KFC NO.135',
+                      payeeOrPayer: 'KFC NO.135',
                       amount: 11.12,
                       date: '06 Jun 2023',
                       balance: 2369.97,
@@ -119,7 +140,7 @@ setupMock({
                     },
                     {
                       type: 'Out',
-                      payee: 'GOOGLE YOUTUBEPREMIUM',
+                      payeeOrPayer: 'GOOGLE YOUTUBEPREMIUM',
                       amount: 11.99,
                       date: '06 Jun 2023',
                       balance: 2381.09,
@@ -128,7 +149,7 @@ setupMock({
                     },
                     {
                       type: 'Out',
-                      payee: 'MCDONALDS',
+                      payeeOrPayer: 'MCDONALDS',
                       amount: 54.32,
                       date: '06 Jun 2023',
                       balance: 2393.08,
@@ -142,7 +163,7 @@ setupMock({
                   records: [
                     {
                       type: 'Out',
-                      payee: 'TESCO STORES 2341',
+                      payeeOrPayer: 'TESCO STORES 2341',
                       amount: 32.5,
                       date: '25 May 2023',
                       balance: 2447.4,
@@ -165,7 +186,7 @@ setupMock({
                   records: [
                     {
                       type: 'Out',
-                      payee: 'KFC NO.135',
+                      payeeOrPayer: 'KFC NO.135',
                       amount: 20.1,
                       date: '08 May 2023',
                       balance: 2479.9,
@@ -174,7 +195,7 @@ setupMock({
                     },
                     {
                       type: 'In',
-                      payee: 'ODO IRVIN',
+                      payeeOrPayer: 'ODO IRVIN',
                       amount: 2500,
                       date: '08 May 2023',
                       balance: 2500,
@@ -200,7 +221,7 @@ setupMock({
                   records: [
                     {
                       type: 'Out',
-                      payee: 'RESHMI RAY',
+                      payeeOrPayer: 'RESHMI RAY',
                       amount: 2000,
                       date: '16 Jun 2023',
                       balance: 2000,
@@ -209,7 +230,7 @@ setupMock({
                     },
                     {
                       type: 'In',
-                      payee: 'BRENNUS YEN',
+                      payeeOrPayer: 'BRENNUS YEN',
                       amount: 4000,
                       date: '16 Jun 2023',
                       balance: 4000,
@@ -244,7 +265,7 @@ setupMock({
                   records: [
                     {
                       type: 'In',
-                      payee: 'BRENNUS YEN',
+                      payeeOrPayer: 'BRENNUS YEN',
                       amount: 4000,
                       date: '16 Jun 2023',
                       balance: 4000,
@@ -270,7 +291,7 @@ setupMock({
                   records: [
                     {
                       type: 'In',
-                      payee: 'BRENNUS YEN',
+                      payeeOrPayer: 'BRENNUS YEN',
                       amount: 4000,
                       date: '16 Jun 2023',
                       balance: 4000,
@@ -305,16 +326,16 @@ setupMock({
                   records: [
                     {
                       type: 'Out',
-                      payee: 'AMAZON.CO.UK',
+                      payeeOrPayer: 'TIMBERS LTD',
                       amount: 499,
                       date: '1 Jul 2023',
                       balance: 1385.67,
                       pending: true,
-                      remark: 'FAST PAYMENT TO AMAZON.CO.UK',
+                      remark: 'TRANSFER TO TIMBERS LTD',
                     },
                     {
                       type: 'Out',
-                      payee: 'AMAZON.CO.UK',
+                      payeeOrPayer: 'AMAZON.CO.UK',
                       amount: 350,
                       date: '25 Jun 2023',
                       balance: 1884.67,
@@ -328,7 +349,7 @@ setupMock({
                   records: [
                     {
                       type: 'Out',
-                      payee: 'TESCO STORES 2341',
+                      payeeOrPayer: 'TESCO STORES 2341',
                       amount: 32.43,
                       date: '18 Jun 2023',
                       balance: 2234.67,
@@ -337,16 +358,16 @@ setupMock({
                     },
                     {
                       type: 'Out',
-                      payee: 'SAINSBURYS S/MKTS',
+                      payeeOrPayer: 'KATICA ZIMMAN',
                       amount: 52.12,
                       date: '18 Jun 2023',
                       balance: 2267.1,
                       pending: false,
-                      remark: 'CARD PAYMENT TO SAINSBURYS S/MKTS',
+                      remark: 'TRANSFER TO KATICA ZIMMAN',
                     },
                     {
                       type: 'Out',
-                      payee: 'MCDONALDS',
+                      payeeOrPayer: 'MCDONALDS',
                       amount: 12.32,
                       date: '18 Jun 2023',
                       balance: 2319.22,
@@ -360,7 +381,7 @@ setupMock({
                   records: [
                     {
                       type: 'Out',
-                      payee: 'TESCO STORES 2341',
+                      payeeOrPayer: 'TESCO STORES 2341',
                       amount: 58.43,
                       date: '06 Jun 2023',
                       balance: 2331.54,
@@ -369,7 +390,7 @@ setupMock({
                     },
                     {
                       type: 'Out',
-                      payee: 'KFC NO.135',
+                      payeeOrPayer: 'KFC NO.135',
                       amount: 11.12,
                       date: '06 Jun 2023',
                       balance: 2369.97,
@@ -378,7 +399,7 @@ setupMock({
                     },
                     {
                       type: 'Out',
-                      payee: 'GOOGLE YOUTUBEPREMIUM',
+                      payeeOrPayer: 'GOOGLE YOUTUBEPREMIUM',
                       amount: 11.99,
                       date: '06 Jun 2023',
                       balance: 2381.09,
@@ -387,7 +408,7 @@ setupMock({
                     },
                     {
                       type: 'Out',
-                      payee: 'MCDONALDS',
+                      payeeOrPayer: 'MCDONALDS',
                       amount: 54.32,
                       date: '06 Jun 2023',
                       balance: 2393.08,
@@ -401,7 +422,7 @@ setupMock({
                   records: [
                     {
                       type: 'Out',
-                      payee: 'TESCO STORES 2341',
+                      payeeOrPayer: 'TESCO STORES 2341',
                       amount: 32.5,
                       date: '25 May 2023',
                       balance: 2447.4,
@@ -424,7 +445,7 @@ setupMock({
                   records: [
                     {
                       type: 'Out',
-                      payee: 'KFC NO.135',
+                      payeeOrPayer: 'KFC NO.135',
                       amount: 20.1,
                       date: '08 May 2023',
                       balance: 2479.9,
@@ -450,7 +471,7 @@ setupMock({
                   records: [
                     {
                       type: 'Out',
-                      payee: 'RESHMI RAY',
+                      payeeOrPayer: 'RESHMI RAY',
                       amount: 2000,
                       date: '16 Jun 2023',
                       balance: 2000,
@@ -468,29 +489,6 @@ setupMock({
           return failResponseWrap(null, 'Incorrect page.', 50000);
         }
         return failResponseWrap(null, 'Unknown account.', 50000);
-      }
-      return failResponseWrap(null, 'You are not logged on.', 50008);
-    });
-
-    // Query Payee List
-    Mock.mock(new RegExp('/api/payee/list'), () => {
-      if (isLogon()) {
-        return successResponseWrap([
-          {
-            name: 'Katica Zimman',
-            type: 'Personal',
-            sortCode: '02-43-24',
-            accountNumber: '15932834',
-            reference: 'service charge',
-          },
-          {
-            name: 'Timbers LTD',
-            type: 'Business',
-            sortCode: '34-45-00',
-            accountNumber: '91908473',
-            reference: 'SN1039455900',
-          },
-        ]);
       }
       return failResponseWrap(null, 'You are not logged on.', 50008);
     });

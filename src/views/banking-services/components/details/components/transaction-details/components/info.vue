@@ -50,7 +50,7 @@
         :heading="5"
         style="margin: 0; line-height: 20px"
       >
-        {{ transactionDetails.payee }}
+        {{ transactionDetails.payeeOrPayer }}
       </a-typography-title>
     </div>
     <div class="transaction-key-info">

@@ -44,7 +44,7 @@
   const detailsDrawerContent = ref(''); // 'transaction' or 'payees'
   const transactionDetails = ref({
     type: '',
-    payee: '',
+    payeeOrPayer: '',
     amount: 0,
     date: '',
     balance: 0,
