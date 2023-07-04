@@ -31,7 +31,7 @@
       placement="right"
       :mask="false"
       :closable="false"
-      width="500"
+      :width="500"
       popup-container="#drawerContainer"
       :esc-to-close="false"
       :header="false"

@@ -34,7 +34,6 @@
     </div>
     <ul class="right-side">
       <li>
-        <!-- TODO: Actual Function -->
         <a-button
           :style="changeBtnStyle(moreBtnHoverFlag)"
           type="outline"
@@ -42,6 +41,7 @@
           size="large"
           @mouseenter="moreBtnHoverFlag = true"
           @mouseleave="moreBtnHoverFlag = false"
+          @click="goToMoreOptions()"
         >
           <template #icon>
             <icon-more-vertical />
@@ -57,6 +57,9 @@
 
   const focusedAccountIdx: any = inject('focusedAccountIdx');
   const focusedAccount: any = inject('focusedAccount');
+  const moreOptionsDrawerVisibleFlag: any = inject(
+    'moreOptionsDrawerVisibleFlag'
+  );
   const defaultNavbarBtnStyle = {
     borderColor: '#ffffff',
     color: '#4e5969',
@@ -78,6 +81,9 @@
   };
   const goBackToHome = () => {
     focusedAccountIdx.value = '';
+  };
+  const goToMoreOptions = () => {
+    moreOptionsDrawerVisibleFlag.value = true;
   };
 </script>
 

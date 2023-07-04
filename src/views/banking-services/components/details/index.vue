@@ -17,7 +17,7 @@
       placement="right"
       :mask="false"
       :closable="false"
-      width="500"
+      :width="500"
       popup-container="#detailsDrawerContainer"
       :esc-to-close="false"
       :header="false"
@@ -25,12 +25,26 @@
     >
       <TransactionDetails v-if="detailsDrawerContent === 'transaction'" />
     </a-drawer>
+    <!-- MORE OPTIONS -->
+    <a-drawer
+      v-model:visible="moreOptionsDrawerVisibleFlag"
+      placement="bottom"
+      :closable="false"
+      :height="240"
+      popup-container="#detailsDrawerContainer"
+      :esc-to-close="false"
+      :header="false"
+      :footer="false"
+    >
+      <MoreOptions />
+    </a-drawer>
   </div>
 </template>
 
 <script lang="ts" setup>
   import { ref, computed, provide, inject, readonly } from 'vue';
   import NavBar from './components/navbar.vue';
+  import MoreOptions from './components/more-options.vue';
   import Overview from './components/overview.vue';
   import BillingRecords from './components/billing-records.vue';
   import TransactionDetails from './components/transaction-details/index.vue';
@@ -40,6 +54,7 @@
   const focusedAccount = computed(() => {
     return bankAccounts.value[Number(focusedAccountIdx.value)];
   });
+  const moreOptionsDrawerVisibleFlag = ref(false);
   const detailsDrawerVisibleFlag = ref(false);
   const detailsDrawerContent = ref(''); // 'transaction' or 'payees'
   const transactionDetails = ref({
@@ -53,6 +68,7 @@
   });
 
   provide('focusedAccount', readonly(focusedAccount));
+  provide('moreOptionsDrawerVisibleFlag', moreOptionsDrawerVisibleFlag);
   provide('detailsDrawerVisibleFlag', detailsDrawerVisibleFlag);
   provide('detailsDrawerContent', detailsDrawerContent);
   provide('transactionDetails', transactionDetails);
