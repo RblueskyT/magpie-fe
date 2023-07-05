@@ -24,6 +24,7 @@
       :footer="false"
     >
       <TransactionDetails v-if="detailsDrawerContent === 'transaction'" />
+      <PayeeMgnt v-if="detailsDrawerContent === 'payees'" />
     </a-drawer>
     <!-- MORE OPTIONS -->
     <a-drawer
@@ -48,6 +49,7 @@
   import Overview from './components/overview.vue';
   import BillingRecords from './components/billing-records.vue';
   import TransactionDetails from './components/transaction-details/index.vue';
+  import PayeeMgnt from './components/payee-mgnt/index.vue';
 
   const bankAccounts: any = inject('bankAccounts');
   const focusedAccountIdx: any = inject('focusedAccountIdx');

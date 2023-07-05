@@ -23,7 +23,7 @@
       <a-spin v-else />
     </template>
     <template #empty>
-      <a-empty description="No data" style="flex-direction: column" />
+      <a-empty description="No data." style="flex-direction: column" />
     </template>
     <a-list-item
       v-for="(itemRecord, indexRecord) in billingRecords[

@@ -18,7 +18,7 @@
         </a-button>
       </a-list-item>
       <a-list-item>
-        <a-button type="text" size="large" long>
+        <a-button type="text" size="large" long @click="goToManagePayees()">
           <template #icon>
             <icon-user-group />
           </template>
@@ -26,7 +26,7 @@
         </a-button>
       </a-list-item>
       <a-list-item>
-        <a-button type="text" size="large" long>
+        <a-button type="text" size="large" long @click="closeMenu()">
           <template #icon>
             <icon-close />
           </template>
@@ -37,7 +37,23 @@
   </div>
 </template>
 
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+  import { inject } from 'vue';
+
+  const moreOptionsDrawerVisibleFlag: any = inject(
+    'moreOptionsDrawerVisibleFlag'
+  );
+  const detailsDrawerVisibleFlag: any = inject('detailsDrawerVisibleFlag');
+  const detailsDrawerContent: any = inject('detailsDrawerContent');
+  const goToManagePayees = () => {
+    detailsDrawerContent.value = 'payees';
+    detailsDrawerVisibleFlag.value = true;
+    moreOptionsDrawerVisibleFlag.value = false;
+  };
+  const closeMenu = () => {
+    moreOptionsDrawerVisibleFlag.value = false;
+  };
+</script>
 
 <style lang="less" scoped>
   .more-options :deep(.arco-list-content > .arco-list-item) {
