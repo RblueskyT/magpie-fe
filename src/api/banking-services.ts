@@ -47,6 +47,17 @@ export interface AllBillingRecordsProps {
   totalNum: number;
 }
 
+export interface PayeeDeleteData {
+  sortCode: string;
+  accountNumber: string;
+  payeeId: number;
+}
+
+export interface UserOperationRes {
+  status: number;
+  message: string;
+}
+
 export function queryAccountList() {
   return axios.post<BankAccountProps[]>('/api/account/list');
 }
@@ -61,4 +72,8 @@ export function queryBillingRecordListIn(data: BillingRecordsQueryData) {
 
 export function queryBillingRecordListOut(data: BillingRecordsQueryData) {
   return axios.post<AllBillingRecordsProps>('/api/records/list_out', data);
+}
+
+export function deletePayee(data: PayeeDeleteData) {
+  return axios.post<UserOperationRes>('/api/payee/delete', data);
 }

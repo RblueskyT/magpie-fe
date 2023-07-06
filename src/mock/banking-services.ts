@@ -492,5 +492,16 @@ setupMock({
       }
       return failResponseWrap(null, 'You are not logged on.', 50008);
     });
+
+    // Delete a payee
+    Mock.mock(new RegExp('/api/payee/delete'), () => {
+      if (isLogon()) {
+        return successResponseWrap({
+          status: 200,
+          message: 'Successful operation.',
+        });
+      }
+      return failResponseWrap(null, 'You are not logged on.', 50008);
+    });
   },
 });
