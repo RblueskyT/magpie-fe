@@ -46,10 +46,12 @@
   );
   const detailsDrawerVisibleFlag: any = inject('detailsDrawerVisibleFlag');
   const detailsDrawerContent: any = inject('detailsDrawerContent');
+  const bottomMenuKey: any = inject('bottomMenuKey');
   const drawerTwoVisibleFlag: any = inject('drawerTwoVisibleFlag');
   const paymentForm: any = inject('paymentForm');
   const goToPay = () => {
     paymentForm.value.from = focusedAccountIdx.value;
+    bottomMenuKey.value[0] = '1';
     drawerTwoVisibleFlag.value = true;
     moreOptionsDrawerVisibleFlag.value = false;
   };

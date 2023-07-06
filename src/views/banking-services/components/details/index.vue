@@ -43,7 +43,7 @@
 </template>
 
 <script lang="ts" setup>
-  import { ref, computed, provide, inject, readonly } from 'vue';
+  import { ref, computed, watch, provide, inject, readonly } from 'vue';
   import NavBar from './components/navbar.vue';
   import MoreOptions from './components/more-options.vue';
   import Overview from './components/overview.vue';
@@ -56,6 +56,8 @@
   const focusedAccount = computed(() => {
     return bankAccounts.value[Number(focusedAccountIdx.value)];
   });
+  const billingRecordsMaxHeight: any = inject('billingRecordsMaxHeight');
+  const drawerTwoVisibleFlag: any = inject('drawerTwoVisibleFlag');
   const moreOptionsDrawerVisibleFlag = ref(false);
   const detailsDrawerVisibleFlag = ref(false);
   const detailsDrawerContent = ref(''); // 'transaction' or 'payees'
@@ -67,6 +69,25 @@
     balance: 0,
     pending: false,
     remark: '',
+  });
+
+  watch(moreOptionsDrawerVisibleFlag, () => {
+    if (moreOptionsDrawerVisibleFlag.value === true) {
+      billingRecordsMaxHeight.value = 0;
+    } else if (
+      moreOptionsDrawerVisibleFlag.value === false &&
+      detailsDrawerVisibleFlag.value === false &&
+      drawerTwoVisibleFlag.value === false
+    ) {
+      billingRecordsMaxHeight.value = 681;
+    }
+  });
+  watch(detailsDrawerVisibleFlag, () => {
+    if (detailsDrawerVisibleFlag.value === true) {
+      billingRecordsMaxHeight.value = 0;
+    } else {
+      billingRecordsMaxHeight.value = 681;
+    }
   });
 
   provide('focusedAccount', readonly(focusedAccount));

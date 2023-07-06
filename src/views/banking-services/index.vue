@@ -75,6 +75,7 @@
   const drawerOneVisibleFlag = ref(false);
   const drawerTwoVisibleFlag = ref(false);
   const focusedAccountIdx = ref(''); // this is used for the control of the 'DETAILS' panel
+  const billingRecordsMaxHeight = ref(681);
   const billingRecords: any = ref([
     {
       all: [],
@@ -131,13 +132,17 @@
       drawerOneVisibleFlag.value = false;
     }
   });
-
-  // Check whether to open the drawer - pay and transfer
-  watch(bottomMenuKey, () => {
-    if (bottomMenuKey.value[0] === '1' || bottomMenuKey.value[0] === '2') {
-      drawerTwoVisibleFlag.value = true;
-    } else {
-      drawerTwoVisibleFlag.value = false;
+  // hide the scrollbar if other drawers pop up
+  watch(drawerTwoVisibleFlag, () => {
+    if (drawerTwoVisibleFlag.value === true) {
+      if (drawerOneVisibleFlag.value === true) {
+        billingRecordsMaxHeight.value = 0;
+      }
+    }
+    if (drawerTwoVisibleFlag.value === false) {
+      if (drawerOneVisibleFlag.value === true) {
+        billingRecordsMaxHeight.value = 681;
+      }
     }
   });
 
@@ -146,6 +151,7 @@
   provide('homePageLoading', homePageLoading);
   provide('bottomMenuKey', bottomMenuKey);
   provide('focusedAccountIdx', focusedAccountIdx);
+  provide('billingRecordsMaxHeight', billingRecordsMaxHeight);
   provide('billingRecords', billingRecords);
   provide('currentPage', currentPage);
   provide('totalPage', readonly(totalPage));

@@ -1,6 +1,10 @@
 <template>
   <div class="bottom-menu">
-    <a-menu v-model:selected-keys="bottomMenuKey" mode="horizontal">
+    <a-menu
+      v-model:selected-keys="bottomMenuKey"
+      mode="horizontal"
+      @menu-item-click="goTo()"
+    >
       <a-menu-item key="0">
         <template #icon>
           <icon-home />
@@ -27,6 +31,12 @@
   import { inject } from 'vue';
 
   const bottomMenuKey: any = inject('bottomMenuKey');
+  const drawerTwoVisibleFlag: any = inject('drawerTwoVisibleFlag');
+  const goTo = () => {
+    if (bottomMenuKey.value[0] === '1' || bottomMenuKey.value[0] === '2') {
+      drawerTwoVisibleFlag.value = true;
+    }
+  };
 </script>
 
 <style lang="less" scoped>

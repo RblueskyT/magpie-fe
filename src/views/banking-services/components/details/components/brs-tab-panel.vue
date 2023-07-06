@@ -3,7 +3,7 @@
     v-show="billingRecordsLoading[props.panel] === false"
     size="small"
     :bordered="false"
-    :max-height="681"
+    :max-height="billingRecordsMaxHeight"
     hoverable
     @reach-bottom="fetchMoreBillingRecords"
   >
@@ -137,6 +137,7 @@
   const detailsDrawerVisibleFlag: any = inject('detailsDrawerVisibleFlag');
   const detailsDrawerContent: any = inject('detailsDrawerContent');
   const transactionDetails: any = inject('transactionDetails');
+  const billingRecordsMaxHeight: any = inject('billingRecordsMaxHeight');
   const reachBottomFlag = ref(false);
   const listBillingRecords = async (
     enableLoading: boolean,
