@@ -25,9 +25,9 @@
       </a-layout-content>
       <a-layout-footer></a-layout-footer>
     </a-layout>
-    <!-- DETAILS, PAY AND TRANSFER -->
+    <!-- DETAILS -->
     <a-drawer
-      v-model:visible="drawerVisibleFlag"
+      v-model:visible="drawerOneVisibleFlag"
       placement="right"
       :mask="false"
       :closable="false"
@@ -39,6 +39,20 @@
     >
       <AccountDetails v-if="focusedAccountIdx.length !== 0" />
     </a-drawer>
+    <!-- PAY AND TRANSFER -->
+    <a-drawer
+      v-model:visible="drawerTwoVisibleFlag"
+      placement="right"
+      :mask="false"
+      :closable="false"
+      :width="500"
+      popup-container="#drawerContainer"
+      :esc-to-close="false"
+      :header="false"
+      :footer="false"
+    >
+      <Pay v-if="bottomMenuKey[0] === '1'" />
+    </a-drawer>
   </div>
 </template>
 
@@ -49,6 +63,7 @@
   import Home from './components/home.vue';
   import BottomMenu from './components/bottom-menu.vue';
   import AccountDetails from './components/details/index.vue';
+  import Pay from './components/pay/index.vue';
 
   const userStore = useUserStore();
   const group = computed(() => {
@@ -57,7 +72,8 @@
   const bankAccounts: any = ref([]);
   const homePageLoading = ref(false);
   const bottomMenuKey = ref(['0']);
-  const drawerVisibleFlag = ref(false);
+  const drawerOneVisibleFlag = ref(false);
+  const drawerTwoVisibleFlag = ref(false);
   const focusedAccountIdx = ref(''); // this is used for the control of the 'DETAILS' panel
   const billingRecords: any = ref([
     {
@@ -95,6 +111,14 @@
       out: 1,
     },
   ]);
+  const paymentForm = ref({
+    from: '',
+    to: '',
+    amount: 0,
+    reference: '',
+    date: '',
+    paymentPurpose: '',
+  });
 
   // Check whether to open the drawer - details
   watch(focusedAccountIdx, () => {
@@ -102,18 +126,18 @@
       bottomMenuKey.value[0] === '0' &&
       focusedAccountIdx.value.length !== 0
     ) {
-      drawerVisibleFlag.value = true;
+      drawerOneVisibleFlag.value = true;
     } else {
-      drawerVisibleFlag.value = false;
+      drawerOneVisibleFlag.value = false;
     }
   });
 
   // Check whether to open the drawer - pay and transfer
   watch(bottomMenuKey, () => {
     if (bottomMenuKey.value[0] === '1' || bottomMenuKey.value[0] === '2') {
-      drawerVisibleFlag.value = true;
+      drawerTwoVisibleFlag.value = true;
     } else {
-      drawerVisibleFlag.value = false;
+      drawerTwoVisibleFlag.value = false;
     }
   });
 
@@ -125,6 +149,8 @@
   provide('billingRecords', billingRecords);
   provide('currentPage', currentPage);
   provide('totalPage', readonly(totalPage));
+  provide('drawerTwoVisibleFlag', drawerTwoVisibleFlag);
+  provide('paymentForm', paymentForm);
 </script>
 
 <style lang="less" scoped>

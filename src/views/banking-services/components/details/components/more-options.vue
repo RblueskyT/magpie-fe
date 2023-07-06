@@ -2,7 +2,7 @@
   <div class="more-options">
     <a-list :bordered="false" :split="false">
       <a-list-item>
-        <a-button type="text" size="large" long>
+        <a-button type="text" size="large" long @click="goToPay()">
           <template #icon>
             <icon-send />
           </template>
@@ -40,11 +40,19 @@
 <script lang="ts" setup>
   import { inject } from 'vue';
 
+  const focusedAccountIdx: any = inject('focusedAccountIdx');
   const moreOptionsDrawerVisibleFlag: any = inject(
     'moreOptionsDrawerVisibleFlag'
   );
   const detailsDrawerVisibleFlag: any = inject('detailsDrawerVisibleFlag');
   const detailsDrawerContent: any = inject('detailsDrawerContent');
+  const drawerTwoVisibleFlag: any = inject('drawerTwoVisibleFlag');
+  const paymentForm: any = inject('paymentForm');
+  const goToPay = () => {
+    paymentForm.value.from = focusedAccountIdx.value;
+    drawerTwoVisibleFlag.value = true;
+    moreOptionsDrawerVisibleFlag.value = false;
+  };
   const goToManagePayees = () => {
     detailsDrawerContent.value = 'payees';
     detailsDrawerVisibleFlag.value = true;
