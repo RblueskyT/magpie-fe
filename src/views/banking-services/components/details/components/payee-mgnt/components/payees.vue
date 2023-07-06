@@ -42,7 +42,9 @@
           </template>
         </a-list-item-meta>
         <template #actions>
-          <a-link>Delete</a-link>
+          <a-link @click="openDeleteDrawer(indexPayee, itemPayee)">
+            Delete
+          </a-link>
         </template>
       </a-list-item>
     </a-list>
@@ -63,9 +65,20 @@
 <script lang="ts" setup>
   import { inject } from 'vue';
 
-  const bankAccounts: any = inject('bankAccounts');
-  const focusedAccountIdx: any = inject('focusedAccountIdx');
   const focusedAccount: any = inject('focusedAccount');
+  const deleteDrawerVisibleFlag: any = inject('deleteDrawerVisibleFlag');
+  const focusedPayee: any = inject('focusedPayee');
+  const openDeleteDrawer = (payeeId: number, payeeInfo: any) => {
+    focusedPayee.value.id = payeeId;
+    focusedPayee.value.name = payeeInfo.name;
+    focusedPayee.value.type = payeeInfo.type;
+    focusedPayee.value.sortCode = payeeInfo.sortCode;
+    focusedPayee.value.accountNumber = payeeInfo.accountNumber;
+    focusedPayee.value.reference = payeeInfo.reference;
+    focusedPayee.value.lastPaidDate = payeeInfo.lastPaidDate;
+    focusedPayee.value.lastPaidAmount = payeeInfo.lastPaidAmount;
+    deleteDrawerVisibleFlag.value = true;
+  };
 </script>
 
 <style lang="less" scoped>
