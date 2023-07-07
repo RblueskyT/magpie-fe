@@ -5,6 +5,7 @@ export interface PayeeProps {
   type: 'Personal' | 'Business';
   sortCode: string;
   accountNumber: string;
+  bankName: string; // it is only shown in 'Pay'
   reference: string;
   lastPaidDate: string;
   lastPaidAmount: number;

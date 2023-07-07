@@ -9,7 +9,7 @@
           size="large"
           @mouseenter="backBtnHoverFlag = true"
           @mouseleave="backBtnHoverFlag = false"
-          @click="goBackToPayeeMgnt()"
+          @click="goBackToPay()"
         >
           <template #icon>
             <icon-arrow-left />
@@ -18,8 +18,10 @@
       </li>
     </ul>
     <div class="center-side">
-      <a-typography-text style="line-height: 52px; font-size: 16px">
-        Confirm Delete
+      <a-typography-text
+        style="line-height: 52px; font-size: 16px; color: #1d2129"
+      >
+        Pay From
       </a-typography-text>
     </div>
     <ul class="right-side">
@@ -31,8 +33,8 @@
 <script lang="ts" setup>
   import { ref, inject } from 'vue';
 
-  const deleteDrawerVisibleFlag: any = inject('deleteDrawerVisibleFlag');
-  const focusedPayee: any = inject('focusedPayee');
+  const payDrawerVisibleFlag: any = inject('payDrawerVisibleFlag');
+  const payDrawerContent: any = inject('payDrawerContent');
   const defaultNavbarBtnStyle = {
     borderColor: '#ffffff',
     color: '#4e5969',
@@ -51,16 +53,9 @@
     }
     return hoverNavbarBtnStyle;
   };
-  const goBackToPayeeMgnt = () => {
-    deleteDrawerVisibleFlag.value = false;
-    focusedPayee.value.id = -1;
-    focusedPayee.value.name = '';
-    focusedPayee.value.type = '';
-    focusedPayee.value.sortCode = '';
-    focusedPayee.value.accountNumber = '';
-    focusedPayee.value.reference = '';
-    focusedPayee.value.lastPaidDate = '';
-    focusedPayee.value.lastPaidAmount = 0;
+  const goBackToPay = () => {
+    payDrawerVisibleFlag.value = false;
+    payDrawerContent.value = '';
   };
 </script>
 

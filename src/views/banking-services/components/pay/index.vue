@@ -5,7 +5,7 @@
         <NavBar />
       </a-layout-header>
       <a-layout-content>
-        test
+        <PaymentForm />
       </a-layout-content>
       <a-layout-footer></a-layout-footer>
     </a-layout>
@@ -29,17 +29,37 @@
     >
       <div>Are you sure you want to cancel the payment?</div>
     </a-modal>
+    <!-- CHOOSE FROM AND CHOOSE TO -->
+    <a-drawer
+      v-model:visible="payDrawerVisibleFlag"
+      placement="right"
+      :mask="false"
+      :closable="false"
+      :width="500"
+      popup-container="#paymentModalDrawerContainer"
+      :esc-to-close="false"
+      :header="false"
+      :footer="false"
+    >
+      <From v-if="payDrawerContent === 'from'" />
+      <To v-if="payDrawerContent === 'to'" />
+    </a-drawer>
   </div>
 </template>
 
 <script lang="ts" setup>
   import { ref, inject, provide } from 'vue';
   import NavBar from './components/navbar.vue';
+  import PaymentForm from './components/payment-form.vue';
+  import From from './components/from/index.vue';
+  import To from './components/to/index.vue';
 
   const bottomMenuKey: any = inject('bottomMenuKey');
   const paymentForm: any = inject('paymentForm');
   const drawerTwoVisibleFlag: any = inject('drawerTwoVisibleFlag');
   const goBackModalVisibleFlag = ref(false);
+  const payDrawerVisibleFlag = ref(false);
+  const payDrawerContent = ref(''); // 'from' or 'to'
   const cancelGoBack = () => {
     goBackModalVisibleFlag.value = false;
   };
@@ -55,6 +75,8 @@
   };
 
   provide('goBackModalVisibleFlag', goBackModalVisibleFlag);
+  provide('payDrawerVisibleFlag', payDrawerVisibleFlag);
+  provide('payDrawerContent', payDrawerContent);
 </script>
 
 <style lang="less" scoped>
@@ -80,7 +102,7 @@
   .payment-layout > .arco-layout > .arco-layout-content {
     display: flex;
     flex-direction: column;
-    background-color: white;
+    background-color: #f2f3f5;
   }
 
   .payment-layout :deep(.arco-modal-container) {
