@@ -30,27 +30,11 @@
 
 <script lang="ts" setup>
   import { ref, inject } from 'vue';
+  import { changeBtnStyle } from '@/utils/change-btn-style';
 
   const deleteDrawerVisibleFlag: any = inject('deleteDrawerVisibleFlag');
   const focusedPayee: any = inject('focusedPayee');
-  const defaultNavbarBtnStyle = {
-    borderColor: '#ffffff',
-    color: '#4e5969',
-    fontSize: '24px',
-  };
-  const hoverNavbarBtnStyle = {
-    borderColor: '#ffffff',
-    color: '#4e5969',
-    fontSize: '26px',
-  };
   const backBtnHoverFlag = ref(false);
-
-  const changeBtnStyle = (hoverFlag: boolean) => {
-    if (hoverFlag === false) {
-      return defaultNavbarBtnStyle;
-    }
-    return hoverNavbarBtnStyle;
-  };
   const goBackToPayeeMgnt = () => {
     deleteDrawerVisibleFlag.value = false;
     focusedPayee.value.id = -1;

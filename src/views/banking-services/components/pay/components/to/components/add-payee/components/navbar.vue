@@ -32,26 +32,10 @@
 
 <script lang="ts" setup>
   import { ref, inject } from 'vue';
+  import { changeBtnStyle } from '@/utils/change-btn-style';
 
   const payToDrawerVisibleFlag: any = inject('payToDrawerVisibleFlag');
-  const defaultNavbarBtnStyle = {
-    borderColor: '#ffffff',
-    color: '#4e5969',
-    fontSize: '24px',
-  };
-  const hoverNavbarBtnStyle = {
-    borderColor: '#ffffff',
-    color: '#4e5969',
-    fontSize: '26px',
-  };
   const backBtnHoverFlag = ref(false);
-
-  const changeBtnStyle = (hoverFlag: boolean) => {
-    if (hoverFlag === false) {
-      return defaultNavbarBtnStyle;
-    }
-    return hoverNavbarBtnStyle;
-  };
   const goBackToPayTo = () => {
     payToDrawerVisibleFlag.value = false;
   };

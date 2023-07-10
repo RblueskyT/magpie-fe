@@ -26,7 +26,7 @@
     <ul class="right-side">
       <li>
         <a-button
-          :style="changeBtnStyle(logoutBtnHoverFlag)"
+          :style="changeBtnStyleHome(logoutBtnHoverFlag)"
           type="outline"
           shape="circle"
           size="large"
@@ -46,26 +46,10 @@
 <script lang="ts" setup>
   import { ref } from 'vue';
   import useUser from '@/hooks/user';
+  import { changeBtnStyleHome } from '@/utils/change-btn-style';
 
   const { logout } = useUser();
-  const defaultNavbarBtnStyle = {
-    borderColor: '#ffffff',
-    color: '#ffffff',
-    fontSize: '20px',
-  };
-  const hoverNavbarBtnStyle = {
-    borderColor: '#ffffff',
-    color: '#ffffff',
-    fontSize: '22px',
-  };
   const logoutBtnHoverFlag = ref(false);
-
-  const changeBtnStyle = (hoverFlag: boolean) => {
-    if (hoverFlag === false) {
-      return defaultNavbarBtnStyle;
-    }
-    return hoverNavbarBtnStyle;
-  };
   const handleLogout = () => {
     logout();
   };
