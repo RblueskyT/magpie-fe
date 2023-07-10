@@ -1,6 +1,7 @@
 <template>
   <div class="radios">
     <a-radio-group
+      v-if="bankAccounts[Number(paymentForm.from)].payees.length > 0"
       v-model:model-value="paymentForm.to"
       direction="vertical"
       @change="goBackToPaymentForm()"
@@ -61,6 +62,17 @@
         </a-radio>
       </template>
     </a-radio-group>
+    <div
+      v-if="bankAccounts[Number(paymentForm.from)].payees.length === 0"
+      class="empty-payee-container"
+    >
+      <a-empty>
+        <template #image>
+          <icon-info-circle />
+        </template>
+        You currently have no payees.
+      </a-empty>
+    </div>
   </div>
 </template>
 
@@ -139,5 +151,12 @@
 
   .custom-radio-card-checked .custom-radio-card-mask-dot {
     background-color: rgb(var(--primary-6));
+  }
+
+  .empty-payee-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
   }
 </style>

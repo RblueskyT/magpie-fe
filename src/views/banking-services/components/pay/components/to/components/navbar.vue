@@ -25,7 +25,21 @@
       </a-typography-text>
     </div>
     <ul class="right-side">
-      <!-- RESERVED -->
+      <li>
+        <a-button
+          :style="changeBtnStyle(addBtnHoverFlag)"
+          type="outline"
+          shape="circle"
+          size="large"
+          @mouseenter="addBtnHoverFlag = true"
+          @mouseleave="addBtnHoverFlag = false"
+          @click="goToAddPayee()"
+        >
+          <template #icon>
+            <icon-plus />
+          </template>
+        </a-button>
+      </li>
     </ul>
   </div>
 </template>
@@ -46,6 +60,7 @@
     fontSize: '26px',
   };
   const backBtnHoverFlag = ref(false);
+  const addBtnHoverFlag = ref(false);
 
   const changeBtnStyle = (hoverFlag: boolean) => {
     if (hoverFlag === false) {
@@ -56,6 +71,9 @@
   const goBackToPay = () => {
     payDrawerVisibleFlag.value = false;
     payDrawerContent.value = '';
+  };
+  const goToAddPayee = () => {
+    // todo
   };
 </script>
 
