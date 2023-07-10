@@ -1,5 +1,5 @@
 <template>
-  <div class="pay-to-layout">
+  <div id="payToDrawerContainer" class="pay-to-layout">
     <a-layout>
       <a-layout-header>
         <NavBar />
@@ -9,12 +9,32 @@
       </a-layout-content>
       <a-layout-footer></a-layout-footer>
     </a-layout>
+    <!-- ADD NEW PAYEE -->
+    <a-drawer
+      v-model:visible="payToDrawerVisibleFlag"
+      placement="right"
+      :mask="false"
+      :closable="false"
+      :width="500"
+      popup-container="#payToDrawerContainer"
+      :esc-to-close="false"
+      :header="false"
+      :footer="false"
+    >
+      <AddPayee />
+    </a-drawer>
   </div>
 </template>
 
 <script lang="ts" setup>
+  import { ref, provide } from 'vue';
   import NavBar from './components/navbar.vue';
   import Radios from './components/radios.vue';
+  import AddPayee from './components/add-payee/index.vue';
+
+  const payToDrawerVisibleFlag = ref(false);
+
+  provide('payToDrawerVisibleFlag', payToDrawerVisibleFlag);
 </script>
 
 <style lang="less" scoped>

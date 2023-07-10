@@ -9,7 +9,7 @@
           size="large"
           @mouseenter="backBtnHoverFlag = true"
           @mouseleave="backBtnHoverFlag = false"
-          @click="goBackToPay()"
+          @click="goBackToPayTo()"
         >
           <template #icon>
             <icon-arrow-left />
@@ -21,25 +21,11 @@
       <a-typography-text
         style="line-height: 52px; font-size: 16px; color: #1d2129"
       >
-        Pay To
+        Add New Payee
       </a-typography-text>
     </div>
     <ul class="right-side">
-      <li>
-        <a-button
-          :style="changeBtnStyle(addBtnHoverFlag)"
-          type="outline"
-          shape="circle"
-          size="large"
-          @mouseenter="addBtnHoverFlag = true"
-          @mouseleave="addBtnHoverFlag = false"
-          @click="goToAddPayee()"
-        >
-          <template #icon>
-            <icon-plus />
-          </template>
-        </a-button>
-      </li>
+      <!-- RESERVED -->
     </ul>
   </div>
 </template>
@@ -47,8 +33,6 @@
 <script lang="ts" setup>
   import { ref, inject } from 'vue';
 
-  const payDrawerVisibleFlag: any = inject('payDrawerVisibleFlag');
-  const payDrawerContent: any = inject('payDrawerContent');
   const payToDrawerVisibleFlag: any = inject('payToDrawerVisibleFlag');
   const defaultNavbarBtnStyle = {
     borderColor: '#ffffff',
@@ -61,7 +45,6 @@
     fontSize: '26px',
   };
   const backBtnHoverFlag = ref(false);
-  const addBtnHoverFlag = ref(false);
 
   const changeBtnStyle = (hoverFlag: boolean) => {
     if (hoverFlag === false) {
@@ -69,12 +52,8 @@
     }
     return hoverNavbarBtnStyle;
   };
-  const goBackToPay = () => {
-    payDrawerVisibleFlag.value = false;
-    payDrawerContent.value = '';
-  };
-  const goToAddPayee = () => {
-    payToDrawerVisibleFlag.value = true;
+  const goBackToPayTo = () => {
+    payToDrawerVisibleFlag.value = false;
   };
 </script>
 
