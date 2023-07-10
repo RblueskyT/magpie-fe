@@ -31,7 +31,7 @@
                     {{ itemPayee.sortCode }} {{ itemPayee.accountNumber }}
                   </a-typography-text>
                   <a-typography-text type="secondary" style="line-height: 14px">
-                    Reference: {{ itemPayee.reference }}
+                    Reference: {{ itemPayee.reference.toUpperCase() }}
                   </a-typography-text>
                 </a-space>
               </a-space>

@@ -8,7 +8,7 @@
           </a-typography-text>
           <a-descriptions size="medium" :column="1">
             <a-descriptions-item label="Name">
-              {{ focusedPayee.name }}
+              {{ focusedPayee.name.toUpperCase() }}
             </a-descriptions-item>
             <a-descriptions-item label="Sort Code">
               {{ focusedPayee.sortCode }}
@@ -20,7 +20,7 @@
               {{ focusedPayee.type }}
             </a-descriptions-item>
             <a-descriptions-item label="Reference">
-              {{ focusedPayee.reference }}
+              {{ focusedPayee.reference.toUpperCase() }}
             </a-descriptions-item>
             <a-descriptions-item label="Last Paid">
               {{ focusedPayee.lastPaidDate }}
@@ -77,9 +77,9 @@
           1
         );
         deleteDrawerVisibleFlag.value = false;
-        Message.success('You have successfully deleted the payee');
+        Message.success('You have successfully deleted this payee');
       } else {
-        Message.error('Sorry, the payee cannot be deleted at this time');
+        Message.error('Sorry, this payee cannot be deleted at this time');
       }
     } catch (err) {
       Message.error((err as Error).message);
