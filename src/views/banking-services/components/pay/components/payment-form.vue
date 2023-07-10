@@ -30,6 +30,14 @@
               type="secondary"
               style="line-height: 26px; font-size: 14px; margin-bottom: 0px"
             >
+              {{ bankAccounts[Number(paymentForm.from)].sortCode }}
+              {{ bankAccounts[Number(paymentForm.from)].accountNumber }}
+            </a-typography-paragraph>
+            <a-typography-paragraph
+              v-if="paymentForm.from.length > 0"
+              type="secondary"
+              style="line-height: 26px; font-size: 14px; margin-bottom: 0px"
+            >
               £{{
                 numberFormatter(
                   bankAccounts[Number(paymentForm.from)].balance.toString()
@@ -80,7 +88,12 @@
               {{
                 bankAccounts[Number(paymentForm.from)].payees[
                   Number(paymentForm.to)
-                ].bankName
+                ].sortCode
+              }}
+              {{
+                bankAccounts[Number(paymentForm.from)].payees[
+                  Number(paymentForm.to)
+                ].accountNumber
               }}
             </a-typography-paragraph>
             <a-typography-paragraph
@@ -91,12 +104,7 @@
               {{
                 bankAccounts[Number(paymentForm.from)].payees[
                   Number(paymentForm.to)
-                ].sortCode
-              }}
-              {{
-                bankAccounts[Number(paymentForm.from)].payees[
-                  Number(paymentForm.to)
-                ].accountNumber
+                ].bankName
               }}
             </a-typography-paragraph>
           </a-typography>
