@@ -34,7 +34,9 @@
           v-model="accountInfo.personalID"
           :max-length="{ length: 10, errorOnly: false }"
           :disabled="loading"
+          allow-clear
           @input="disableSubmit"
+          @clear="disableSubmit"
         >
           <template #prefix>
             <icon-user />
@@ -67,7 +69,9 @@
           :max-length="{ length: 5, errorOnly: false }"
           :invisible-button="false"
           :disabled="loading"
+          allow-clear
           @input="disableSubmit"
+          @clear="disableSubmit"
         >
           <template #prefix>
             <icon-lock />

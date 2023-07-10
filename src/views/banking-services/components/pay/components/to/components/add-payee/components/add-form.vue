@@ -26,7 +26,9 @@
             v-model="addPayeeFormData.name"
             :max-length="{ length: 18, errorOnly: false }"
             :disabled="loading"
-            @input="disableSubmit()"
+            allow-clear
+            @input="disableSubmit"
+            @clear="disableSubmit"
           >
             <template #suffix>
               <a-button
@@ -85,7 +87,9 @@
             v-model="addPayeeFormData.sortCode"
             :max-length="{ length: 8, errorOnly: false }"
             :disabled="loading"
-            @input="disableSubmit()"
+            allow-clear
+            @input="disableSubmit"
+            @clear="disableSubmit"
             @blur="sortCodeFormatter(addPayeeFormData.sortCode)"
           />
         </a-form-item>
@@ -108,7 +112,9 @@
             v-model="addPayeeFormData.accountNumber"
             :max-length="{ length: 8, errorOnly: false }"
             :disabled="loading"
-            @input="disableSubmit()"
+            allow-clear
+            @input="disableSubmit"
+            @clear="disableSubmit"
           />
         </a-form-item>
         <a-form-item
@@ -118,7 +124,7 @@
             {
               type: 'string',
               required: true,
-              message: 'Only numbers, letters, - and _ are allowed',
+              message: 'Only digits, letters, - and _ are allowed',
               match: /^[0-9a-zA-Z-_ ]{1,18}$/,
             },
           ]"
@@ -129,7 +135,9 @@
             v-model="addPayeeFormData.reference"
             :max-length="{ length: 18, errorOnly: false }"
             :disabled="loading"
-            @input="disableSubmit()"
+            allow-clear
+            @input="disableSubmit"
+            @clear="disableSubmit"
           >
             <template #suffix>
               <a-button
