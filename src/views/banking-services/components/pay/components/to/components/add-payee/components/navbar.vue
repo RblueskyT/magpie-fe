@@ -38,6 +38,7 @@
   const backBtnHoverFlag = ref(false);
   const goBackToPayTo = () => {
     payToDrawerVisibleFlag.value = false;
+    // todo: open modal if needed
   };
 </script>
 

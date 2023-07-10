@@ -14,8 +14,19 @@
 </template>
 
 <script lang="ts" setup>
+  import { ref, provide } from 'vue';
   import NavBar from './components/navbar.vue';
   import AddForm from './components/add-form.vue';
+
+  const addPayeeFormData = ref({
+    name: '',
+    type: '',
+    sortCode: '',
+    accountNumber: '',
+    reference: '',
+  });
+
+  provide('addPayeeFormData', addPayeeFormData);
 </script>
 
 <style lang="less" scoped>
@@ -41,6 +52,6 @@
   .add-payee-layout > .arco-layout > .arco-layout-content {
     display: flex;
     flex-direction: column;
-    background-color: white;
+    background-color: #f2f3f5;
   }
 </style>
