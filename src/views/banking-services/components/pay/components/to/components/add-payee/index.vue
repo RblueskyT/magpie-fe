@@ -9,7 +9,59 @@
       </a-layout-content>
       <a-layout-footer></a-layout-footer>
     </a-layout>
-    <!-- TODO: MODAL AND DRAWER -->
+    <!-- EXTRA INFO MODAL -->
+    <a-modal
+      v-model:visible="extraInfoModalVisibleFlag"
+      :width="400"
+      :title="extraInfoTitle"
+      title-align="center"
+      :mask-closable="false"
+      simple
+      :footer="false"
+      :render-to-body="false"
+      popup-container="#addPayeeModalDrawerContainer"
+      :esc-to-close="false"
+    >
+      <div>
+        <a-typography v-if="extraInfoTitle === 'Name on the Account'">
+          <a-typography-paragraph style="margin-bottom: 12px">
+            Enter the name of the person or business you're paying
+            <span style="font-weight: bold">exactly</span> as it appears on
+            their account.
+          </a-typography-paragraph>
+          <a-typography-paragraph
+            style="margin-bottom: 12px; font-weight: bold"
+          >
+            Check with the person you're trying to pay if you're not sure.
+          </a-typography-paragraph>
+        </a-typography>
+        <a-typography v-if="extraInfoTitle === 'Account Type'">
+          <a-typography-paragraph style="margin-bottom: 12px">
+            Choose whether you're paying money to somebody's personal account or
+            a business account.
+          </a-typography-paragraph>
+          <a-typography-paragraph
+            style="margin-bottom: 12px; font-weight: bold"
+          >
+            Check with the person you're trying to pay if you're not sure.
+          </a-typography-paragraph>
+        </a-typography>
+        <a-typography v-if="extraInfoTitle === 'Reference'">
+          <a-typography-paragraph style="margin-bottom: 12px">
+            If you're paying a credit card, loan or mortgage, you might need to
+            add a reference that identifies you.
+          </a-typography-paragraph>
+          <a-typography-paragraph
+            style="margin-bottom: 12px; font-weight: bold"
+          >
+            It's important that you enter this correctly.
+          </a-typography-paragraph>
+        </a-typography>
+        <a-button type="text" shape="round" long @click="closeExtraInfoModal()">
+          {{ 'Got It' }}
+        </a-button>
+      </div>
+    </a-modal>
   </div>
 </template>
 
@@ -25,8 +77,16 @@
     accountNumber: '',
     reference: '',
   });
+  const extraInfoModalVisibleFlag = ref(false);
+  const extraInfoTitle = ref('');
+  const closeExtraInfoModal = () => {
+    extraInfoModalVisibleFlag.value = false;
+    extraInfoTitle.value = '';
+  };
 
   provide('addPayeeFormData', addPayeeFormData);
+  provide('extraInfoModalVisibleFlag', extraInfoModalVisibleFlag);
+  provide('extraInfoTitle', extraInfoTitle);
 </script>
 
 <style lang="less" scoped>

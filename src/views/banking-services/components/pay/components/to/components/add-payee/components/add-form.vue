@@ -36,6 +36,7 @@
                 shape="circle"
                 size="mini"
                 style="border-color: #6b7785; color: #6b7785"
+                @click="openExtraInfoModal('Name on the Account')"
               >
                 <template #icon>
                   <icon-info />
@@ -61,6 +62,7 @@
               shape="circle"
               size="mini"
               style="border-color: #6b7785; color: #6b7785"
+              @click="openExtraInfoModal('Account Type')"
             >
               <template #icon>
                 <icon-info />
@@ -75,7 +77,7 @@
             {
               type: 'string',
               required: true,
-              message: 'Please enter a valid sort code, e.g. 01-02-03',
+              message: 'Please enter a valid sort code, e.g. 010203 or 01-02-03',
               match: /^\d{2}\-\d{2}\-\d{2}$/,
             },
           ]"
@@ -124,7 +126,8 @@
             {
               type: 'string',
               required: true,
-              message: 'Only digits, letters, - and _ are allowed',
+              message:
+                'Please enter a valid reference without special symbols, e.g. Flat 101',
               match: /^[0-9a-zA-Z-_ ]{1,18}$/,
             },
           ]"
@@ -145,6 +148,7 @@
                 shape="circle"
                 size="mini"
                 style="border-color: #6b7785; color: #6b7785"
+                @click="openExtraInfoModal('Reference')"
               >
                 <template #icon>
                   <icon-info />
@@ -165,6 +169,8 @@
   const { loading, setLoading } = useLoading();
 
   const addPayeeFormData: any = inject('addPayeeFormData');
+  const extraInfoModalVisibleFlag: any = inject('extraInfoModalVisibleFlag');
+  const extraInfoTitle: any = inject('extraInfoTitle');
   const disableSubmitFlag = ref(true);
   const sortCodeFormatter = (sortCode: string) => {
     const sortCodeRegex = new RegExp(/^\d{6}$/);
@@ -173,6 +179,10 @@
         .slice(0, 2)
         .concat('-', sortCode.slice(2, 4), '-', sortCode.slice(4));
     }
+  };
+  const openExtraInfoModal = (modalTitle: string) => {
+    extraInfoTitle.value = modalTitle;
+    extraInfoModalVisibleFlag.value = true;
   };
   const disableSubmit = () => {
     const nameRegex = new RegExp(/^[a-zA-Z][a-zA-Z ]{1,16}[a-zA-Z]$/);
