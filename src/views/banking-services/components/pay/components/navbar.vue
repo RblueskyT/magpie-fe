@@ -45,17 +45,14 @@
   const bottomMenuKey: any = inject('bottomMenuKey');
   const paymentForm: any = inject('paymentForm');
   const drawerTwoVisibleFlag: any = inject('drawerTwoVisibleFlag');
-  const goBackModalVisibleFlag: any = inject('goBackModalVisibleFlag');
+  const goBackModalPayVisibleFlag: any = inject('goBackModalPayVisibleFlag');
   const backBtnHoverFlag = ref(false);
-  const openGoBackModal = () => {
-    goBackModalVisibleFlag.value = true;
-  };
   const goBackTo = () => {
     if (paymentForm.value.from.length === 0) {
       drawerTwoVisibleFlag.value = false;
       bottomMenuKey.value[0] = '0';
     } else {
-      openGoBackModal();
+      goBackModalPayVisibleFlag.value = true;
     }
   };
 </script>

@@ -11,7 +11,7 @@
     </a-layout>
     <!-- CONFIRM GO BACK -->
     <a-modal
-      v-model:visible="goBackModalVisibleFlag"
+      v-model:visible="goBackModalPayVisibleFlag"
       :width="400"
       title="Warning"
       title-align="start"
@@ -57,11 +57,11 @@
   const bottomMenuKey: any = inject('bottomMenuKey');
   const paymentForm: any = inject('paymentForm');
   const drawerTwoVisibleFlag: any = inject('drawerTwoVisibleFlag');
-  const goBackModalVisibleFlag = ref(false);
+  const goBackModalPayVisibleFlag = ref(false);
   const payDrawerVisibleFlag = ref(false);
   const payDrawerContent = ref(''); // 'from' or 'to'
   const cancelGoBack = () => {
-    goBackModalVisibleFlag.value = false;
+    goBackModalPayVisibleFlag.value = false;
   };
   const confirmGoBack = () => {
     paymentForm.value.from = '';
@@ -74,7 +74,7 @@
     bottomMenuKey.value[0] = '0';
   };
 
-  provide('goBackModalVisibleFlag', goBackModalVisibleFlag);
+  provide('goBackModalPayVisibleFlag', goBackModalPayVisibleFlag);
   provide('payDrawerVisibleFlag', payDrawerVisibleFlag);
   provide('payDrawerContent', payDrawerContent);
 </script>

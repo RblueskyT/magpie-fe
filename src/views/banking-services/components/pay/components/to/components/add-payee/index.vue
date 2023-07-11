@@ -5,10 +5,30 @@
         <NavBar />
       </a-layout-header>
       <a-layout-content>
-        <AddForm />
+        <AddForm v-if="payToDrawerVisibleFlag === true" />
       </a-layout-content>
       <a-layout-footer></a-layout-footer>
     </a-layout>
+    <!-- CONFIRM GO BACK -->
+    <a-modal
+      v-model:visible="goBackModalAddPayeeVisibleFlag"
+      :width="400"
+      title="Warning"
+      title-align="start"
+      :mask-closable="false"
+      simple
+      ok-text="YES"
+      cancel-text="NO"
+      :ok-button-props="{ type: 'text' }"
+      :cancel-button-props="{ type: 'text' }"
+      :render-to-body="false"
+      popup-container="#addPayeeModalDrawerContainer"
+      :esc-to-close="false"
+      @ok="confirmGoBack()"
+      @cancel="cancelGoBack()"
+    >
+      <div>Are you sure you want to cancel adding the payee?</div>
+    </a-modal>
     <!-- EXTRA INFO MODAL -->
     <a-modal
       v-model:visible="extraInfoModalVisibleFlag"
@@ -66,10 +86,11 @@
 </template>
 
 <script lang="ts" setup>
-  import { ref, provide } from 'vue';
+  import { ref, inject, provide } from 'vue';
   import NavBar from './components/navbar.vue';
   import AddForm from './components/add-form.vue';
 
+  const payToDrawerVisibleFlag: any = inject('payToDrawerVisibleFlag');
   const addPayeeFormData = ref({
     name: '',
     type: '',
@@ -77,14 +98,27 @@
     accountNumber: '',
     reference: '',
   });
+  const goBackModalAddPayeeVisibleFlag = ref(false);
   const extraInfoModalVisibleFlag = ref(false);
   const extraInfoTitle = ref('');
+  const cancelGoBack = () => {
+    goBackModalAddPayeeVisibleFlag.value = false;
+  };
+  const confirmGoBack = () => {
+    addPayeeFormData.value.name = '';
+    addPayeeFormData.value.type = '';
+    addPayeeFormData.value.sortCode = '';
+    addPayeeFormData.value.accountNumber = '';
+    addPayeeFormData.value.reference = '';
+    payToDrawerVisibleFlag.value = false;
+  };
   const closeExtraInfoModal = () => {
     extraInfoModalVisibleFlag.value = false;
     extraInfoTitle.value = '';
   };
 
   provide('addPayeeFormData', addPayeeFormData);
+  provide('goBackModalAddPayeeVisibleFlag', goBackModalAddPayeeVisibleFlag);
   provide('extraInfoModalVisibleFlag', extraInfoModalVisibleFlag);
   provide('extraInfoTitle', extraInfoTitle);
 </script>

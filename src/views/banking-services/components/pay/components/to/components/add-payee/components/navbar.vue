@@ -35,10 +35,23 @@
   import { changeBtnStyle } from '@/utils/change-btn-style';
 
   const payToDrawerVisibleFlag: any = inject('payToDrawerVisibleFlag');
+  const goBackModalAddPayeeVisibleFlag: any = inject(
+    'goBackModalAddPayeeVisibleFlag'
+  );
+  const addPayeeFormData: any = inject('addPayeeFormData');
   const backBtnHoverFlag = ref(false);
   const goBackToPayTo = () => {
-    payToDrawerVisibleFlag.value = false;
-    // todo: open modal if needed
+    if (
+      addPayeeFormData.value.name === '' &&
+      addPayeeFormData.value.type === '' &&
+      addPayeeFormData.value.sortCode === '' &&
+      addPayeeFormData.value.accountNumber === '' &&
+      addPayeeFormData.value.reference === ''
+    ) {
+      payToDrawerVisibleFlag.value = false;
+    } else {
+      goBackModalAddPayeeVisibleFlag.value = true;
+    }
   };
 </script>
 
