@@ -495,6 +495,69 @@ setupMock({
       return failResponseWrap(null, 'You are not logged on.', 50008);
     });
 
+    // Check a payee
+    Mock.mock(new RegExp('/api/payee/check'), (params: MockParams) => {
+      if (isLogon()) {
+        const { name, sortCode, accountNumber } = JSON.parse(params.body);
+        let incorrectSCAN = true; // sort code or account number
+        let incorrectNameFlag = true;
+        if (sortCode === '40-37-25' && accountNumber === '19304373') {
+          incorrectSCAN = false;
+          if (name.trim() === 'Dexter LTD') {
+            incorrectNameFlag = false;
+          }
+        }
+        if (sortCode === '30-90-89' && accountNumber === '20374916') {
+          incorrectSCAN = false;
+          if (name.trim() === 'Libra Crypto LTD') {
+            incorrectNameFlag = false;
+          }
+        }
+        if (sortCode === '23-05-80' && accountNumber === '36502859') {
+          incorrectSCAN = false;
+          if (name.trim() === 'Hayden Oakley') {
+            incorrectNameFlag = false;
+          }
+        }
+        if (sortCode === '58-20-41' && accountNumber === '51067729') {
+          incorrectSCAN = false;
+          if (name.trim() === 'Neo Gordon') {
+            incorrectNameFlag = false;
+          }
+        }
+        if (incorrectSCAN === true) {
+          return successResponseWrap({
+            status: 404,
+            message: 'Incorrect SCAN.',
+          });
+        }
+        if (incorrectSCAN === false && incorrectNameFlag === true) {
+          return successResponseWrap({
+            status: 404,
+            message: 'Incorrect name.',
+          });
+        }
+        if (incorrectSCAN === false && incorrectNameFlag === false) {
+          return successResponseWrap({
+            status: 200,
+            message: 'Correct details.',
+          });
+        }
+      }
+      return failResponseWrap(null, 'You are not logged on.', 50008);
+    });
+
+    // Add a payee
+    Mock.mock(new RegExp('/api/payee/add'), () => {
+      if (isLogon()) {
+        return successResponseWrap({
+          status: 200,
+          message: 'Successful operation.',
+        });
+      }
+      return failResponseWrap(null, 'You are not logged on.', 50008);
+    });
+
     // Delete a payee
     Mock.mock(new RegExp('/api/payee/delete'), () => {
       if (isLogon()) {

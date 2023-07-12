@@ -48,6 +48,15 @@ export interface AllBillingRecordsProps {
   totalNum: number;
 }
 
+export interface PayeeAddData {
+  accountId: number;
+  name: string;
+  type: 'Personal' | 'Business';
+  sortCode: string;
+  accountNumber: string;
+  reference: string;
+}
+
 export interface PayeeDeleteData {
   sortCode: string;
   accountNumber: string;
@@ -73,6 +82,14 @@ export function queryBillingRecordListIn(data: BillingRecordsQueryData) {
 
 export function queryBillingRecordListOut(data: BillingRecordsQueryData) {
   return axios.post<AllBillingRecordsProps>('/api/records/list_out', data);
+}
+
+export function checkPayee(data: PayeeAddData) {
+  return axios.post<UserOperationRes>('/api/payee/check', data);
+}
+
+export function addPayee(data: PayeeAddData) {
+  return axios.post<UserOperationRes>('/api/payee/add', data);
 }
 
 export function deletePayee(data: PayeeDeleteData) {
