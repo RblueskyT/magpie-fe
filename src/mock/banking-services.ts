@@ -503,25 +503,25 @@ setupMock({
         let incorrectNameFlag = true;
         if (sortCode === '40-37-25' && accountNumber === '19304373') {
           incorrectSCAN = false;
-          if (name.trim() === 'Dexter LTD') {
+          if (name.trim().toUpperCase() === 'Dexter LTD') {
             incorrectNameFlag = false;
           }
         }
         if (sortCode === '30-90-89' && accountNumber === '20374916') {
           incorrectSCAN = false;
-          if (name.trim() === 'Libra Crypto LTD') {
+          if (name.trim().toUpperCase() === 'Libra Crypto LTD') {
             incorrectNameFlag = false;
           }
         }
         if (sortCode === '23-05-80' && accountNumber === '36502859') {
           incorrectSCAN = false;
-          if (name.trim() === 'Hayden Oakley') {
+          if (name.trim().toUpperCase() === 'Hayden Oakley') {
             incorrectNameFlag = false;
           }
         }
         if (sortCode === '58-20-41' && accountNumber === '51067729') {
           incorrectSCAN = false;
-          if (name.trim() === 'Neo Gordon') {
+          if (name.trim().toUpperCase() === 'Neo Gordon') {
             incorrectNameFlag = false;
           }
         }

@@ -52,7 +52,10 @@
           hide-asterisk
           style="margin-bottom: 12px"
         >
-          <a-radio-group v-model="addPayeeFormData.type">
+          <a-radio-group
+            v-model="addPayeeFormData.type"
+            @change="disableSubmit"
+          >
             <a-radio value="Personal">Personal</a-radio>
             <a-radio value="Business">Business</a-radio>
           </a-radio-group>
@@ -77,8 +80,9 @@
             {
               type: 'string',
               required: true,
-              message: 'Please enter a valid sort code, e.g. 010203 or 01-02-03',
-              match: /^\d{2}\-\d{2}\-\d{2}$/,
+              message:
+                'Please enter a valid sort code, e.g. 010203 or 01-02-03',
+              match: /^\d{2}-\d{2}-\d{2}$/,
             },
           ]"
           :validate-trigger="['change', 'blur']"
@@ -159,6 +163,26 @@
         </a-form-item>
       </a-form>
     </a-card>
+    <a-button
+      type="primary"
+      shape="round"
+      size="large"
+      long
+      :loading="loading"
+      :disabled="disableSubmitFlag"
+    >
+      Check Payee Details
+    </a-button>
+    <a-typography style="margin-top: 12px">
+      <a-typography-paragraph style="margin-bottom: 12px">
+        Magpie will <span style="font-weight: bold">NEVER</span> ask you to
+        transfer money.
+      </a-typography-paragraph>
+      <a-typography-paragraph style="margin-bottom: 0px">
+        If you have been asked to transfer money or are unsure about the payment
+        you are making, please do not complete the request.
+      </a-typography-paragraph>
+    </a-typography>
   </div>
 </template>
 
@@ -186,20 +210,40 @@
   };
   const disableSubmit = () => {
     const nameRegex = new RegExp(/^[a-zA-Z][a-zA-Z ]{1,16}[a-zA-Z]$/);
-    // const snRegex = new RegExp(/^\d{5}$/);
+    const scRegex = new RegExp(/^\d{2}-\d{2}-\d{2}$/);
+    const anRegex = new RegExp(/^\d{8}$/);
+    const refRegex = new RegExp(/^[0-9a-zA-Z-_ ]{1,18}$/);
     let validNameFlag = false;
-    // let validSnFlag = false;
+    let validATFlag = false;
+    let validSCFlag = false;
+    let validANFlag = false;
+    let validRefFlag = false;
     if (nameRegex.test(addPayeeFormData.value.name)) {
       validNameFlag = true;
     }
-    // if (snRegex.test(accountInfo.securityNumber)) {
-    //   validSnFlag = true;
-    // }
-    // if (validPidFlag === true && validSnFlag === true) {
-    //   disableSubmitFlag.value = false;
-    // } else {
-    //   disableSubmitFlag.value = true;
-    // }
+    if (addPayeeFormData.value.type.length > 0) {
+      validATFlag = true;
+    }
+    if (scRegex.test(addPayeeFormData.value.sortCode)) {
+      validSCFlag = true;
+    }
+    if (anRegex.test(addPayeeFormData.value.accountNumber)) {
+      validANFlag = true;
+    }
+    if (refRegex.test(addPayeeFormData.value.reference)) {
+      validRefFlag = true;
+    }
+    if (
+      validNameFlag &&
+      validATFlag &&
+      validSCFlag &&
+      validANFlag &&
+      validRefFlag
+    ) {
+      disableSubmitFlag.value = false;
+    } else {
+      disableSubmitFlag.value = true;
+    }
   };
 </script>
 
@@ -211,6 +255,7 @@
 
   .add-form-card {
     padding: 12px;
+    margin-bottom: 12px;
   }
 
   .add-form-card :deep(.arco-card-body) {

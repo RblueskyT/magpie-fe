@@ -90,8 +90,10 @@
   import NavBar from './components/navbar.vue';
   import AddForm from './components/add-form.vue';
 
+  const paymentForm: any = inject('paymentForm');
   const payToDrawerVisibleFlag: any = inject('payToDrawerVisibleFlag');
   const addPayeeFormData = ref({
+    accountId: paymentForm.value.from,
     name: '',
     type: '',
     sortCode: '',
