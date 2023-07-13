@@ -40,7 +40,9 @@
             >
               £{{
                 numberFormatter(
-                  bankAccounts[Number(paymentForm.from)].balance.toString()
+                  bankAccounts[
+                    Number(paymentForm.from)
+                  ].balanceInclPending.toString()
                 )
               }}
             </a-typography-paragraph>
