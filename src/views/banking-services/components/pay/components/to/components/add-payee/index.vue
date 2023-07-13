@@ -82,6 +82,20 @@
         </a-button>
       </div>
     </a-modal>
+    <!-- CONFIRM ADD NEW PAYEE DRAWER -->
+    <a-drawer
+      v-model:visible="addPayeeDrawerVisibleFlag"
+      placement="right"
+      :mask="false"
+      :closable="false"
+      :width="500"
+      popup-container="#addPayeeModalDrawerContainer"
+      :esc-to-close="false"
+      :header="false"
+      :footer="false"
+    >
+      <ConfirmAdd />
+    </a-drawer>
   </div>
 </template>
 
@@ -89,6 +103,7 @@
   import { ref, inject, provide } from 'vue';
   import NavBar from './components/navbar.vue';
   import AddForm from './components/add-form.vue';
+  import ConfirmAdd from './components/confirm-add/index.vue';
 
   const paymentForm: any = inject('paymentForm');
   const payToDrawerVisibleFlag: any = inject('payToDrawerVisibleFlag');
@@ -100,6 +115,7 @@
     accountNumber: '',
     reference: '',
   });
+  const addPayeeDrawerVisibleFlag = ref(false);
   const goBackModalAddPayeeVisibleFlag = ref(false);
   const extraInfoModalVisibleFlag = ref(false);
   const extraInfoTitle = ref('');
@@ -122,6 +138,7 @@
   };
 
   provide('addPayeeFormData', addPayeeFormData);
+  provide('addPayeeDrawerVisibleFlag', addPayeeDrawerVisibleFlag);
   provide('goBackModalAddPayeeVisibleFlag', goBackModalAddPayeeVisibleFlag);
   provide('extraInfoModalVisibleFlag', extraInfoModalVisibleFlag);
   provide('extraInfoTitle', extraInfoTitle);

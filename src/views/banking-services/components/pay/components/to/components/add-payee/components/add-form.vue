@@ -213,6 +213,7 @@
   const payDrawerVisibleFlag: any = inject('payDrawerVisibleFlag');
   const payDrawerContent: any = inject('payDrawerContent');
   const addPayeeFormData: any = inject('addPayeeFormData');
+  const addPayeeDrawerVisibleFlag: any = inject('addPayeeDrawerVisibleFlag');
   const payToDrawerVisibleFlag: any = inject('payToDrawerVisibleFlag');
   const extraInfoModalVisibleFlag: any = inject('extraInfoModalVisibleFlag');
   const extraInfoTitle: any = inject('extraInfoTitle');
@@ -312,7 +313,9 @@
       if (resData.data.message === 'Incorrect SCAN.') {
         incorrectSCANFlag.value = true;
       }
-      // todo: the last situation
+      if (resData.data.message === 'Incorrect name.') {
+        addPayeeDrawerVisibleFlag.value = true;
+      }
     } catch (err) {
       Message.error((err as Error).message);
     } finally {
