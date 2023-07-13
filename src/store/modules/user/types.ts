@@ -1,5 +1,3 @@
-export type GroupNumber = 0 | 1 | 2 | 3 | 4;
-
 export interface UserState {
-  group?: GroupNumber; // Group number used in the controlled experiment
+  group?: string[]; // group is used to configure the think aloud experiment
 }
