@@ -13,8 +13,13 @@
 </template>
 
 <script lang="ts" setup>
+  import { ref, provide } from 'vue';
   import NavBar from './components/navbar.vue';
   import Info from './components/info.vue';
+
+  const deleteBtnLoading = ref(false);
+
+  provide('deleteBtnLoading', deleteBtnLoading);
 </script>
 
 <style lang="less" scoped>

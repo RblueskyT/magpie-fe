@@ -51,7 +51,7 @@
 </template>
 
 <script lang="ts" setup>
-  import { ref, inject } from 'vue';
+  import { inject } from 'vue';
   import { Message } from '@arco-design/web-vue';
   import { deletePayee } from '@/api/banking-services';
   import numberFormatter from '@/utils/number-formatter';
@@ -61,7 +61,7 @@
   const focusedAccount: any = inject('focusedAccount');
   const deleteDrawerVisibleFlag: any = inject('deleteDrawerVisibleFlag');
   const focusedPayee: any = inject('focusedPayee');
-  const deleteBtnLoading = ref(false);
+  const deleteBtnLoading: any = inject('deleteBtnLoading');
   const confirmDeletePayee = async () => {
     deleteBtnLoading.value = true;
     try {

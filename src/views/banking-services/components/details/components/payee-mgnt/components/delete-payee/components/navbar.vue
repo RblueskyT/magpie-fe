@@ -7,6 +7,7 @@
           type="outline"
           shape="circle"
           size="large"
+          :disabled="deleteBtnLoading"
           @mouseenter="backBtnHoverFlag = true"
           @mouseleave="backBtnHoverFlag = false"
           @click="goBackToPayeeMgnt()"
@@ -34,6 +35,7 @@
 
   const deleteDrawerVisibleFlag: any = inject('deleteDrawerVisibleFlag');
   const focusedPayee: any = inject('focusedPayee');
+  const deleteBtnLoading: any = inject('deleteBtnLoading');
   const backBtnHoverFlag = ref(false);
   const goBackToPayeeMgnt = () => {
     deleteDrawerVisibleFlag.value = false;
