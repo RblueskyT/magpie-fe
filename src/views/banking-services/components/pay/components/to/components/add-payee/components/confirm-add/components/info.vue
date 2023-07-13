@@ -49,6 +49,7 @@
       size="large"
       long
       style="margin-bottom: 16px"
+      :disabled="continueBtnLoading"
       @click="backToDetails()"
     >
       Back to Details
@@ -58,6 +59,7 @@
       shape="round"
       size="large"
       long
+      :loading="continueBtnLoading"
       @click="confirmAddPayee()"
     >
       Continue Anyway

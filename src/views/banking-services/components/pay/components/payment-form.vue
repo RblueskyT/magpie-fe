@@ -117,6 +117,7 @@
           </a-link>
         </div>
       </a-card>
+      <!-- OTHER DETAILS CARD -->
     </a-space>
   </div>
 </template>
