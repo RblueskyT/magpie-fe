@@ -7,7 +7,7 @@ export interface LogonData {
 
 export interface LogonRes {
   token: string;
-  group: string[];
+  group: string;
 }
 
 export function logon(data: LogonData) {

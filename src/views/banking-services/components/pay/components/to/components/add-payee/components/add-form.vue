@@ -9,7 +9,7 @@
     >
       We could not verify the account you provided, please double-check the
       account you're sending money to and cancel this payment if you think
-      someone might be trying to scam you
+      someone might be trying to scam you.
     </a-alert>
     <a-card class="add-form-card" :bordered="false">
       <a-form

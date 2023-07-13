@@ -1,7 +1,7 @@
 export default function getARandomWarningSet(group: number) {
   const initialGroupNumSet = [];
   const randomGroupNumSet = [];
-  const finalGroupNumSet = [];
+  let finalGroupNumSet = '';
   let zeroFlag = 0;
   let oneFlag = 0;
   while (zeroFlag < 2 || oneFlag < 2) {
@@ -36,11 +36,14 @@ export default function getARandomWarningSet(group: number) {
   if (group === 4) {
     initialGroupNumSet.push('01', '10', '11', '00');
   }
-  finalGroupNumSet.push(
-    initialGroupNumSet[0].concat(randomGroupNumSet[0]),
-    initialGroupNumSet[1].concat(randomGroupNumSet[1]),
-    initialGroupNumSet[2].concat(randomGroupNumSet[2]),
-    initialGroupNumSet[3].concat(randomGroupNumSet[3])
+  finalGroupNumSet = initialGroupNumSet[0].concat(
+    randomGroupNumSet[0],
+    initialGroupNumSet[1],
+    randomGroupNumSet[1],
+    initialGroupNumSet[2],
+    randomGroupNumSet[2],
+    initialGroupNumSet[3],
+    randomGroupNumSet[3]
   );
   return finalGroupNumSet;
 }

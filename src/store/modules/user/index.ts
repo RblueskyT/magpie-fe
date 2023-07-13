@@ -9,7 +9,7 @@ import { UserState } from './types';
 
 const useUserStore = defineStore('user', {
   state: (): UserState => ({
-    group: [],
+    group: '',
   }),
 
   getters: {
