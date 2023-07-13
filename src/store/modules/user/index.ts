@@ -4,7 +4,7 @@ import {
   logon as userLogon,
   logout as userLogout,
 } from '@/api/user';
-import { setToken, clearToken } from '@/utils/auth';
+import { setToken, clearToken, setGroup, clearGroup } from '@/utils/auth';
 import { UserState } from './types';
 
 const useUserStore = defineStore('user', {
@@ -35,15 +35,18 @@ const useUserStore = defineStore('user', {
         const res = await userLogon(logonForm);
         this.setGroup({ group: res.data.group });
         setToken(res.data.token);
+        setGroup(res.data.group);
       } catch (err) {
         this.resetGroup();
         clearToken();
+        clearGroup();
         throw err;
       }
     },
     logoutCallBack() {
       this.resetGroup();
       clearToken();
+      clearGroup();
     },
 
     // Logout

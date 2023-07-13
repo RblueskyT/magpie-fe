@@ -58,16 +58,22 @@
 
 <script lang="ts" setup>
   import { computed, ref, watch, provide, readonly } from 'vue';
-  import { useUserStore } from '@/store';
+  import { getGroup } from '@/utils/auth';
   import NavBar from './components/navbar.vue';
   import Home from './components/home.vue';
   import BottomMenu from './components/bottom-menu.vue';
   import AccountDetails from './components/details/index.vue';
   import Pay from './components/pay/index.vue';
 
-  const userStore = useUserStore();
   const group = computed(() => {
-    return userStore.group;
+    const rawGroup = getGroup();
+    const finalGroup = [
+      rawGroup?.substring(0, 3),
+      rawGroup?.substring(3, 6),
+      rawGroup?.substring(6, 9),
+      rawGroup?.substring(9),
+    ];
+    return finalGroup;
   });
   const bankAccounts: any = ref([]);
   const homePageLoading = ref(false);
