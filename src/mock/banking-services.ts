@@ -498,13 +498,17 @@ setupMock({
     // Check a payee
     Mock.mock(new RegExp('/api/payee/check'), (params: MockParams) => {
       if (isLogon()) {
-        const { name, sortCode, accountNumber } = JSON.parse(params.body);
+        const { name, type, sortCode, accountNumber } = JSON.parse(params.body);
         let incorrectSCAN = true; // sort code or account number
         let incorrectNameFlag = true;
+        let incorrectTypeFlag = true;
         if (sortCode === '40-37-25' && accountNumber === '19304373') {
           incorrectSCAN = false;
           if (name.trim().toUpperCase() === 'DEXTER LTD') {
             incorrectNameFlag = false;
+          }
+          if (type === 'Business') {
+            incorrectTypeFlag = false;
           }
         }
         if (sortCode === '30-90-89' && accountNumber === '20374916') {
@@ -512,17 +516,26 @@ setupMock({
           if (name.trim().toUpperCase() === 'LIBRA CRYPTO LTD') {
             incorrectNameFlag = false;
           }
+          if (type === 'Business') {
+            incorrectTypeFlag = false;
+          }
         }
         if (sortCode === '23-05-80' && accountNumber === '36502859') {
           incorrectSCAN = false;
           if (name.trim().toUpperCase() === 'HAYDEN OAKLEY') {
             incorrectNameFlag = false;
           }
+          if (type === 'Personal') {
+            incorrectTypeFlag = false;
+          }
         }
         if (sortCode === '58-20-41' && accountNumber === '51067729') {
           incorrectSCAN = false;
           if (name.trim().toUpperCase() === 'NEO GORDON') {
             incorrectNameFlag = false;
+          }
+          if (type === 'Personal') {
+            incorrectTypeFlag = false;
           }
         }
         if (incorrectSCAN === true) {
@@ -531,13 +544,41 @@ setupMock({
             message: 'Incorrect SCAN.',
           });
         }
-        if (incorrectSCAN === false && incorrectNameFlag === true) {
+        if (
+          incorrectSCAN === false &&
+          incorrectNameFlag === true &&
+          incorrectTypeFlag === true
+        ) {
+          return successResponseWrap({
+            status: 404,
+            message: 'Incorrect name and incorrect type.',
+          });
+        }
+        if (
+          incorrectSCAN === false &&
+          incorrectNameFlag === true &&
+          incorrectTypeFlag === false
+        ) {
           return successResponseWrap({
             status: 404,
             message: 'Incorrect name.',
           });
         }
-        if (incorrectSCAN === false && incorrectNameFlag === false) {
+        if (
+          incorrectSCAN === false &&
+          incorrectNameFlag === false &&
+          incorrectTypeFlag === true
+        ) {
+          return successResponseWrap({
+            status: 404,
+            message: 'Incorrect type.',
+          });
+        }
+        if (
+          incorrectSCAN === false &&
+          incorrectNameFlag === false &&
+          incorrectTypeFlag === false
+        ) {
           return successResponseWrap({
             status: 200,
             message: 'Correct details.',
