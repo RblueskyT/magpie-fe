@@ -547,16 +547,6 @@ setupMock({
         if (
           incorrectSCAN === false &&
           incorrectNameFlag === true &&
-          incorrectTypeFlag === true
-        ) {
-          return successResponseWrap({
-            status: 404,
-            message: 'Incorrect name and incorrect type.',
-          });
-        }
-        if (
-          incorrectSCAN === false &&
-          incorrectNameFlag === true &&
           incorrectTypeFlag === false
         ) {
           return successResponseWrap({
@@ -572,6 +562,16 @@ setupMock({
           return successResponseWrap({
             status: 404,
             message: 'Incorrect type.',
+          });
+        }
+        if (
+          incorrectSCAN === false &&
+          incorrectNameFlag === true &&
+          incorrectTypeFlag === true
+        ) {
+          return successResponseWrap({
+            status: 404,
+            message: 'Incorrect name and type.',
           });
         }
         if (

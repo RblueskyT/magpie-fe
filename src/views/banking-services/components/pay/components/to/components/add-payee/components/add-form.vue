@@ -214,6 +214,9 @@
   const payDrawerContent: any = inject('payDrawerContent');
   const addPayeeFormData: any = inject('addPayeeFormData');
   const addPayeeDrawerVisibleFlag: any = inject('addPayeeDrawerVisibleFlag');
+  const addPayeeDrawerVisibleContent: any = inject(
+    'addPayeeDrawerVisibleContent'
+  );
   const payToDrawerVisibleFlag: any = inject('payToDrawerVisibleFlag');
   const extraInfoModalVisibleFlag: any = inject('extraInfoModalVisibleFlag');
   const extraInfoTitle: any = inject('extraInfoTitle');
@@ -315,6 +318,15 @@
       }
       if (resData.data.message === 'Incorrect name.') {
         addPayeeDrawerVisibleFlag.value = true;
+        addPayeeDrawerVisibleContent.value = 'name';
+      }
+      if (resData.data.message === 'Incorrect type.') {
+        addPayeeDrawerVisibleFlag.value = true;
+        addPayeeDrawerVisibleContent.value = 'type';
+      }
+      if (resData.data.message === 'Incorrect name and type.') {
+        addPayeeDrawerVisibleFlag.value = true;
+        addPayeeDrawerVisibleContent.value = 'name and type';
       }
     } catch (err) {
       Message.error((err as Error).message);

@@ -116,6 +116,7 @@
     reference: '',
   });
   const addPayeeDrawerVisibleFlag = ref(false);
+  const addPayeeDrawerVisibleContent = ref('');
   const goBackModalAddPayeeVisibleFlag = ref(false);
   const extraInfoModalVisibleFlag = ref(false);
   const extraInfoTitle = ref('');
@@ -139,6 +140,7 @@
 
   provide('addPayeeFormData', addPayeeFormData);
   provide('addPayeeDrawerVisibleFlag', addPayeeDrawerVisibleFlag);
+  provide('addPayeeDrawerVisibleContent', addPayeeDrawerVisibleContent);
   provide('goBackModalAddPayeeVisibleFlag', goBackModalAddPayeeVisibleFlag);
   provide('extraInfoModalVisibleFlag', extraInfoModalVisibleFlag);
   provide('extraInfoTitle', extraInfoTitle);

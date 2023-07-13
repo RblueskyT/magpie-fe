@@ -34,10 +34,14 @@
   import { changeBtnStyle } from '@/utils/change-btn-style';
 
   const addPayeeDrawerVisibleFlag: any = inject('addPayeeDrawerVisibleFlag');
+  const addPayeeDrawerVisibleContent: any = inject(
+    'addPayeeDrawerVisibleContent'
+  );
   const continueBtnLoading: any = inject('continueBtnLoading');
   const backBtnHoverFlag = ref(false);
   const goBackToAddNewPayee = () => {
     addPayeeDrawerVisibleFlag.value = false;
+    addPayeeDrawerVisibleContent.value = '';
   };
 </script>
 
