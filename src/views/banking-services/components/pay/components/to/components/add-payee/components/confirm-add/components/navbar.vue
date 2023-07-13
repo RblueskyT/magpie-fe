@@ -19,9 +19,7 @@
       </li>
     </ul>
     <div class="center-side">
-      <a-typography-text style="line-height: 52px; font-size: 16px">
-        Confirm Add
-      </a-typography-text>
+      <!-- RESERVED -->
     </div>
     <ul class="right-side">
       <!-- RESERVED -->
