@@ -103,6 +103,8 @@
   const goBackModalAddPayeeVisibleFlag = ref(false);
   const extraInfoModalVisibleFlag = ref(false);
   const extraInfoTitle = ref('');
+  const submitLoading = ref(false);
+  const formValidFlag = ref(false);
   const cancelGoBack = () => {
     goBackModalAddPayeeVisibleFlag.value = false;
   };
@@ -123,6 +125,8 @@
   provide('goBackModalAddPayeeVisibleFlag', goBackModalAddPayeeVisibleFlag);
   provide('extraInfoModalVisibleFlag', extraInfoModalVisibleFlag);
   provide('extraInfoTitle', extraInfoTitle);
+  provide('submitLoading', submitLoading);
+  provide('formValidFlag', formValidFlag);
 </script>
 
 <style lang="less" scoped>

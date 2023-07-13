@@ -7,6 +7,7 @@
           type="outline"
           shape="circle"
           size="large"
+          :disabled="submitLoading || formValidFlag"
           @mouseenter="backBtnHoverFlag = true"
           @mouseleave="backBtnHoverFlag = false"
           @click="goBackToPayTo()"
@@ -39,6 +40,8 @@
     'goBackModalAddPayeeVisibleFlag'
   );
   const addPayeeFormData: any = inject('addPayeeFormData');
+  const submitLoading: any = inject('submitLoading');
+  const formValidFlag: any = inject('formValidFlag');
   const backBtnHoverFlag = ref(false);
   const goBackToPayTo = () => {
     if (

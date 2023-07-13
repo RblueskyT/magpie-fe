@@ -14,6 +14,7 @@
       :model="accountInfo"
       layout="vertical"
       size="large"
+      :disabled="loading"
       @submit="handleSubmit"
     >
       <a-form-item
@@ -33,7 +34,6 @@
         <a-input
           v-model="accountInfo.personalID"
           :max-length="{ length: 10, errorOnly: false }"
-          :disabled="loading"
           allow-clear
           @input="disableSubmit"
           @clear="disableSubmit"
@@ -68,7 +68,6 @@
           placeholder="•••••"
           :max-length="{ length: 5, errorOnly: false }"
           :invisible-button="false"
-          :disabled="loading"
           allow-clear
           @input="disableSubmit"
           @clear="disableSubmit"

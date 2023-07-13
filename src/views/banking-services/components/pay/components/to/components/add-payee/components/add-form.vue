@@ -6,6 +6,7 @@
         :model="addPayeeFormData"
         size="large"
         auto-label-width
+        :disabled="submitLoading || formValidFlag"
       >
         <a-form-item
           field="name"
@@ -25,7 +26,6 @@
           <a-input
             v-model="addPayeeFormData.name"
             :max-length="{ length: 18, errorOnly: false }"
-            :disabled="loading"
             allow-clear
             @input="disableSubmit"
             @clear="disableSubmit"
@@ -92,7 +92,6 @@
           <a-input
             v-model="addPayeeFormData.sortCode"
             :max-length="{ length: 8, errorOnly: false }"
-            :disabled="loading"
             allow-clear
             @input="disableSubmit"
             @clear="disableSubmit"
@@ -117,7 +116,6 @@
           <a-input
             v-model="addPayeeFormData.accountNumber"
             :max-length="{ length: 8, errorOnly: false }"
-            :disabled="loading"
             allow-clear
             @input="disableSubmit"
             @clear="disableSubmit"
@@ -141,7 +139,6 @@
           <a-input
             v-model="addPayeeFormData.reference"
             :max-length="{ length: 18, errorOnly: false }"
-            :disabled="loading"
             allow-clear
             @input="disableSubmit"
             @clear="disableSubmit"
@@ -166,12 +163,20 @@
     <a-button
       type="primary"
       shape="round"
+      :status="formValidFlag ? 'success' : 'normal'"
       size="large"
       long
-      :loading="loading"
-      :disabled="disableSubmitFlag"
+      :loading="submitLoading"
+      :disabled="disableSubmitFlag || formValidFlag"
+      @click="submitAddForm()"
     >
-      Check Payee Details
+      <template v-if="formValidFlag" #icon>
+        <icon-check />
+      </template>
+      <template #default>
+        <span v-if="!formValidFlag">Check Payee Details</span>
+        <span v-else>Check Passed</span>
+      </template>
     </a-button>
     <a-typography style="margin-top: 12px">
       <a-typography-paragraph style="margin-bottom: 12px">
@@ -188,13 +193,20 @@
 
 <script lang="ts" setup>
   import { ref, inject } from 'vue';
-  import useLoading from '@/hooks/loading';
+  import { Message } from '@arco-design/web-vue';
+  import { checkPayee } from '@/api/banking-services';
+  import getARandomBankName from '@/utils/random-bank-name';
 
-  const { loading, setLoading } = useLoading();
-
+  const bankAccounts: any = inject('bankAccounts');
+  const paymentForm: any = inject('paymentForm');
+  const payDrawerVisibleFlag: any = inject('payDrawerVisibleFlag');
+  const payDrawerContent: any = inject('payDrawerContent');
   const addPayeeFormData: any = inject('addPayeeFormData');
+  const payToDrawerVisibleFlag: any = inject('payToDrawerVisibleFlag');
   const extraInfoModalVisibleFlag: any = inject('extraInfoModalVisibleFlag');
   const extraInfoTitle: any = inject('extraInfoTitle');
+  const submitLoading: any = inject('submitLoading');
+  const formValidFlag: any = inject('formValidFlag');
   const disableSubmitFlag = ref(true);
   const sortCodeFormatter = (sortCode: string) => {
     const sortCodeRegex = new RegExp(/^\d{6}$/);
@@ -243,6 +255,50 @@
       disableSubmitFlag.value = false;
     } else {
       disableSubmitFlag.value = true;
+    }
+  };
+  const submitAddForm = async () => {
+    submitLoading.value = true;
+    try {
+      const reqData = addPayeeFormData.value;
+      const resData = await checkPayee(reqData);
+      if (resData.data.message === 'Correct details.') {
+        // Show the success message
+        formValidFlag.value = true;
+        window.setTimeout(() => {
+          // Add payee to the mock data
+          const newPayee = {
+            name: reqData.name,
+            type: reqData.type,
+            sortCode: reqData.sortCode,
+            accountNumber: reqData.accountNumber,
+            bankName: getARandomBankName(),
+            reference: reqData.reference,
+            lastPaidDate: '',
+            lastPaidAmount: 0,
+          };
+          bankAccounts.value[Number(reqData.accountId)].payees.push(newPayee);
+          paymentForm.value.to = (
+            bankAccounts.value[Number(reqData.accountId)].payees.length - 1
+          ).toString();
+          paymentForm.value.reference = reqData.reference;
+          // Close the 'Add New Payee' drawer
+          payToDrawerVisibleFlag.value = false;
+          addPayeeFormData.value.name = '';
+          addPayeeFormData.value.type = '';
+          addPayeeFormData.value.sortCode = '';
+          addPayeeFormData.value.accountNumber = '';
+          addPayeeFormData.value.reference = '';
+          // Close the 'Pay To' drawer
+          payDrawerVisibleFlag.value = false;
+          payDrawerContent.value = '';
+        }, 750);
+        // todo: other two situations
+      }
+    } catch (err) {
+      Message.error((err as Error).message);
+    } finally {
+      submitLoading.value = false;
     }
   };
 </script>
