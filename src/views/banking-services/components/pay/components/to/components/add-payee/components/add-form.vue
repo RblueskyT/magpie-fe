@@ -210,6 +210,8 @@
 
   const bankAccounts: any = inject('bankAccounts');
   const paymentForm: any = inject('paymentForm');
+  const paymentFormTempAmount: any = inject('paymentFormTempAmount');
+  const paymentFormTempDate: any = inject('paymentFormTempDate');
   const payDrawerVisibleFlag: any = inject('payDrawerVisibleFlag');
   const payDrawerContent: any = inject('payDrawerContent');
   const addPayeeFormData: any = inject('addPayeeFormData');
@@ -297,10 +299,16 @@
             lastPaidAmount: 0,
           };
           bankAccounts.value[Number(reqData.accountId)].payees.push(newPayee);
+          // Reset the payement form
           paymentForm.value.to = (
             bankAccounts.value[Number(reqData.accountId)].payees.length - 1
           ).toString();
+          paymentForm.value.amount = 0;
+          paymentFormTempAmount.value = 0;
           paymentForm.value.reference = reqData.reference;
+          paymentForm.value.date = '';
+          paymentFormTempDate.value = '';
+          paymentForm.value.paymentPurpose = '';
           // Close the 'Add New Payee' drawer
           payToDrawerVisibleFlag.value = false;
           addPayeeFormData.value.name = '';

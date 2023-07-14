@@ -56,6 +56,8 @@
 
   const bottomMenuKey: any = inject('bottomMenuKey');
   const paymentForm: any = inject('paymentForm');
+  const paymentFormTempAmount: any = inject('paymentFormTempAmount');
+  const paymentFormTempDate: any = inject('paymentFormTempDate');
   const drawerTwoVisibleFlag: any = inject('drawerTwoVisibleFlag');
   const goBackModalPayVisibleFlag = ref(false);
   const payDrawerVisibleFlag = ref(false);
@@ -67,8 +69,10 @@
     paymentForm.value.from = '';
     paymentForm.value.to = '';
     paymentForm.value.amount = 0;
+    paymentFormTempAmount.value = 0;
     paymentForm.value.reference = '';
     paymentForm.value.date = '';
+    paymentFormTempDate.value = '';
     paymentForm.value.paymentPurpose = '';
     drawerTwoVisibleFlag.value = false;
     bottomMenuKey.value[0] = '0';

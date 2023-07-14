@@ -50,12 +50,19 @@
 
   const bankAccounts: any = inject('bankAccounts');
   const paymentForm: any = inject('paymentForm');
+  const paymentFormTempAmount: any = inject('paymentFormTempAmount');
+  const paymentFormTempDate: any = inject('paymentFormTempDate');
   const payDrawerVisibleFlag: any = inject('payDrawerVisibleFlag');
   const payDrawerContent: any = inject('payDrawerContent');
   const goBackToPaymentForm = () => {
     if (paymentForm.value.to.length > 0) {
       paymentForm.value.to = '';
-      // todo: reset other fields
+      paymentForm.value.amount = 0;
+      paymentFormTempAmount.value = 0;
+      paymentForm.value.reference = '';
+      paymentForm.value.date = '';
+      paymentFormTempDate.value = '';
+      paymentForm.value.paymentPurpose = '';
     }
     payDrawerVisibleFlag.value = false;
     payDrawerContent.value = '';

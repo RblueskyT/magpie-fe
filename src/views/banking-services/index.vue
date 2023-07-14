@@ -126,6 +126,8 @@
     date: '',
     paymentPurpose: '',
   });
+  const paymentFormTempAmount = ref(0);
+  const paymentFormTempDate = ref('');
 
   // Check whether to open the drawer - details
   watch(focusedAccountIdx, () => {
@@ -163,6 +165,8 @@
   provide('totalPage', readonly(totalPage));
   provide('drawerTwoVisibleFlag', drawerTwoVisibleFlag);
   provide('paymentForm', paymentForm);
+  provide('paymentFormTempAmount', paymentFormTempAmount);
+  provide('paymentFormTempDate', paymentFormTempDate);
 </script>
 
 <style lang="less" scoped>

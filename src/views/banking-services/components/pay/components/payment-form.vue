@@ -120,18 +120,150 @@
         </div>
       </a-card>
       <!-- OTHER DETAILS CARD -->
+      <a-card class="other-details-card" :bordered="false">
+        <a-form
+          ref="payForm"
+          :model="paymentForm"
+          size="large"
+          auto-label-width
+          :disabled="paymentForm.to.length > 0 ? false : true"
+        >
+          <a-form-item
+            field="amount"
+            label="Amount"
+            :rules="[
+              {
+                type: 'number',
+                required: true,
+                message:
+                  'Please enter a valid amount that is greater than zero and less than your balance incl. pending',
+                max: bankAccounts[Number(paymentForm.from)].balanceInclPending,
+                positive: true,
+              },
+            ]"
+            :validate-trigger="['change', 'blur']"
+            hide-asterisk
+            style="margin-bottom: 12px"
+          >
+            <a-input-number
+              v-model="paymentFormTempAmount"
+              :default-value="0"
+              :precision="2"
+              :min="0"
+              :max="bankAccounts[Number(paymentForm.from)].balanceInclPending"
+              hide-button
+              :formatter="amountInputFormatter"
+              :parser="amountInputParser"
+              @change="updatePaymentAmount"
+            >
+              <template #prefix>&#xa3;</template>
+            </a-input-number>
+          </a-form-item>
+          <a-form-item
+            field="reference"
+            label="Reference"
+            :rules="[
+              {
+                type: 'string',
+                required: true,
+                message:
+                  'Please enter a valid reference without special symbols, e.g. Flat 101',
+                match: /^[0-9a-zA-Z-_ ]{1,18}$/,
+              },
+            ]"
+            :validate-trigger="['change', 'blur']"
+            hide-asterisk
+            style="margin-bottom: 12px"
+          >
+            <a-input
+              v-model="paymentForm.reference"
+              :max-length="{ length: 18, errorOnly: false }"
+              allow-clear
+              @input="disableContinue"
+              @clear="disableContinue"
+            />
+          </a-form-item>
+          <a-form-item
+            field="date"
+            label="Date"
+            :rules="[
+              {
+                type: 'string',
+                required: true,
+                message: 'Please select a payment date',
+              },
+            ]"
+            :validate-trigger="['change', 'blur']"
+            hide-asterisk
+            style="margin-bottom: 12px"
+          >
+            <a-config-provider :locale="enUS">
+              <a-date-picker
+                v-model="paymentFormTempDate"
+                :format="(value) => `${dayjs(value).format('DD MMM YYYY')}`"
+                :disabled-date="(current: any) => dayjs(current).isBefore(dayjs())"
+                placeholder=" "
+                disabled-input
+                :allow-clear="false"
+                style="width: 134px"
+                @change="updatePaymentDate"
+              />
+            </a-config-provider>
+          </a-form-item>
+          <a-form-item
+            field="paymentPurpose"
+            label="Payment Purpose"
+            :rules="[
+              {
+                type: 'string',
+                required: true,
+                message: 'Please select a payment purpose',
+              },
+            ]"
+            :validate-trigger="['change', 'blur']"
+            hide-asterisk
+          >
+            <a-select
+              v-model="paymentForm.paymentPurpose"
+              placeholder=" "
+              @change="disableContinue"
+            >
+              <a-option>Paying a friend</a-option>
+              <a-option>Paying family</a-option>
+              <a-option>Paying for a service</a-option>
+              <a-option>Buying goods</a-option>
+              <a-option>Transfer to an investment</a-option>
+              <a-option>Anything else</a-option>
+            </a-select>
+          </a-form-item>
+        </a-form>
+      </a-card>
     </a-space>
   </div>
 </template>
 
 <script lang="ts" setup>
   import { inject } from 'vue';
+  import enUS from '@arco-design/web-vue/es/locale/lang/en-us';
+  import dayjs from 'dayjs';
   import numberFormatter from '@/utils/number-formatter';
 
   const bankAccounts: any = inject('bankAccounts');
   const paymentForm: any = inject('paymentForm');
+  const paymentFormTempAmount: any = inject('paymentFormTempAmount');
+  const paymentFormTempDate: any = inject('paymentFormTempDate');
   const payDrawerVisibleFlag: any = inject('payDrawerVisibleFlag');
   const payDrawerContent: any = inject('payDrawerContent');
+  const amountInputFormatter = (value: string) => {
+    const values = value.split('.');
+    values[0] = values[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+
+    return values.join('.');
+  };
+
+  const amountInputParser = (value: string) => {
+    return value.replace(/,/g, '');
+  };
   const openFromDrawer = () => {
     payDrawerContent.value = 'from';
     payDrawerVisibleFlag.value = true;
@@ -139,6 +271,21 @@
   const openToDrawer = () => {
     payDrawerContent.value = 'to';
     payDrawerVisibleFlag.value = true;
+  };
+  const disableContinue = () => {
+    // todo
+  };
+  const updatePaymentAmount = (value: number | undefined) => {
+    if (value === undefined) {
+      paymentForm.value.amount = 0;
+    } else {
+      paymentForm.value.amount = value;
+    }
+    // todo: disableSubmit
+  };
+  const updatePaymentDate = (value: string) => {
+    paymentForm.value.date = dayjs(value).format('DD MMM YYYY');
+    // todo: disableSubmit
   };
 </script>
 
@@ -168,5 +315,26 @@
     line-height: 26px;
     font-size: 16px;
     margin-bottom: 0px;
+  }
+
+  .other-details-card {
+    padding: 12px;
+    margin: 12px 0px;
+  }
+
+  .other-details-card :deep(.arco-card-body) {
+    height: 100%;
+  }
+
+  .other-details-card :deep(.arco-card-body > .arco-form > .arco-form-item) {
+    margin-bottom: 0px;
+  }
+
+  .other-details-card :deep(.arco-form-item-content-flex) {
+    justify-content: space-between;
+  }
+
+  .other-details-card :deep(.arco-select-dropdown-list-wrapper) {
+    max-height: none;
   }
 </style>
