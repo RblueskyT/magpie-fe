@@ -16,7 +16,12 @@
                   >
                     <template #extra>
                       <a-space>
-                        <a-button key="back" type="primary" @click="back">
+                        <a-button
+                          key="back"
+                          type="primary"
+                          size="large"
+                          @click="back"
+                        >
                           Back
                         </a-button>
                       </a-space>

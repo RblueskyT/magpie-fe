@@ -40,6 +40,7 @@
       <a-button
         type="primary"
         shape="round"
+        size="large"
         long
         :loading="deleteBtnLoading"
         @click="confirmDeletePayee()"

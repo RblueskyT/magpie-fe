@@ -238,12 +238,23 @@
           </a-form-item>
         </a-form>
       </a-card>
+      <a-button
+        type="primary"
+        shape="round"
+        size="large"
+        long
+        :loading="continueLoading"
+        :disabled="disableContinueFlag"
+        @click="continuePayment()"
+      >
+        Continue
+      </a-button>
     </a-space>
   </div>
 </template>
 
 <script lang="ts" setup>
-  import { inject } from 'vue';
+  import { ref, inject } from 'vue';
   import enUS from '@arco-design/web-vue/es/locale/lang/en-us';
   import dayjs from 'dayjs';
   import numberFormatter from '@/utils/number-formatter';
@@ -254,6 +265,8 @@
   const paymentFormTempDate: any = inject('paymentFormTempDate');
   const payDrawerVisibleFlag: any = inject('payDrawerVisibleFlag');
   const payDrawerContent: any = inject('payDrawerContent');
+  const continueLoading: any = inject('continueLoading');
+  const disableContinueFlag = ref(true);
   const amountInputFormatter = (value: string) => {
     const values = value.split('.');
     values[0] = values[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
@@ -287,6 +300,9 @@
     paymentForm.value.date = dayjs(value).format('DD MMM YYYY');
     // todo: disableSubmit
   };
+  const continuePayment = () => {
+    // todo
+  };
 </script>
 
 <style lang="less" scoped>
@@ -319,7 +335,6 @@
 
   .other-details-card {
     padding: 12px;
-    margin: 12px 0px;
   }
 
   .other-details-card :deep(.arco-card-body) {

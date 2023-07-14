@@ -77,7 +77,13 @@
             It's important that you enter this correctly.
           </a-typography-paragraph>
         </a-typography>
-        <a-button type="text" long @click="closeExtraInfoModal()">
+        <a-button
+          type="text"
+          shape="round"
+          size="large"
+          long
+          @click="closeExtraInfoModal()"
+        >
           {{ 'Got It' }}
         </a-button>
       </div>
