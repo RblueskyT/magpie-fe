@@ -85,6 +85,7 @@
   const paymentFormTempDate: any = inject('paymentFormTempDate');
   const payDrawerVisibleFlag: any = inject('payDrawerVisibleFlag');
   const payDrawerContent: any = inject('payDrawerContent');
+  const disableContinueFlag: any = inject('disableContinueFlag');
   const goBackToPaymentForm = () => {
     paymentForm.value.amount = 0;
     paymentFormTempAmount.value = 0;
@@ -95,6 +96,7 @@
     paymentForm.value.date = '';
     paymentFormTempDate.value = '';
     paymentForm.value.paymentPurpose = '';
+    disableContinueFlag.value = true;
     payDrawerVisibleFlag.value = false;
     payDrawerContent.value = '';
   };

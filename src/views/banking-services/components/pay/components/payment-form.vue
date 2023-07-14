@@ -254,7 +254,7 @@
 </template>
 
 <script lang="ts" setup>
-  import { ref, inject } from 'vue';
+  import { inject } from 'vue';
   import enUS from '@arco-design/web-vue/es/locale/lang/en-us';
   import dayjs from 'dayjs';
   import numberFormatter from '@/utils/number-formatter';
@@ -266,7 +266,7 @@
   const payDrawerVisibleFlag: any = inject('payDrawerVisibleFlag');
   const payDrawerContent: any = inject('payDrawerContent');
   const continueLoading: any = inject('continueLoading');
-  const disableContinueFlag = ref(true);
+  const disableContinueFlag: any = inject('disableContinueFlag');
   const amountInputFormatter = (value: string) => {
     const values = value.split('.');
     values[0] = values[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
@@ -286,7 +286,37 @@
     payDrawerVisibleFlag.value = true;
   };
   const disableContinue = () => {
-    // todo
+    const refRegex = new RegExp(/^[0-9a-zA-Z-_ ]{1,18}$/);
+    let validAmountFlag = false;
+    let validRefFlag = false;
+    let validDateFlag = false;
+    let validPaymentPurposeFlag = false;
+    if (
+      paymentForm.value.amount > 0 &&
+      paymentForm.value.amount <=
+        bankAccounts.value[Number(paymentForm.from)].balanceInclPending
+    ) {
+      validAmountFlag = true;
+    }
+    if (refRegex.test(paymentForm.value.reference)) {
+      validRefFlag = true;
+    }
+    if (paymentForm.value.date.length > 0) {
+      validDateFlag = true;
+    }
+    if (paymentForm.value.paymentPurpose.length > 0) {
+      validPaymentPurposeFlag = true;
+    }
+    if (
+      validAmountFlag &&
+      validRefFlag &&
+      validDateFlag &&
+      validPaymentPurposeFlag
+    ) {
+      disableContinueFlag.value = false;
+    } else {
+      disableContinueFlag.value = true;
+    }
   };
   const updatePaymentAmount = (value: number | undefined) => {
     if (value === undefined) {
@@ -294,11 +324,11 @@
     } else {
       paymentForm.value.amount = value;
     }
-    // todo: disableSubmit
+    disableContinue();
   };
   const updatePaymentDate = (value: string) => {
     paymentForm.value.date = dayjs(value).format('DD MMM YYYY');
-    // todo: disableSubmit
+    disableContinue();
   };
   const continuePayment = () => {
     // todo

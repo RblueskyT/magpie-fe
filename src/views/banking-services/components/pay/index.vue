@@ -63,6 +63,7 @@
   const payDrawerVisibleFlag = ref(false);
   const payDrawerContent = ref(''); // 'from' or 'to'
   const continueLoading = ref(false);
+  const disableContinueFlag = ref(true);
   const cancelGoBack = () => {
     goBackModalPayVisibleFlag.value = false;
   };
@@ -83,6 +84,7 @@
   provide('payDrawerVisibleFlag', payDrawerVisibleFlag);
   provide('payDrawerContent', payDrawerContent);
   provide('continueLoading', continueLoading);
+  provide('disableContinueFlag', disableContinueFlag);
 </script>
 
 <style lang="less" scoped>

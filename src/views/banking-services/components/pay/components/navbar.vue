@@ -7,6 +7,7 @@
           type="outline"
           shape="circle"
           size="large"
+          :disabled="continueLoading"
           @mouseenter="backBtnHoverFlag = true"
           @mouseleave="backBtnHoverFlag = false"
           @click="goBackTo()"
@@ -47,6 +48,7 @@
   const drawerTwoVisibleFlag: any = inject('drawerTwoVisibleFlag');
   const goBackModalPayVisibleFlag: any = inject('goBackModalPayVisibleFlag');
   const backBtnHoverFlag = ref(false);
+  const continueLoading: any = inject('continueLoading');
   const goBackTo = () => {
     if (paymentForm.value.from.length === 0) {
       drawerTwoVisibleFlag.value = false;
