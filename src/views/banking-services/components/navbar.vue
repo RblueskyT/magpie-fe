@@ -30,6 +30,7 @@
           type="outline"
           shape="circle"
           size="large"
+          :disabled="homePageLoading"
           @mouseenter="logoutBtnHoverFlag = true"
           @mouseleave="logoutBtnHoverFlag = false"
           @click="handleLogout"
@@ -44,11 +45,12 @@
 </template>
 
 <script lang="ts" setup>
-  import { ref } from 'vue';
+  import { ref, inject } from 'vue';
   import useUser from '@/hooks/user';
   import { changeBtnStyleHome } from '@/utils/change-btn-style';
 
   const { logout } = useUser();
+  const homePageLoading: any = inject('homePageLoading');
   const logoutBtnHoverFlag = ref(false);
   const handleLogout = () => {
     logout();

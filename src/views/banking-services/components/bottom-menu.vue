@@ -5,19 +5,19 @@
       mode="horizontal"
       @menu-item-click="goTo()"
     >
-      <a-menu-item key="0">
+      <a-menu-item key="0" :disabled="homePageLoading">
         <template #icon>
           <icon-home />
         </template>
         Home
       </a-menu-item>
-      <a-menu-item key="1">
+      <a-menu-item key="1" :disabled="homePageLoading">
         <template #icon>
           <icon-send />
         </template>
         Pay
       </a-menu-item>
-      <a-menu-item key="2">
+      <a-menu-item key="2" :disabled="homePageLoading">
         <template #icon>
           <icon-swap />
         </template>
@@ -32,6 +32,7 @@
 
   const bottomMenuKey: any = inject('bottomMenuKey');
   const drawerTwoVisibleFlag: any = inject('drawerTwoVisibleFlag');
+  const homePageLoading: any = inject('homePageLoading');
   const goTo = () => {
     if (bottomMenuKey.value[0] === '1' || bottomMenuKey.value[0] === '2') {
       drawerTwoVisibleFlag.value = true;
