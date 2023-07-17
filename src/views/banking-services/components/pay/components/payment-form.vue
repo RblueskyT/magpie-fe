@@ -47,7 +47,7 @@
               }}
             </a-typography-paragraph>
           </a-typography>
-          <a-link @click="openFromDrawer()">
+          <a-link :disabled="continueLoading" @click="openFromDrawer()">
             <span v-if="paymentForm.from.length === 0">Choose</span>
             <span v-if="paymentForm.from.length > 0">Change</span>
           </a-link>
@@ -111,7 +111,11 @@
             </a-typography-paragraph>
           </a-typography>
           <a-link
-            :disabled="paymentForm.from.length > 0 ? false : true"
+            :disabled="
+              paymentForm.from.length > 0 && continueLoading === false
+                ? false
+                : true
+            "
             @click="openToDrawer()"
           >
             <span v-if="paymentForm.to.length === 0">Choose</span>
@@ -126,7 +130,11 @@
           :model="paymentForm"
           size="large"
           auto-label-width
-          :disabled="paymentForm.to.length > 0 ? false : true"
+          :disabled="
+            paymentForm.to.length > 0 && continueLoading === false
+              ? false
+              : true
+          "
         >
           <a-form-item
             field="amount"
