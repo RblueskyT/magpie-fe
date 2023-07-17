@@ -609,5 +609,27 @@ setupMock({
       }
       return failResponseWrap(null, 'You are not logged on.', 50008);
     });
+
+    // Continue a payment
+    Mock.mock(new RegExp('/api/payment/continue'), () => {
+      if (isLogon()) {
+        return successResponseWrap({
+          status: 200,
+          message: 'Successful operation.',
+        });
+      }
+      return failResponseWrap(null, 'You are not logged on.', 50008);
+    });
+
+    // Authorise a payment
+    Mock.mock(new RegExp('/api/payment/authorise'), () => {
+      if (isLogon()) {
+        return successResponseWrap({
+          status: 200,
+          message: 'Successful operation.',
+        });
+      }
+      return failResponseWrap(null, 'You are not logged on.', 50008);
+    });
   },
 });

@@ -63,6 +63,14 @@ export interface PayeeDeleteData {
   payeeId: number;
 }
 
+export interface PaymentData {
+  from: string;
+  to: string;
+  amount: number;
+  reference: string;
+  date: string;
+}
+
 export interface UserOperationRes {
   status: number;
   message: string;
@@ -94,4 +102,12 @@ export function addPayee(data: PayeeAddData) {
 
 export function deletePayee(data: PayeeDeleteData) {
   return axios.post<UserOperationRes>('/api/payee/delete', data);
+}
+
+export function continuePayment(data: PaymentData) {
+  return axios.post<UserOperationRes>('/api/payment/continue', data);
+}
+
+export function authorisePayment(data: PaymentData) {
+  return axios.post<UserOperationRes>('/api/payment/authorise', data);
 }
