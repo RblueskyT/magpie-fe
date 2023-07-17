@@ -124,7 +124,11 @@
         </div>
       </a-card>
       <!-- OTHER DETAILS CARD -->
-      <a-card class="other-details-card" :bordered="false">
+      <a-card
+        id="paymentPurposeContainer"
+        class="other-details-card"
+        :bordered="false"
+      >
         <a-form
           ref="payForm"
           :model="paymentForm"
@@ -209,7 +213,7 @@
               <a-date-picker
                 v-model="paymentFormTempDate"
                 :format="(value) => `${dayjs(value).format('DD MMM YYYY')}`"
-                :disabled-date="(current: any) => dayjs(current).isBefore(dayjs())"
+                :disabled-date="(current: any) => dayjs(current).isBefore(dayjs().subtract(1, 'day'))"
                 placeholder=" "
                 disabled-input
                 :allow-clear="false"
@@ -234,6 +238,7 @@
             <a-select
               v-model="paymentForm.paymentPurpose"
               placeholder=" "
+              popup-container="#paymentPurposeContainer"
               @change="disableContinue"
             >
               <a-option>Paying a friend</a-option>
@@ -302,7 +307,7 @@
     if (
       paymentForm.value.amount > 0 &&
       paymentForm.value.amount <=
-        bankAccounts.value[Number(paymentForm.from)].balanceInclPending
+        bankAccounts.value[Number(paymentForm.value.from)].balanceInclPending
     ) {
       validAmountFlag = true;
     }
