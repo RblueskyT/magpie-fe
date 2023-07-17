@@ -75,6 +75,7 @@
     ];
     return finalGroup;
   });
+  const currentScenario = ref(0);
   const bankAccounts: any = ref([]);
   const homePageLoading = ref(false);
   const bottomMenuKey = ref(['0']);
@@ -155,6 +156,7 @@
   });
 
   provide('group', readonly(group));
+  provide('currentScenario', currentScenario);
   provide('bankAccounts', bankAccounts);
   provide('homePageLoading', homePageLoading);
   provide('bottomMenuKey', bottomMenuKey);
