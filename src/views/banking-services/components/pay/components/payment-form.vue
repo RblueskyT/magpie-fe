@@ -272,6 +272,7 @@
   import dayjs from 'dayjs';
   import numberFormatter from '@/utils/number-formatter';
 
+  const group: any = inject('group');
   const bankAccounts: any = inject('bankAccounts');
   const paymentForm: any = inject('paymentForm');
   const paymentFormTempAmount: any = inject('paymentFormTempAmount');
@@ -280,6 +281,10 @@
   const payDrawerContent: any = inject('payDrawerContent');
   const continueLoading: any = inject('continueLoading');
   const disableContinueFlag: any = inject('disableContinueFlag');
+  const warningGuideDrawerVisibleFlag: any = inject(
+    'warningGuideDrawerVisibleFlag'
+  );
+  const warningDrawerVisibleFlag: any = inject('warningDrawerVisibleFlag');
   const amountInputFormatter = (value: string) => {
     const values = value.split('.');
     values[0] = values[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
@@ -344,6 +349,7 @@
     disableContinue();
   };
   const continuePayment = () => {
+    console.log(group);
     // todo
   };
 </script>

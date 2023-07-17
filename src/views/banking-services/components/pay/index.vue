@@ -64,6 +64,9 @@
   const payDrawerContent = ref(''); // 'from' or 'to'
   const continueLoading = ref(false);
   const disableContinueFlag = ref(true);
+  const warningGuideDrawerVisibleFlag = ref(false);
+  const warningGuideUserChoice = ref(0);
+  const warningDrawerVisibleFlag = ref(false);
   const cancelGoBack = () => {
     goBackModalPayVisibleFlag.value = false;
   };
@@ -85,6 +88,9 @@
   provide('payDrawerContent', payDrawerContent);
   provide('continueLoading', continueLoading);
   provide('disableContinueFlag', disableContinueFlag);
+  provide('warningGuideDrawerVisibleFlag', warningGuideDrawerVisibleFlag);
+  provide('warningGuideUserChoice', warningGuideUserChoice);
+  provide('warningDrawerVisibleFlag', warningDrawerVisibleFlag);
 </script>
 
 <style lang="less" scoped>
