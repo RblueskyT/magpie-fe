@@ -3,7 +3,7 @@
     <div class="warning-sign-container">
       <img
         style="width: 80px; height: 80px"
-        src="@/assets/images/warning-sign.png"
+        src="@/assets/images/warning-sign-circle.png"
         alt="Warning Sign"
       />
     </div>
@@ -11,37 +11,30 @@
       :heading="5"
       style="margin-top: 0px; margin-bottom: 32px; text-align: center"
     >
-      Details Don't Match Account
+      These Details Don't Match
     </a-typography-title>
-    <a-descriptions size="large" :column="1">
-      <a-descriptions-item label="Name">
-        {{ addPayeeFormData.name.toUpperCase() }}
-        <icon-close
-          v-if="addPayeeDrawerVisibleContent.includes('name')"
-          style="color: #f53f3f"
-        />
-        <icon-check v-else style="color: #00b42a" />
-      </a-descriptions-item>
-      <a-descriptions-item label="Account Type">
-        {{ addPayeeFormData.type }}
-        <icon-close
-          v-if="addPayeeDrawerVisibleContent.includes('type')"
-          style="color: #f53f3f"
-        />
-        <icon-check v-else style="color: #00b42a" />
-      </a-descriptions-item>
-      <a-descriptions-item label="Sort Code">
-        {{ addPayeeFormData.sortCode }} <icon-check style="color: #00b42a" />
-      </a-descriptions-item>
-      <a-descriptions-item label="Account No.">
-        {{ addPayeeFormData.accountNumber }}
-        <icon-check style="color: #00b42a" />
-      </a-descriptions-item>
-    </a-descriptions>
-    <a-typography-paragraph style="margin: 16px 0px">
-      The details you entered don't match the account you're sending money to.
-      Please double-check who you're sending money to and cancel this payment if
-      you think someone might be trying to scam you.
+    <a-typography-paragraph style="margin-bottom: 16px">
+      <span v-if="addPayeeDrawerVisibleContent === 'SCAN'">
+        The name you gave us doesn't match the name on the account.
+      </span>
+      <span v-if="addPayeeDrawerVisibleContent === 'name'">
+        The name you gave us doesn't match the name on the account.
+      </span>
+      <span v-if="addPayeeDrawerVisibleContent === 'type'">
+        The account type you gave us doesn't match the account.
+      </span>
+      <span v-if="addPayeeDrawerVisibleContent === 'name and type'">
+        The name and account type you gave us don't match the account.
+      </span>
+      You should call the payee on a number you trust to check the account
+      details.
+    </a-typography-paragraph>
+    <a-typography-paragraph style="margin-bottom: 16px">
+      We may not be able to get your money back if it goes to the wrong account.
+    </a-typography-paragraph>
+    <a-typography-paragraph style="margin-bottom: 16px">
+      <span style="font-weight: bold">Remember:</span> we'll never tell you to
+      move money to another account.
     </a-typography-paragraph>
     <a-button
       type="primary"

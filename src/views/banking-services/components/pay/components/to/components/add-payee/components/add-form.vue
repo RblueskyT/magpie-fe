@@ -1,16 +1,5 @@
 <template>
   <div class="add-form">
-    <a-alert
-      v-if="incorrectSCANFlag === true"
-      type="warning"
-      title="Unverifiable Payee"
-      banner
-      style="padding: 12px"
-    >
-      We could not verify the account you provided, please double-check the
-      account you're sending money to and cancel this payment if you think
-      someone might be trying to scam you.
-    </a-alert>
     <a-card class="add-form-card" :bordered="false">
       <a-form
         ref="addForm"
@@ -224,7 +213,6 @@
   const extraInfoTitle: any = inject('extraInfoTitle');
   const submitLoading: any = inject('submitLoading');
   const formValidFlag: any = inject('formValidFlag');
-  const incorrectSCANFlag: any = ref(false);
   const disableSubmitFlag = ref(true);
   const sortCodeFormatter = (sortCode: string) => {
     const sortCodeRegex = new RegExp(/^\d{6}$/);
@@ -276,9 +264,6 @@
     }
   };
   const submitAddForm = async () => {
-    if (incorrectSCANFlag.value === true) {
-      incorrectSCANFlag.value = false;
-    }
     submitLoading.value = true;
     try {
       const reqData = addPayeeFormData.value;
@@ -322,7 +307,8 @@
         }, 750);
       }
       if (resData.data.message === 'Incorrect SCAN.') {
-        incorrectSCANFlag.value = true;
+        addPayeeDrawerVisibleFlag.value = true;
+        addPayeeDrawerVisibleContent.value = 'SCAN';
       }
       if (resData.data.message === 'Incorrect name.') {
         addPayeeDrawerVisibleFlag.value = true;
@@ -352,7 +338,7 @@
 
   .add-form-card {
     padding: 12px;
-    margin: 12px 0px;
+    margin-bottom: 12px;
   }
 
   .add-form-card :deep(.arco-card-body) {
