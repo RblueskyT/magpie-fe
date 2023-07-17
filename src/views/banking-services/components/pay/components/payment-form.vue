@@ -359,9 +359,9 @@
       if (resData.data.status === 200) {
         const scenarioScript = group.value[currentScenario.value];
         if (scenarioScript.charAt(0) === '0') {
-          warningGuideDrawerVisibleFlag.value = true;
-        } else {
           warningDrawerVisibleFlag.value = true;
+        } else {
+          warningGuideDrawerVisibleFlag.value = true;
         }
       } else {
         Message.error('Sorry, you cannot continue the payment at this time');
