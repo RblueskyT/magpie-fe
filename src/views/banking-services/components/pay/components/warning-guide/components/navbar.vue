@@ -33,11 +33,9 @@
   const warningGuideDrawerVisibleFlag: any = inject(
     'warningGuideDrawerVisibleFlag'
   );
-  const warningGuideUserChoice: any = inject('warningGuideUserChoice');
   const backBtnHoverFlag = ref(false);
   const goBackToPay = () => {
     warningGuideDrawerVisibleFlag.value = false;
-    warningGuideUserChoice.value = 0;
   };
 </script>
 

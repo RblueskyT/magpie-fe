@@ -44,6 +44,34 @@
       <From v-if="payDrawerContent === 'from'" />
       <To v-if="payDrawerContent === 'to'" />
     </a-drawer>
+    <!-- APP FRAUD WARNING GUIDE -->
+    <a-drawer
+      v-model:visible="warningGuideDrawerVisibleFlag"
+      placement="right"
+      :mask="false"
+      :closable="false"
+      :width="500"
+      popup-container="#paymentModalDrawerContainer"
+      :esc-to-close="false"
+      :header="false"
+      :footer="false"
+    >
+      <WarningGuide />
+    </a-drawer>
+    <!-- APP FRAUD WARNING -->
+    <a-drawer
+      v-model:visible="warningDrawerVisibleFlag"
+      placement="right"
+      :mask="false"
+      :closable="false"
+      :width="500"
+      popup-container="#paymentModalDrawerContainer"
+      :esc-to-close="false"
+      :header="false"
+      :footer="false"
+    >
+      <Warning />
+    </a-drawer>
   </div>
 </template>
 
@@ -53,6 +81,8 @@
   import PaymentForm from './components/payment-form.vue';
   import From from './components/from/index.vue';
   import To from './components/to/index.vue';
+  import WarningGuide from './components/warning-guide/index.vue';
+  import Warning from './components/warning/index.vue';
 
   const bottomMenuKey: any = inject('bottomMenuKey');
   const paymentForm: any = inject('paymentForm');

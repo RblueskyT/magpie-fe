@@ -258,7 +258,7 @@
         long
         :loading="continueLoading"
         :disabled="disableContinueFlag"
-        @click="continuePayment()"
+        @click="submitPaymentForm()"
       >
         Continue
       </a-button>
@@ -271,8 +271,11 @@
   import enUS from '@arco-design/web-vue/es/locale/lang/en-us';
   import dayjs from 'dayjs';
   import numberFormatter from '@/utils/number-formatter';
+  import { Message } from '@arco-design/web-vue';
+  import { continuePayment } from '@/api/banking-services';
 
   const group: any = inject('group');
+  const currentScenario: any = inject('currentScenario');
   const bankAccounts: any = inject('bankAccounts');
   const paymentForm: any = inject('paymentForm');
   const paymentFormTempAmount: any = inject('paymentFormTempAmount');
@@ -348,9 +351,26 @@
     paymentForm.value.date = dayjs(value).format('DD MMM YYYY');
     disableContinue();
   };
-  const continuePayment = () => {
-    console.log(group);
-    // todo
+  const submitPaymentForm = async () => {
+    continueLoading.value = true;
+    try {
+      const reqData = paymentForm.value;
+      const resData = await continuePayment(reqData);
+      if (resData.data.status === 200) {
+        const scenarioScript = group.value[currentScenario.value];
+        if (scenarioScript.charAt(0) === '0') {
+          warningGuideDrawerVisibleFlag.value = true;
+        } else {
+          warningDrawerVisibleFlag.value = true;
+        }
+      } else {
+        Message.error('Sorry, you cannot continue the payment at this time');
+      }
+    } catch (err) {
+      Message.error((err as Error).message);
+    } finally {
+      continueLoading.value = false;
+    }
   };
 </script>
 
