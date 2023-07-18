@@ -37,7 +37,7 @@ setupMock({
                 sortCode: '02-43-24',
                 accountNumber: '15932834',
                 bankName: 'QUOTA BANK PLC',
-                reference: 'service charge',
+                reference: 'S DOSIA',
                 lastPaidDate: '18 Jun 2023',
                 lastPaidAmount: 52.12,
               },

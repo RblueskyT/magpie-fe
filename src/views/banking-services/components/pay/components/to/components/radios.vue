@@ -92,7 +92,7 @@
     paymentForm.value.reference =
       bankAccounts.value[Number(paymentForm.value.from)].payees[
         Number(paymentForm.value.to)
-      ].reference;
+      ].reference.toUpperCase();
     paymentForm.value.date = '';
     paymentFormTempDate.value = '';
     paymentForm.value.paymentPurpose = '';

@@ -107,7 +107,7 @@
         ).toString();
         paymentForm.value.amount = 0;
         paymentFormTempAmount.value = 0;
-        paymentForm.value.reference = reqData.reference;
+        paymentForm.value.reference = reqData.reference.toUpperCase();
         paymentForm.value.date = '';
         paymentFormTempDate.value = '';
         paymentForm.value.paymentPurpose = '';
