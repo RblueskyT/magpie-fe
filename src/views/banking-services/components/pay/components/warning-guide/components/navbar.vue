@@ -18,7 +18,22 @@
       </li>
     </ul>
     <div class="center-side">
-      <!-- RESERVED -->
+      <a-space direction="vertical" :size="0" fill>
+        <a-typography-text style="line-height: 26px; font-size: 16px">
+          You're about to pay
+        </a-typography-text>
+        <a-typography-text
+          style="line-height: 26px; font-size: 14px"
+          type="secondary"
+        >
+          {{
+            bankAccounts[Number(paymentForm.from)].payees[
+              Number(paymentForm.to)
+            ].name
+          }}
+          £{{ numberFormatter(paymentForm.amount.toString()) }}
+        </a-typography-text>
+      </a-space>
     </div>
     <ul class="right-side">
       <!-- RESERVED -->
@@ -29,7 +44,10 @@
 <script lang="ts" setup>
   import { ref, inject } from 'vue';
   import { changeBtnStyle } from '@/utils/change-btn-style';
+  import numberFormatter from '@/utils/number-formatter';
 
+  const bankAccounts: any = inject('bankAccounts');
+  const paymentForm: any = inject('paymentForm');
   const warningGuideDrawerVisibleFlag: any = inject(
     'warningGuideDrawerVisibleFlag'
   );
