@@ -26,13 +26,19 @@
           Have you been contacted and asked to make an urgent payment?
         </span>
       </a-typography-title>
-      <a-button shape="round" size="large" long style="margin-bottom: 16px">
+      <a-button
+        shape="round"
+        size="large"
+        long
+        style="margin-bottom: 16px"
+        @click="goToWarning(0)"
+      >
         <span v-if="paymentForm.paymentPurpose === 'Paying a friend'">
           Yes, I am
         </span>
         <span v-else>Yes, I have</span>
       </a-button>
-      <a-button shape="round" size="large" long>
+      <a-button shape="round" size="large" long @click="goToWarning(1)">
         <span v-if="paymentForm.paymentPurpose === 'Paying a friend'">
           No, I'm not
         </span>
@@ -93,6 +99,12 @@
   import { inject } from 'vue';
 
   const paymentForm: any = inject('paymentForm');
+  const warningGuideUserChoice: any = inject('warningGuideUserChoice');
+  const warningDrawerVisibleFlag: any = inject('warningDrawerVisibleFlag');
+  const goToWarning = (choice: number) => {
+    warningGuideUserChoice.value = choice;
+    warningDrawerVisibleFlag.value = true;
+  };
 </script>
 
 <style lang="less" scoped>
