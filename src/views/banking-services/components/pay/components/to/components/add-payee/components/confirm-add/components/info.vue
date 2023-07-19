@@ -9,7 +9,12 @@
     </div>
     <a-typography-title
       :heading="5"
-      style="margin-top: 0px; margin-bottom: 32px; text-align: center"
+      style="
+        margin-top: 0px;
+        margin-bottom: 32px;
+        text-align: center;
+        font-weight: bold;
+      "
     >
       These Details Don't Match
     </a-typography-title>

@@ -3,14 +3,14 @@
     <div style="padding: 12px 12px 32px 12px">
       <a-typography-title
         :heading="5"
-        style="margin-top: 16px; margin-bottom: 32px"
+        style="margin-top: 16px; margin-bottom: 32px; font-weight: bold"
       >
         <span v-if="paymentForm.paymentPurpose === 'Paying a friend'">
           Are you paying someone you've met online?
         </span>
         <span v-if="paymentForm.paymentPurpose === 'Paying family'">
-          Have you received this payment request from your family members by
-          email or text message?
+          Have you received the payment request from your family by email or
+          text message?
         </span>
         <span v-if="paymentForm.paymentPurpose === 'Paying for a service'">
           Have you received the invoice or bank account details by email or text

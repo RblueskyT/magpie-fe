@@ -1,25 +1,431 @@
 <template>
   <div class="continue-payment-container">
-    <div class="warning-sign-container">
+    <!-- WARNING SIGN -->
+    <div
+      v-if="group[currentScenario].charAt(2) === '1'"
+      class="warning-sign-container"
+    >
       <img
         style="width: 80px; height: 80px"
         src="@/assets/images/warning-sign.png"
         alt="Warning Sign"
       />
     </div>
+    <!-- WARNING TITLE -->
+    <a-typography-title
+      :heading="5"
+      style="
+        margin-top: 32px;
+        margin-bottom: 32px;
+        text-align: center;
+        font-weight: bold;
+      "
+    >
+      <span v-if="group[currentScenario].charAt(1) === '0'">
+        Could this be a scam?
+      </span>
+      <span
+        v-if="
+          group[currentScenario].charAt(1) === '1' &&
+          paymentForm.paymentPurpose === 'Paying a friend'
+        "
+      >
+        Could this be a friendship scam?
+      </span>
+      <span
+        v-if="
+          group[currentScenario].charAt(1) === '1' &&
+          paymentForm.paymentPurpose === 'Paying family'
+        "
+      >
+        Could this be a payment redirection scam?
+      </span>
+      <span
+        v-if="
+          group[currentScenario].charAt(1) === '1' &&
+          paymentForm.paymentPurpose === 'Paying for a service'
+        "
+      >
+        Could this be a payment redirection scam?
+      </span>
+      <span
+        v-if="
+          group[currentScenario].charAt(1) === '1' &&
+          paymentForm.paymentPurpose === 'Buying goods'
+        "
+      >
+        Could this be a purchase scam?
+      </span>
+      <span
+        v-if="
+          group[currentScenario].charAt(1) === '1' &&
+          paymentForm.paymentPurpose === 'Transfer to an investment'
+        "
+      >
+        Could this be an investment scam?
+      </span>
+      <span
+        v-if="
+          group[currentScenario].charAt(1) === '1' &&
+          paymentForm.paymentPurpose === 'Anything else'
+        "
+      >
+        Could this be a scam?
+      </span>
+    </a-typography-title>
+    <!-- WARNING MESSAGE ONE -->
+    <a-typography-paragraph
+      v-if="group[currentScenario].charAt(0) === '1'"
+      style="margin-bottom: 32px; padding: 0px 12px"
+    >
+      <span
+        v-if="
+          paymentForm.paymentPurpose === 'Paying a friend' &&
+          warningGuideUserChoice === 0
+        "
+      >
+        You've informed us you're paying someone you've met online. Please be
+        aware that this could be a scam.
+      </span>
+      <span
+        v-if="
+          paymentForm.paymentPurpose === 'Paying a friend' &&
+          warningGuideUserChoice === 1
+        "
+      >
+        You've informed us you're not paying someone you've met online. If this
+        is not the case, please be aware that it could be a scam.
+      </span>
+      <span
+        v-if="
+          paymentForm.paymentPurpose === 'Paying family' &&
+          warningGuideUserChoice === 0
+        "
+      >
+        You've informed us your family emailed or texted you the payment
+        request. Please be aware that this could be a scam.
+      </span>
+      <span
+        v-if="
+          paymentForm.paymentPurpose === 'Paying family' &&
+          warningGuideUserChoice === 1
+        "
+      >
+        You've informed us it's not the case that your family emailed or texted
+        you the payment request. If this is the case, please be aware that it
+        could be a scam.
+      </span>
+      <span
+        v-if="
+          paymentForm.paymentPurpose === 'Paying for a service' &&
+          warningGuideUserChoice === 0
+        "
+      >
+        You've informed us the invoice or bank account details were emailed or
+        texted to you. Please be aware that this could be a scam.
+      </span>
+      <span
+        v-if="
+          paymentForm.paymentPurpose === 'Paying for a service' &&
+          warningGuideUserChoice === 1
+        "
+      >
+        You've informed us it's not the case that the invoice or bank account
+        details were emailed or texted to you. If this is the case, please be
+        aware that this could be a scam.
+      </span>
+      <span
+        v-if="
+          paymentForm.paymentPurpose === 'Buying goods' &&
+          warningGuideUserChoice === 0
+        "
+      >
+        You've informed us you've been asked to pay without seeing the item.
+        Please be aware that this could be a scam.
+      </span>
+      <span
+        v-if="
+          paymentForm.paymentPurpose === 'Buying goods' &&
+          warningGuideUserChoice === 1
+        "
+      >
+        You've informed us it's not the case that you've been asked to pay
+        without seeing the item. If this is the case, please be aware that it
+        could be a scam.
+      </span>
+      <span
+        v-if="
+          paymentForm.paymentPurpose === 'Transfer to an investment' &&
+          warningGuideUserChoice === 0
+        "
+      >
+        You've informed us you've been cold-called about an investment
+        opportunity. Please be aware that this could be a scam.
+      </span>
+      <span
+        v-if="
+          paymentForm.paymentPurpose === 'Transfer to an investment' &&
+          warningGuideUserChoice === 1
+        "
+      >
+        You've informed us it's not the case that you've been cold-called about
+        an investment opportunity. If this is the case, please be aware that it
+        could be a scam.
+      </span>
+      <span
+        v-if="
+          paymentForm.paymentPurpose === 'Anything else' &&
+          warningGuideUserChoice === 0
+        "
+      >
+        You've informed us you've been contacted and asked to make an urgent
+        payment. Please be aware that this could be a scam.
+      </span>
+      <span
+        v-if="
+          paymentForm.paymentPurpose === 'Anything else' &&
+          warningGuideUserChoice === 1
+        "
+      >
+        You've informed us it's not the case that you've been contacted and
+        asked to make an urgent payment. If this is the case, please be aware
+        that it could be a scam.
+      </span>
+    </a-typography-paragraph>
+    <!-- WARNING MESSAGE TWO -->
+    <div style="margin-bottom: 32px; padding: 0px 12px">
+      <a-typography-title
+        :heading="6"
+        style="margin-top: 0px; margin-bottom: 16px; font-weight: bold"
+      >
+        <span
+          :style="
+            group[currentScenario].charAt(2) === '1'
+              ? 'color: #f53f3f'
+              : 'color: #1d2129'
+          "
+        >
+          Remember:
+        </span>
+      </a-typography-title>
+      <ul style="margin: 0px 0px; padding-left: 20px">
+        <li
+          :style="
+            group[currentScenario].charAt(2) === '1'
+              ? 'color: #f53f3f; margin-bottom: 16px'
+              : 'color: #1d2129; margin-bottom: 16px'
+          "
+        >
+          <a-typography-paragraph style="color: #1d2129; margin-bottom: 0px">
+            <span v-if="group[currentScenario].charAt(1) === '0'">
+              If a deal seems too good to be true, it's likely a scam.
+            </span>
+            <span
+              v-if="
+                group[currentScenario].charAt(1) === '1' &&
+                paymentForm.paymentPurpose === 'Paying a friend'
+              "
+            >
+              Criminals regularly use social networks and dating websites to
+              scam people, often building up a friendship over months.
+            </span>
+            <span
+              v-if="
+                group[currentScenario].charAt(1) === '1' &&
+                paymentForm.paymentPurpose === 'Paying family'
+              "
+            >
+              Criminals often attempt to intercept emails or text messages and
+              send you false bank account details. These emails or text messages
+              often look genuine.
+            </span>
+            <span
+              v-if="
+                group[currentScenario].charAt(1) === '1' &&
+                paymentForm.paymentPurpose === 'Paying for a service'
+              "
+            >
+              Criminals often attempt to intercept emails or text messages and
+              send you false bank account details. These emails or text messages
+              often look genuine.
+            </span>
+            <span
+              v-if="
+                group[currentScenario].charAt(1) === '1' &&
+                paymentForm.paymentPurpose === 'Buying goods'
+              "
+            >
+              Criminals post fake adverts and ask for upfront payment. If you
+              haven't seen the item in person, this could be a scam.
+            </span>
+            <span
+              v-if="
+                group[currentScenario].charAt(1) === '1' &&
+                paymentForm.paymentPurpose === 'Transfer to an investment'
+              "
+            >
+              If you've been cold-called or contacted out of the blue about an
+              investment opportunity, this is highly likely to be a scam.
+            </span>
+            <span
+              v-if="
+                group[currentScenario].charAt(1) === '1' &&
+                paymentForm.paymentPurpose === 'Anything else'
+              "
+            >
+              If a deal seems too good to be true, it's likely a scam.
+            </span>
+          </a-typography-paragraph>
+        </li>
+        <li
+          :style="
+            group[currentScenario].charAt(2) === '1'
+              ? 'color: #f53f3f'
+              : 'color: #1d2129'
+          "
+        >
+          <a-typography-paragraph style="color: #1d2129; margin-bottom: 0px">
+            <span v-if="group[currentScenario].charAt(1) === '0'">
+              The name and phone number of legitimate companies can be 'spoofed'
+              or faked. Please take a minute to check the payment details and
+              the reason for payment is genuine - this could save your money
+              from being stolen.
+            </span>
+            <span
+              v-if="
+                group[currentScenario].charAt(1) === '1' &&
+                paymentForm.paymentPurpose === 'Paying a friend'
+              "
+            >
+              Please think twice before sending money to someone you've met
+              online.
+            </span>
+            <span
+              v-if="
+                group[currentScenario].charAt(1) === '1' &&
+                paymentForm.paymentPurpose === 'Paying family'
+              "
+            >
+              Please take a minute to double-check the payment details by phone
+              or in person - this could save your money from being stolen.
+            </span>
+            <span
+              v-if="
+                group[currentScenario].charAt(1) === '1' &&
+                paymentForm.paymentPurpose === 'Paying for a service'
+              "
+            >
+              Please take a minute to double-check the payment details by phone
+              or in person - this could save your money from being stolen.
+            </span>
+            <span
+              v-if="
+                group[currentScenario].charAt(1) === '1' &&
+                paymentForm.paymentPurpose === 'Buying goods'
+              "
+            >
+              Please always complete checks to make sure the item and the seller
+              are genuine.
+            </span>
+            <span
+              v-if="
+                group[currentScenario].charAt(1) === '1' &&
+                paymentForm.paymentPurpose === 'Transfer to an investment'
+              "
+            >
+              Please check the company details thoroughly, including on the
+              Financial Conduct Authorities website (fca.org.uk), before
+              transferring any money.
+            </span>
+            <span
+              v-if="
+                group[currentScenario].charAt(1) === '1' &&
+                paymentForm.paymentPurpose === 'Anything else'
+              "
+            >
+              The name and phone number of legitimate companies can be 'spoofed'
+              or faked. Please take a minute to check the payment details and
+              the reason for payment is genuine - this could save your money
+              from being stolen.
+            </span>
+          </a-typography-paragraph>
+        </li>
+      </ul>
+    </div>
+    <!-- CHECKBOX -->
+    <div style="background-color: #f2f3f5; margin-bottom: 32px; padding: 12px">
+      <a-typography-paragraph style="margin-bottom: 16px">
+        Please don't ignore this as we're unlikely to be able to recover your
+        money if this is a scam.
+      </a-typography-paragraph>
+      <a-typography-paragraph style="margin-bottom: 16px; font-weight: bold">
+        If you're at all nervous, stop this payment and contact us immediately.
+      </a-typography-paragraph>
+      <div class="warning-checkbox-container">
+        <a-checkbox v-model="warningCheckboxFlag" @change="disableContinue">
+          I'm comfortable to make this payment
+        </a-checkbox>
+      </div>
+    </div>
+    <!-- BUTTONS -->
+    <!-- TODO: ACTUAL FUNCTIONS -->
+    <div style="padding: 0px 12px">
+      <a-button
+        type="primary"
+        shape="round"
+        size="large"
+        long
+        style="margin-bottom: 16px"
+      >
+        Cancel Payment
+      </a-button>
+      <a-button
+        shape="round"
+        size="large"
+        long
+        :disabled="disableContinuePaymentFlag"
+      >
+        Continue Payment
+      </a-button>
+    </div>
   </div>
 </template>
 
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+  import { ref, inject } from 'vue';
+
+  const group: any = inject('group');
+  const currentScenario: any = inject('currentScenario');
+  const paymentForm: any = inject('paymentForm');
+  const warningGuideDrawerVisibleFlag: any = inject(
+    'warningGuideDrawerVisibleFlag'
+  );
+  const warningGuideUserChoice: any = inject('warningGuideUserChoice');
+  const warningDrawerVisibleFlag: any = inject('warningDrawerVisibleFlag');
+  const warningCheckboxFlag = ref(false);
+  const disableContinuePaymentFlag = ref(true);
+  const disableContinue = () => {
+    if (warningCheckboxFlag.value === true) {
+      disableContinuePaymentFlag.value = false;
+    } else {
+      disableContinuePaymentFlag.value = true;
+    }
+  };
+</script>
 
 <style lang="less" scoped>
   .continue-payment-container {
     height: 100%;
-    padding: 12px;
   }
 
   .warning-sign-container {
-    margin-bottom: 32px;
+    margin-top: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .warning-checkbox-container {
     display: flex;
     justify-content: center;
     align-items: center;
