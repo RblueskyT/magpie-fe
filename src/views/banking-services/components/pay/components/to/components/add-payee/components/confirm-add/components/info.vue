@@ -77,6 +77,7 @@
   const paymentFormTempDate: any = inject('paymentFormTempDate');
   const payDrawerVisibleFlag: any = inject('payDrawerVisibleFlag');
   const payDrawerContent: any = inject('payDrawerContent');
+  const disableContinueFlag: any = inject('disableContinueFlag');
   const addPayeeFormData: any = inject('addPayeeFormData');
   const addPayeeDrawerVisibleFlag: any = inject('addPayeeDrawerVisibleFlag');
   const addPayeeDrawerVisibleContent: any = inject(
@@ -127,6 +128,7 @@
         addPayeeFormData.value.accountNumber = '';
         addPayeeFormData.value.reference = '';
         // Close the 'Pay To' drawer
+        disableContinueFlag.value = true;
         payDrawerVisibleFlag.value = false;
         payDrawerContent.value = '';
       } else {

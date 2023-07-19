@@ -376,6 +376,7 @@
         size="large"
         long
         style="margin-bottom: 16px"
+        @click="cancelPayment()"
       >
         Cancel Payment
       </a-button>
@@ -384,6 +385,7 @@
         size="large"
         long
         :disabled="disableContinuePaymentFlag"
+        @click="continuePayment()"
       >
         Continue Payment
       </a-button>
@@ -396,7 +398,11 @@
 
   const group: any = inject('group');
   const currentScenario: any = inject('currentScenario');
+  const bottomMenuKey: any = inject('bottomMenuKey');
   const paymentForm: any = inject('paymentForm');
+  const paymentFormTempAmount: any = inject('paymentFormTempAmount');
+  const paymentFormTempDate: any = inject('paymentFormTempDate');
+  const drawerTwoVisibleFlag: any = inject('drawerTwoVisibleFlag');
   const warningGuideDrawerVisibleFlag: any = inject(
     'warningGuideDrawerVisibleFlag'
   );
@@ -410,6 +416,30 @@
     } else {
       disableContinuePaymentFlag.value = true;
     }
+  };
+  const cancelPayment = () => {
+    // close the warning drawer
+    warningGuideDrawerVisibleFlag.value = false;
+    warningGuideUserChoice.value = 0;
+    warningDrawerVisibleFlag.value = false;
+    // close the payment form drawer
+    paymentForm.value.from = '';
+    paymentForm.value.to = '';
+    paymentForm.value.amount = 0;
+    paymentFormTempAmount.value = 0;
+    paymentForm.value.reference = '';
+    paymentForm.value.date = '';
+    paymentFormTempDate.value = '';
+    paymentForm.value.paymentPurpose = '';
+    drawerTwoVisibleFlag.value = false;
+    bottomMenuKey.value[0] = '0';
+    // update the current scenario
+    currentScenario.value = (currentScenario.value + 1) % 3;
+  };
+  const continuePayment = () => {
+    // todo
+    // open 'review details' drawer
+    // close the warning drawer
   };
 </script>
 
