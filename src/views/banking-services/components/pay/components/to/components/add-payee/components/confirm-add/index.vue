@@ -34,7 +34,7 @@
     justify-content: center;
     background-color: white;
     height: 80px;
-    border-bottom: 1px solid white;
+    border-bottom: 1px solid var(--color-neutral-3);
   }
 
   .add-payee-warning-layout > .arco-layout > .arco-layout-content {

@@ -19,7 +19,11 @@
       </li>
     </ul>
     <div class="center-side">
-      <!-- RESERVED -->
+      <a-typography-text
+        style="line-height: 52px; font-size: 16px; color: #1d2129"
+      >
+        Add New Payee
+      </a-typography-text>
     </div>
     <ul class="right-side">
       <!-- RESERVED -->

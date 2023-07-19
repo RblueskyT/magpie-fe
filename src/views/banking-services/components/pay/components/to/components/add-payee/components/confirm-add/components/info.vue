@@ -147,6 +147,7 @@
   }
 
   .warning-sign-container {
+    margin-top: 20px;
     margin-bottom: 32px;
     display: flex;
     justify-content: center;

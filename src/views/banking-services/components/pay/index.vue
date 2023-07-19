@@ -56,7 +56,7 @@
       :header="false"
       :footer="false"
     >
-      <WarningGuide />
+      <WarningGuide v-if="paymentForm.to.length > 0" />
     </a-drawer>
     <!-- APP FRAUD WARNING -->
     <a-drawer
@@ -70,7 +70,7 @@
       :header="false"
       :footer="false"
     >
-      <Warning />
+      <Warning v-if="paymentForm.to.length > 0" />
     </a-drawer>
   </div>
 </template>
