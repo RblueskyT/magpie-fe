@@ -20,7 +20,7 @@
     </ul>
     <div class="center-side">
       <a-typography-text style="line-height: 52px; font-size: 16px">
-        Confirm Delete
+        Delete Saved Payee
       </a-typography-text>
     </div>
     <ul class="right-side">
