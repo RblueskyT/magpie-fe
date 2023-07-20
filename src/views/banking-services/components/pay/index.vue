@@ -86,6 +86,20 @@
     >
       <ReviewDetails v-if="paymentForm.to.length > 0" />
     </a-drawer>
+    <!-- PAYMENT SUCCESS -->
+    <a-drawer
+      v-model:visible="paymentSuccessDrawerVisibleFlag"
+      placement="right"
+      :mask="false"
+      :closable="false"
+      :width="500"
+      popup-container="#paymentModalDrawerContainer"
+      :esc-to-close="false"
+      :header="false"
+      :footer="false"
+    >
+      <PaymentSuccess />
+    </a-drawer>
   </div>
 </template>
 
@@ -98,6 +112,7 @@
   import WarningGuide from './components/warning-guide/index.vue';
   import Warning from './components/warning/index.vue';
   import ReviewDetails from './components/review-details/index.vue';
+  import PaymentSuccess from './components/payment-success.vue';
 
   const bottomMenuKey: any = inject('bottomMenuKey');
   const paymentForm: any = inject('paymentForm');
@@ -113,6 +128,7 @@
   const warningGuideUserChoice = ref(0);
   const warningDrawerVisibleFlag = ref(false);
   const reviewDetailsDrawerVisibleFlag = ref(false);
+  const paymentSuccessDrawerVisibleFlag = ref(false);
   const cancelGoBack = () => {
     goBackModalPayVisibleFlag.value = false;
   };
@@ -138,6 +154,7 @@
   provide('warningGuideUserChoice', warningGuideUserChoice);
   provide('warningDrawerVisibleFlag', warningDrawerVisibleFlag);
   provide('reviewDetailsDrawerVisibleFlag', reviewDetailsDrawerVisibleFlag);
+  provide('paymentSuccessDrawerVisibleFlag', paymentSuccessDrawerVisibleFlag);
 </script>
 
 <style lang="less" scoped>

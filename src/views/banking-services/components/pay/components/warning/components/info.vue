@@ -393,7 +393,7 @@
 </template>
 
 <script lang="ts" setup>
-  import { ref, inject } from 'vue';
+  import { inject } from 'vue';
 
   const group: any = inject('group');
   const currentScenario: any = inject('currentScenario');
@@ -410,8 +410,8 @@
   const reviewDetailsDrawerVisibleFlag: any = inject(
     'reviewDetailsDrawerVisibleFlag'
   );
-  const warningCheckboxFlag = ref(false);
-  const disableContinuePaymentFlag = ref(true);
+  const warningCheckboxFlag: any = inject('warningCheckboxFlag');
+  const disableContinuePaymentFlag: any = inject('disableContinuePaymentFlag');
   const disableContinue = () => {
     if (warningCheckboxFlag.value === true) {
       disableContinuePaymentFlag.value = false;
@@ -421,8 +421,10 @@
   };
   const cancelPayment = () => {
     // close the warning drawer
-    warningGuideDrawerVisibleFlag.value = false;
     warningGuideUserChoice.value = 0;
+    warningGuideDrawerVisibleFlag.value = false;
+    warningCheckboxFlag.value = false;
+    disableContinuePaymentFlag.value = true;
     warningDrawerVisibleFlag.value = false;
     // close the payment form drawer
     paymentForm.value.from = '';

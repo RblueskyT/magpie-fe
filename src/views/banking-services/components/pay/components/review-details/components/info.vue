@@ -116,14 +116,13 @@
   import { authorisePayment } from '@/api/banking-services';
 
   const currentScenario: any = inject('currentScenario');
-  const bottomMenuKey: any = inject('bottomMenuKey');
   const bankAccounts: any = inject('bankAccounts');
   const billingRecords: any = inject('billingRecords');
   const pendingBillingRecords: any = inject('pendingBillingRecords');
   const paymentForm: any = inject('paymentForm');
   const paymentFormTempAmount: any = inject('paymentFormTempAmount');
   const paymentFormTempDate: any = inject('paymentFormTempDate');
-  const drawerTwoVisibleFlag: any = inject('drawerTwoVisibleFlag');
+  const disableContinueFlag: any = inject('disableContinueFlag');
   const warningGuideDrawerVisibleFlag: any = inject(
     'warningGuideDrawerVisibleFlag'
   );
@@ -133,6 +132,9 @@
     'reviewDetailsDrawerVisibleFlag'
   );
   const authoriseBtnLoading: any = inject('authoriseBtnLoading');
+  const paymentSuccessDrawerVisibleFlag: any = inject(
+    'paymentSuccessDrawerVisibleFlag'
+  );
   const authoriseThePayment = async () => {
     authoriseBtnLoading.value = true;
     try {
@@ -361,11 +363,7 @@
             ].out.unshift(newBillingRecord);
           }
         }
-        // close the warning drawer
-        warningGuideDrawerVisibleFlag.value = false;
-        warningGuideUserChoice.value = 0;
-        warningDrawerVisibleFlag.value = false;
-        // close the payment form drawer
+        // clear the payment form
         paymentForm.value.from = '';
         paymentForm.value.to = '';
         paymentForm.value.amount = 0;
@@ -374,10 +372,11 @@
         paymentForm.value.date = '';
         paymentFormTempDate.value = '';
         paymentForm.value.paymentPurpose = '';
-        drawerTwoVisibleFlag.value = false;
-        bottomMenuKey.value[0] = '0';
+        disableContinueFlag.value = true;
         // update the current scenario
         currentScenario.value = (currentScenario.value + 1) % 3;
+        // open the payment success drawer
+        paymentSuccessDrawerVisibleFlag.value = true;
       } else {
         Message.error('Sorry, you cannot authorise the payment at this time');
       }
@@ -388,8 +387,8 @@
     }
   };
   const changePaymentDetails = () => {
-    warningGuideDrawerVisibleFlag.value = false;
     warningGuideUserChoice.value = 0;
+    warningGuideDrawerVisibleFlag.value = false;
     warningDrawerVisibleFlag.value = false;
     reviewDetailsDrawerVisibleFlag.value = false;
   };

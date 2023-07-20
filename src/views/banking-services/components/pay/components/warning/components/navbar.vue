@@ -48,11 +48,13 @@
 
   const bankAccounts: any = inject('bankAccounts');
   const paymentForm: any = inject('paymentForm');
-  const warningGuideUserChoice: any = inject('warningGuideUserChoice');
   const warningDrawerVisibleFlag: any = inject('warningDrawerVisibleFlag');
+  const warningCheckboxFlag: any = inject('warningCheckboxFlag');
+  const disableContinuePaymentFlag: any = inject('disableContinuePaymentFlag');
   const backBtnHoverFlag = ref(false);
   const goBackToPayOrWarningGuide = () => {
-    warningGuideUserChoice.value = 0;
+    warningCheckboxFlag.value = false;
+    disableContinuePaymentFlag.value = true;
     warningDrawerVisibleFlag.value = false;
   };
 </script>
