@@ -72,6 +72,13 @@ export interface PaymentData {
   paymentPurpose: string;
 }
 
+export interface TransferData {
+  from: string;
+  to: string;
+  amount: number;
+  date: string;
+}
+
 export interface UserOperationRes {
   status: number;
   message: string;
@@ -111,4 +118,8 @@ export function continuePayment(data: PaymentData) {
 
 export function authorisePayment(data: PaymentData) {
   return axios.post<UserOperationRes>('/api/payment/authorise', data);
+}
+
+export function authoriseTransfer(data: TransferData) {
+  return axios.post<UserOperationRes>('/api/transfer/authorise', data);
 }

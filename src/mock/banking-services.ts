@@ -631,5 +631,16 @@ setupMock({
       }
       return failResponseWrap(null, 'You are not logged on.', 50008);
     });
+
+    // Authorise a transfer
+    Mock.mock(new RegExp('/api/transfer/authorise'), () => {
+      if (isLogon()) {
+        return successResponseWrap({
+          status: 200,
+          message: 'Successful operation.',
+        });
+      }
+      return failResponseWrap(null, 'You are not logged on.', 50008);
+    });
   },
 });
