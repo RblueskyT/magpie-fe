@@ -83,7 +83,7 @@ setupMock({
                       date: '25 Jun 2023',
                       balance: 1884.67,
                       pending: true,
-                      remark: 'FAST PAYMENT TO AMAZON.CO.UK',
+                      remark: 'FASTER PAYMENT TO AMAZON.CO.UK',
                     },
                   ],
                 },
@@ -147,7 +147,7 @@ setupMock({
                       date: '06 Jun 2023',
                       balance: 2381.09,
                       pending: false,
-                      remark: 'FAST PAYMENT TO GOOGLE YOUTUBEPREMIUM',
+                      remark: 'FASTER PAYMENT TO GOOGLE YOUTUBEPREMIUM',
                     },
                     {
                       type: 'Out',
@@ -342,7 +342,7 @@ setupMock({
                       date: '25 Jun 2023',
                       balance: 1884.67,
                       pending: true,
-                      remark: 'FAST PAYMENT TO AMAZON.CO.UK',
+                      remark: 'FASTER PAYMENT TO AMAZON.CO.UK',
                     },
                   ],
                 },
@@ -406,7 +406,7 @@ setupMock({
                       date: '06 Jun 2023',
                       balance: 2381.09,
                       pending: false,
-                      remark: 'FAST PAYMENT TO GOOGLE YOUTUBEPREMIUM',
+                      remark: 'FASTER PAYMENT TO GOOGLE YOUTUBEPREMIUM',
                     },
                     {
                       type: 'Out',
@@ -504,7 +504,7 @@ setupMock({
         let incorrectTypeFlag = true;
         if (sortCode === '40-37-25' && accountNumber === '19304373') {
           incorrectSCAN = false;
-          if (name.trim().toUpperCase() === 'DEXTER LTD') {
+          if (name.trim().toUpperCase() === 'DEXTER LOGISTICS') {
             incorrectNameFlag = false;
           }
           if (type === 'Business') {
@@ -513,7 +513,7 @@ setupMock({
         }
         if (sortCode === '30-90-89' && accountNumber === '20374916') {
           incorrectSCAN = false;
-          if (name.trim().toUpperCase() === 'LIBRA CRYPTO LTD') {
+          if (name.trim().toUpperCase() === 'LIBRA INVESTMENTS') {
             incorrectNameFlag = false;
           }
           if (type === 'Business') {
