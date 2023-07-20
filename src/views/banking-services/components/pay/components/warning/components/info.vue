@@ -368,7 +368,6 @@
       </div>
     </div>
     <!-- BUTTONS -->
-    <!-- TODO: ACTUAL FUNCTIONS -->
     <div style="padding: 0px 12px">
       <a-button
         type="primary"
@@ -440,6 +439,8 @@
     currentScenario.value = (currentScenario.value + 1) % 3;
   };
   const continuePayment = () => {
+    warningCheckboxFlag.value = false;
+    disableContinuePaymentFlag.value = true;
     reviewDetailsDrawerVisibleFlag.value = true;
   };
 </script>

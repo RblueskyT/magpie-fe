@@ -138,6 +138,7 @@
   const focusedAccountIdx: any = inject('focusedAccountIdx');
   const focusedAccount: any = inject('focusedAccount');
   const billingRecords: any = inject('billingRecords');
+  const pendingBillingRecords: any = inject('pendingBillingRecords');
   const currentPage: any = inject('currentPage');
   const totalPage: any = inject('totalPage');
   const billingRecordsLoading: any = inject('billingRecordsLoading');
@@ -179,6 +180,111 @@
           billingRecords.value[accountIdx][props.panel].concat(
             convertedResData
           );
+        // check if there are pending billing records
+        if (pendingBillingRecords.value[accountIdx][props.panel].length > 0) {
+          for (
+            let i =
+              pendingBillingRecords.value[accountIdx][props.panel].length - 1;
+            i > -1;
+            i -= 1
+          ) {
+            if (
+              pendingBillingRecords.value[accountIdx][props.panel][i]
+                .pending === true
+            ) {
+              if (
+                billingRecords.value[accountIdx][props.panel][0].title ===
+                'Pending'
+              ) {
+                billingRecords.value[accountIdx][props.panel].splice(
+                  1,
+                  0,
+                  pendingBillingRecords.value[accountIdx][props.panel][i]
+                );
+              } else {
+                billingRecords.value[accountIdx][props.panel].splice(
+                  0,
+                  0,
+                  { title: 'Pending' },
+                  pendingBillingRecords.value[accountIdx][props.panel][i]
+                );
+              }
+            } else if (
+              pendingBillingRecords.value[accountIdx][props.panel][i]
+                .pending === false &&
+              billingRecords.value[accountIdx][props.panel][0].title ===
+                'Pending'
+            ) {
+              for (
+                let j = 1;
+                j < billingRecords.value[accountIdx][props.panel].length;
+                j += 1
+              ) {
+                if (
+                  billingRecords.value[accountIdx][props.panel][j].title &&
+                  billingRecords.value[accountIdx][props.panel][j].title !==
+                    pendingBillingRecords.value[accountIdx][props.panel][i].date
+                ) {
+                  billingRecords.value[accountIdx][props.panel].splice(
+                    j,
+                    0,
+                    {
+                      title:
+                        pendingBillingRecords.value[accountIdx][props.panel][i]
+                          .date,
+                    },
+                    pendingBillingRecords.value[accountIdx][props.panel][i]
+                  );
+                  break;
+                }
+                if (
+                  billingRecords.value[accountIdx][props.panel][j].title &&
+                  billingRecords.value[accountIdx][props.panel][j].title ===
+                    pendingBillingRecords.value[accountIdx][props.panel][i].date
+                ) {
+                  billingRecords.value[accountIdx][props.panel].splice(
+                    j + 1,
+                    0,
+                    pendingBillingRecords.value[accountIdx][props.panel][i]
+                  );
+                  break;
+                }
+              }
+            } else {
+              if (
+                billingRecords.value[accountIdx][props.panel][0].title !==
+                pendingBillingRecords.value[accountIdx][props.panel][i].date
+              ) {
+                billingRecords.value[accountIdx][props.panel].splice(
+                  0,
+                  0,
+                  {
+                    title:
+                      pendingBillingRecords.value[accountIdx][props.panel][i]
+                        .date,
+                  },
+                  pendingBillingRecords.value[accountIdx][props.panel][i]
+                );
+                break;
+              }
+              if (
+                billingRecords.value[accountIdx][props.panel][0].title ===
+                pendingBillingRecords.value[accountIdx][props.panel][i].date
+              ) {
+                billingRecords.value[accountIdx][props.panel].splice(
+                  1,
+                  0,
+                  pendingBillingRecords.value[accountIdx][props.panel][i]
+                );
+                break;
+              }
+            }
+          }
+          pendingBillingRecords.value[accountIdx][props.panel].splice(
+            0,
+            pendingBillingRecords.value[accountIdx][props.panel].length
+          );
+        }
       } else {
         Message.error(
           'Sorry, the billing records cannot be retrieved at this time'

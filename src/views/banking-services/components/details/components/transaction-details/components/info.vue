@@ -112,7 +112,7 @@
   }
 
   .transaction-remark {
-    height: 72px;
+    min-height: 72px;
     width: 500px;
     padding: 12px 0px;
     text-align: center;

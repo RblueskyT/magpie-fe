@@ -95,6 +95,18 @@
       out: [],
     },
   ]);
+  const pendingBillingRecords: any = ref([
+    {
+      all: [],
+      in: [],
+      out: [],
+    },
+    {
+      all: [],
+      in: [],
+      out: [],
+    },
+  ]);
   const currentPage = ref([
     {
       all: 0,
@@ -163,6 +175,7 @@
   provide('focusedAccountIdx', focusedAccountIdx);
   provide('billingRecordsMaxHeight', billingRecordsMaxHeight);
   provide('billingRecords', billingRecords);
+  provide('pendingBillingRecords', pendingBillingRecords);
   provide('currentPage', currentPage);
   provide('totalPage', readonly(totalPage));
   provide('drawerTwoVisibleFlag', drawerTwoVisibleFlag);
