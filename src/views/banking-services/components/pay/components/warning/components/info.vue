@@ -408,6 +408,9 @@
   );
   const warningGuideUserChoice: any = inject('warningGuideUserChoice');
   const warningDrawerVisibleFlag: any = inject('warningDrawerVisibleFlag');
+  const reviewDetailsDrawerVisibleFlag: any = inject(
+    'reviewDetailsDrawerVisibleFlag'
+  );
   const warningCheckboxFlag = ref(false);
   const disableContinuePaymentFlag = ref(true);
   const disableContinue = () => {
@@ -437,9 +440,7 @@
     currentScenario.value = (currentScenario.value + 1) % 3;
   };
   const continuePayment = () => {
-    // todo
-    // open 'review details' drawer
-    // close the warning drawer
+    reviewDetailsDrawerVisibleFlag.value = true;
   };
 </script>
 

@@ -72,6 +72,20 @@
     >
       <Warning v-if="paymentForm.to.length > 0" />
     </a-drawer>
+    <!-- REVIEW PAYMENT DETAILS -->
+    <a-drawer
+      v-model:visible="reviewDetailsDrawerVisibleFlag"
+      placement="right"
+      :mask="false"
+      :closable="false"
+      :width="500"
+      popup-container="#paymentModalDrawerContainer"
+      :esc-to-close="false"
+      :header="false"
+      :footer="false"
+    >
+      <ReviewDetails v-if="paymentForm.to.length > 0" />
+    </a-drawer>
   </div>
 </template>
 
@@ -83,6 +97,7 @@
   import To from './components/to/index.vue';
   import WarningGuide from './components/warning-guide/index.vue';
   import Warning from './components/warning/index.vue';
+  import ReviewDetails from './components/review-details/index.vue';
 
   const bottomMenuKey: any = inject('bottomMenuKey');
   const paymentForm: any = inject('paymentForm');
@@ -97,6 +112,7 @@
   const warningGuideDrawerVisibleFlag = ref(false);
   const warningGuideUserChoice = ref(0);
   const warningDrawerVisibleFlag = ref(false);
+  const reviewDetailsDrawerVisibleFlag = ref(false);
   const cancelGoBack = () => {
     goBackModalPayVisibleFlag.value = false;
   };
@@ -121,6 +137,7 @@
   provide('warningGuideDrawerVisibleFlag', warningGuideDrawerVisibleFlag);
   provide('warningGuideUserChoice', warningGuideUserChoice);
   provide('warningDrawerVisibleFlag', warningDrawerVisibleFlag);
+  provide('reviewDetailsDrawerVisibleFlag', reviewDetailsDrawerVisibleFlag);
 </script>
 
 <style lang="less" scoped>

@@ -7,9 +7,10 @@
           type="outline"
           shape="circle"
           size="large"
+          :disabled="authoriseBtnLoading"
           @mouseenter="backBtnHoverFlag = true"
           @mouseleave="backBtnHoverFlag = false"
-          @click="goBackToPayOrWarningGuide()"
+          @click="goBackToWarning()"
         >
           <template #icon>
             <icon-arrow-left />
@@ -18,22 +19,9 @@
       </li>
     </ul>
     <div class="center-side">
-      <a-space direction="vertical" :size="0" fill>
-        <a-typography-text style="line-height: 26px; font-size: 16px">
-          You're about to pay
-        </a-typography-text>
-        <a-typography-text
-          style="line-height: 26px; font-size: 14px"
-          type="secondary"
-        >
-          {{
-            bankAccounts[Number(paymentForm.from)].payees[
-              Number(paymentForm.to)
-            ].name
-          }}
-          £{{ numberFormatter(paymentForm.amount.toString()) }}
-        </a-typography-text>
-      </a-space>
+      <a-typography-text style="line-height: 52px; font-size: 16px">
+        Review Payment Details
+      </a-typography-text>
     </div>
     <ul class="right-side">
       <!-- RESERVED -->
@@ -44,16 +32,14 @@
 <script lang="ts" setup>
   import { ref, inject } from 'vue';
   import { changeBtnStyle } from '@/utils/change-btn-style';
-  import numberFormatter from '@/utils/number-formatter';
 
-  const bankAccounts: any = inject('bankAccounts');
-  const paymentForm: any = inject('paymentForm');
-  const warningGuideUserChoice: any = inject('warningGuideUserChoice');
-  const warningDrawerVisibleFlag: any = inject('warningDrawerVisibleFlag');
+  const reviewDetailsDrawerVisibleFlag: any = inject(
+    'reviewDetailsDrawerVisibleFlag'
+  );
+  const authoriseBtnLoading: any = inject('authoriseBtnLoading');
   const backBtnHoverFlag = ref(false);
-  const goBackToPayOrWarningGuide = () => {
-    warningGuideUserChoice.value = 0;
-    warningDrawerVisibleFlag.value = false;
+  const goBackToWarning = () => {
+    reviewDetailsDrawerVisibleFlag.value = false;
   };
 </script>
 
