@@ -25,21 +25,7 @@
       </a-typography-text>
     </div>
     <ul class="right-side">
-      <li>
-        <a-button
-          :style="changeBtnStyle(addBtnHoverFlag)"
-          type="outline"
-          shape="circle"
-          size="large"
-          @mouseenter="addBtnHoverFlag = true"
-          @mouseleave="addBtnHoverFlag = false"
-          @click="goToAddPayee()"
-        >
-          <template #icon>
-            <icon-plus />
-          </template>
-        </a-button>
-      </li>
+      <!-- RESERVED -->
     </ul>
   </div>
 </template>
@@ -50,15 +36,10 @@
 
   const payDrawerVisibleFlag: any = inject('payDrawerVisibleFlag');
   const payDrawerContent: any = inject('payDrawerContent');
-  const payToDrawerVisibleFlag: any = inject('payToDrawerVisibleFlag');
   const backBtnHoverFlag = ref(false);
-  const addBtnHoverFlag = ref(false);
   const goBackToPay = () => {
     payDrawerVisibleFlag.value = false;
     payDrawerContent.value = '';
-  };
-  const goToAddPayee = () => {
-    payToDrawerVisibleFlag.value = true;
   };
 </script>
 

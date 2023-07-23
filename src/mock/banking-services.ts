@@ -44,7 +44,7 @@ setupMock({
             ],
           },
           {
-            bankAccountType: 'EDGE UP BANK ACCOUNT',
+            bankAccountType: 'EVERYDAY SAVER BANK ACCOUNT',
             sortCode: '01-02-03',
             accountNumber: '87654321',
             balance: 20000,

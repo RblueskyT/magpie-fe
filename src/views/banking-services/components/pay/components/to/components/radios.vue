@@ -1,5 +1,17 @@
 <template>
   <div class="radios">
+    <a-button
+      type="outline"
+      size="large"
+      long
+      style="margin-bottom: 12px"
+      @click="goToAddPayee()"
+    >
+      <template #icon>
+        <icon-plus />
+      </template>
+      <template #default>Add</template>
+    </a-button>
     <a-radio-group
       v-if="bankAccounts[Number(paymentForm.from)].payees.length > 0"
       v-model:model-value="paymentForm.to"
@@ -85,6 +97,7 @@
   const paymentFormTempDate: any = inject('paymentFormTempDate');
   const payDrawerVisibleFlag: any = inject('payDrawerVisibleFlag');
   const payDrawerContent: any = inject('payDrawerContent');
+  const payToDrawerVisibleFlag: any = inject('payToDrawerVisibleFlag');
   const disableContinueFlag: any = inject('disableContinueFlag');
   const goBackToPaymentForm = () => {
     paymentForm.value.amount = 0;
@@ -100,12 +113,19 @@
     payDrawerVisibleFlag.value = false;
     payDrawerContent.value = '';
   };
+  const goToAddPayee = () => {
+    payToDrawerVisibleFlag.value = true;
+  };
 </script>
 
 <style lang="less" scoped>
   .radios {
     height: 100%;
     padding: 12px;
+  }
+
+  .radios :deep(.arco-btn-size-large) {
+    border-radius: 4px;
   }
 
   .radios :deep(.arco-radio) {
