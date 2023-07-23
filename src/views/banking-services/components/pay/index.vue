@@ -105,6 +105,7 @@
 
 <script lang="ts" setup>
   import { ref, inject, provide } from 'vue';
+  import getARandomQuestionOrder from '@/utils/random-question-order';
   import NavBar from './components/navbar.vue';
   import PaymentForm from './components/payment-form.vue';
   import From from './components/from/index.vue';
@@ -124,6 +125,8 @@
   const payDrawerContent = ref(''); // 'from' or 'to'
   const continueLoading = ref(false);
   const disableContinueFlag = ref(true);
+  const currentQuestion = ref(0);
+  const questionOrder = ref([0, 1, 2]);
   const warningGuideDrawerVisibleFlag = ref(false);
   const warningGuideUserChoice = ref(0);
   const warningDrawerVisibleFlag = ref(false);
@@ -145,11 +148,15 @@
     bottomMenuKey.value[0] = '0';
   };
 
+  getARandomQuestionOrder(questionOrder.value);
+
   provide('goBackModalPayVisibleFlag', goBackModalPayVisibleFlag);
   provide('payDrawerVisibleFlag', payDrawerVisibleFlag);
   provide('payDrawerContent', payDrawerContent);
   provide('continueLoading', continueLoading);
   provide('disableContinueFlag', disableContinueFlag);
+  provide('currentQuestion', currentQuestion);
+  provide('questionOrder', questionOrder);
   provide('warningGuideDrawerVisibleFlag', warningGuideDrawerVisibleFlag);
   provide('warningGuideUserChoice', warningGuideUserChoice);
   provide('warningDrawerVisibleFlag', warningDrawerVisibleFlag);

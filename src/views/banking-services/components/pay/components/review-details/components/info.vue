@@ -116,6 +116,7 @@
   import { authorisePayment } from '@/api/banking-services';
 
   const currentScenario: any = inject('currentScenario');
+  const currentQuestion: any = inject('currentQuestion');
   const bankAccounts: any = inject('bankAccounts');
   const billingRecords: any = inject('billingRecords');
   const pendingBillingRecords: any = inject('pendingBillingRecords');
@@ -390,6 +391,7 @@
     warningGuideUserChoice.value = 0;
     warningGuideDrawerVisibleFlag.value = false;
     warningDrawerVisibleFlag.value = false;
+    currentQuestion.value = 0;
     reviewDetailsDrawerVisibleFlag.value = false;
   };
 </script>

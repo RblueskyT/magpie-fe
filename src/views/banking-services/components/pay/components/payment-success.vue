@@ -51,9 +51,12 @@
 
 <script lang="ts" setup>
   import { inject } from 'vue';
+  import getARandomQuestionOrder from '@/utils/random-question-order';
 
   const bottomMenuKey: any = inject('bottomMenuKey');
   const drawerTwoVisibleFlag: any = inject('drawerTwoVisibleFlag');
+  const currentQuestion: any = inject('currentQuestion');
+  const questionOrder: any = inject('questionOrder');
   const warningGuideDrawerVisibleFlag: any = inject(
     'warningGuideDrawerVisibleFlag'
   );
@@ -78,6 +81,8 @@
     warningGuideUserChoice.value = 0;
     warningGuideDrawerVisibleFlag.value = false;
     warningDrawerVisibleFlag.value = false;
+    currentQuestion.value = 0;
+    getARandomQuestionOrder(questionOrder.value);
     reviewDetailsDrawerVisibleFlag.value = false;
     paymentSuccessDrawerVisibleFlag.value = false;
   };
