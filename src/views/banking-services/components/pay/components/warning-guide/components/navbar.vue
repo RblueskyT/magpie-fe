@@ -46,16 +46,21 @@
   import { changeBtnStyle } from '@/utils/change-btn-style';
   import numberFormatter from '@/utils/number-formatter';
 
+  const currentQuestion: any = inject('currentQuestion');
+  const questionOrder: any = inject('questionOrder');
   const bankAccounts: any = inject('bankAccounts');
   const paymentForm: any = inject('paymentForm');
-  const warningGuideUserChoice: any = inject('warningGuideUserChoice');
   const warningGuideDrawerVisibleFlag: any = inject(
     'warningGuideDrawerVisibleFlag'
   );
   const backBtnHoverFlag = ref(false);
   const goBackToPay = () => {
-    warningGuideUserChoice.value = 0;
-    warningGuideDrawerVisibleFlag.value = false;
+    warningGuideDrawerVisibleFlag.value[
+      questionOrder.value[currentQuestion.value]
+    ] = false;
+    if (currentQuestion.value > 0) {
+      currentQuestion.value -= 1;
+    }
   };
 </script>
 

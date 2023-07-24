@@ -5,7 +5,7 @@
         <NavBar />
       </a-layout-header>
       <a-layout-content>
-        <Info />
+        <Info :question="props.question" />
       </a-layout-content>
       <a-layout-footer></a-layout-footer>
     </a-layout>
@@ -15,6 +15,10 @@
 <script lang="ts" setup>
   import NavBar from './components/navbar.vue';
   import Info from './components/info.vue';
+
+  const props = defineProps<{
+    question: number;
+  }>();
 </script>
 
 <style lang="less" scoped>
@@ -29,7 +33,7 @@
     justify-content: center;
     background-color: white;
     height: 80px;
-    border-bottom: 1px solid var(--color-neutral-3);
+    border-bottom: 1px solid white;
   }
 
   .payment-warning-guide-layout > .arco-layout > .arco-layout-content {

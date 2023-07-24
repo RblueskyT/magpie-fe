@@ -284,6 +284,8 @@
   const payDrawerContent: any = inject('payDrawerContent');
   const continueLoading: any = inject('continueLoading');
   const disableContinueFlag: any = inject('disableContinueFlag');
+  const currentQuestion: any = inject('currentQuestion');
+  const questionOrder: any = inject('questionOrder');
   const warningGuideDrawerVisibleFlag: any = inject(
     'warningGuideDrawerVisibleFlag'
   );
@@ -361,7 +363,9 @@
         if (scenarioScript.charAt(0) === '0') {
           warningDrawerVisibleFlag.value = true;
         } else {
-          warningGuideDrawerVisibleFlag.value = true;
+          warningGuideDrawerVisibleFlag.value[
+            questionOrder.value[currentQuestion.value]
+          ] = true;
         }
       } else {
         Message.error('Sorry, you cannot continue the payment at this time');

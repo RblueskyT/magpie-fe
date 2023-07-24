@@ -74,7 +74,7 @@
       </span>
     </a-typography-title>
     <!-- WARNING MESSAGE ONE -->
-    <a-typography-paragraph
+    <!-- <a-typography-paragraph
       v-if="group[currentScenario].charAt(0) === '1'"
       style="margin-bottom: 32px; padding: 0px 12px"
     >
@@ -191,7 +191,7 @@
         asked to make an urgent payment. If this is the case, please be aware
         that it could be a scam.
       </span>
-    </a-typography-paragraph>
+    </a-typography-paragraph> -->
     <!-- WARNING MESSAGE TWO -->
     <div style="margin-bottom: 32px; padding: 0px 12px">
       <a-typography-title
@@ -421,8 +421,8 @@
   };
   const cancelPayment = () => {
     // close the warning drawer
-    warningGuideUserChoice.value = 0;
-    warningGuideDrawerVisibleFlag.value = false;
+    warningGuideUserChoice.value.splice(0, 3, 0, 0, 0);
+    warningGuideDrawerVisibleFlag.value.splice(0, 3, false, false, false);
     warningCheckboxFlag.value = false;
     disableContinuePaymentFlag.value = true;
     warningDrawerVisibleFlag.value = false;

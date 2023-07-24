@@ -388,8 +388,8 @@
     }
   };
   const changePaymentDetails = () => {
-    warningGuideUserChoice.value = 0;
-    warningGuideDrawerVisibleFlag.value = false;
+    warningGuideUserChoice.value.splice(0, 3, 0, 0, 0);
+    warningGuideDrawerVisibleFlag.value.splice(0, 3, false, false, false);
     warningDrawerVisibleFlag.value = false;
     currentQuestion.value = 0;
     reviewDetailsDrawerVisibleFlag.value = false;

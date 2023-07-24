@@ -51,12 +51,12 @@
 
 <script lang="ts" setup>
   import { inject } from 'vue';
-  import getARandomQuestionOrder from '@/utils/random-question-order';
+  // import getARandomQuestionOrder from '@/utils/random-question-order';
 
   const bottomMenuKey: any = inject('bottomMenuKey');
   const drawerTwoVisibleFlag: any = inject('drawerTwoVisibleFlag');
   const currentQuestion: any = inject('currentQuestion');
-  const questionOrder: any = inject('questionOrder');
+  // const questionOrder: any = inject('questionOrder');
   const warningGuideDrawerVisibleFlag: any = inject(
     'warningGuideDrawerVisibleFlag'
   );
@@ -69,8 +69,8 @@
     'paymentSuccessDrawerVisibleFlag'
   );
   const gotIt = () => {
-    warningGuideUserChoice.value = 0;
-    warningGuideDrawerVisibleFlag.value = false;
+    warningGuideUserChoice.value.splice(0, 3, 0, 0, 0);
+    warningGuideDrawerVisibleFlag.value.splice(0, 3, false, false, false);
     warningDrawerVisibleFlag.value = false;
     reviewDetailsDrawerVisibleFlag.value = false;
     paymentSuccessDrawerVisibleFlag.value = false;
@@ -78,11 +78,11 @@
     bottomMenuKey.value[0] = '0';
   };
   const makeAnotherPayment = () => {
-    warningGuideUserChoice.value = 0;
-    warningGuideDrawerVisibleFlag.value = false;
+    warningGuideUserChoice.value.splice(0, 3, 0, 0, 0);
+    warningGuideDrawerVisibleFlag.value.splice(0, 3, false, false, false);
     warningDrawerVisibleFlag.value = false;
     currentQuestion.value = 0;
-    getARandomQuestionOrder(questionOrder.value);
+    // getARandomQuestionOrder(questionOrder.value);
     reviewDetailsDrawerVisibleFlag.value = false;
     paymentSuccessDrawerVisibleFlag.value = false;
   };

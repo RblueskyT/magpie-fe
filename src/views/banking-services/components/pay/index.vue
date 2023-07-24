@@ -44,9 +44,9 @@
       <From v-if="payDrawerContent === 'from'" />
       <To v-if="payDrawerContent === 'to'" />
     </a-drawer>
-    <!-- APP FRAUD WARNING GUIDE -->
+    <!-- APP FRAUD WARNING GUIDE: Q1 -->
     <a-drawer
-      v-model:visible="warningGuideDrawerVisibleFlag"
+      v-model:visible="warningGuideDrawerVisibleFlag[0]"
       placement="right"
       :mask="false"
       :closable="false"
@@ -56,7 +56,50 @@
       :header="false"
       :footer="false"
     >
-      <WarningGuide v-if="paymentForm.to.length > 0" />
+      <WarningGuide
+        v-if="
+          paymentForm.to.length > 0 && warningGuideDrawerVisibleFlag[0] === true
+        "
+        :question="0"
+      />
+    </a-drawer>
+    <!-- APP FRAUD WARNING GUIDE: Q2 -->
+    <a-drawer
+      v-model:visible="warningGuideDrawerVisibleFlag[1]"
+      placement="right"
+      :mask="false"
+      :closable="false"
+      :width="500"
+      popup-container="#paymentModalDrawerContainer"
+      :esc-to-close="false"
+      :header="false"
+      :footer="false"
+    >
+      <WarningGuide
+        v-if="
+          paymentForm.to.length > 0 && warningGuideDrawerVisibleFlag[1] === true
+        "
+        :question="1"
+      />
+    </a-drawer>
+    <!-- APP FRAUD WARNING GUIDE: Q3 -->
+    <a-drawer
+      v-model:visible="warningGuideDrawerVisibleFlag[2]"
+      placement="right"
+      :mask="false"
+      :closable="false"
+      :width="500"
+      popup-container="#paymentModalDrawerContainer"
+      :esc-to-close="false"
+      :header="false"
+      :footer="false"
+    >
+      <WarningGuide
+        v-if="
+          paymentForm.to.length > 0 && warningGuideDrawerVisibleFlag[2] === true
+        "
+        :question="2"
+      />
     </a-drawer>
     <!-- APP FRAUD WARNING -->
     <a-drawer
@@ -105,7 +148,7 @@
 
 <script lang="ts" setup>
   import { ref, inject, provide } from 'vue';
-  import getARandomQuestionOrder from '@/utils/random-question-order';
+  // import getARandomQuestionOrder from '@/utils/random-question-order';
   import NavBar from './components/navbar.vue';
   import PaymentForm from './components/payment-form.vue';
   import From from './components/from/index.vue';
@@ -127,8 +170,8 @@
   const disableContinueFlag = ref(true);
   const currentQuestion = ref(0);
   const questionOrder = ref([0, 1, 2]);
-  const warningGuideDrawerVisibleFlag = ref(false);
-  const warningGuideUserChoice = ref(0);
+  const warningGuideDrawerVisibleFlag = ref([false, false, false]);
+  const warningGuideUserChoice = ref([0, 0, 0]);
   const warningDrawerVisibleFlag = ref(false);
   const reviewDetailsDrawerVisibleFlag = ref(false);
   const paymentSuccessDrawerVisibleFlag = ref(false);
@@ -148,7 +191,7 @@
     bottomMenuKey.value[0] = '0';
   };
 
-  getARandomQuestionOrder(questionOrder.value);
+  // getARandomQuestionOrder(questionOrder.value);
 
   provide('goBackModalPayVisibleFlag', goBackModalPayVisibleFlag);
   provide('payDrawerVisibleFlag', payDrawerVisibleFlag);
