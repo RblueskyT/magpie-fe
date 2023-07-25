@@ -189,6 +189,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100%;
+    width: 476px;
+    position: absolute;
+    bottom: 12px;
+    top: 140px;
   }
 </style>
