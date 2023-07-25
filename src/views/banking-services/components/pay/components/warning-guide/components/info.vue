@@ -9,10 +9,13 @@
       />
     </div>
     <!-- Q1 PART 1 -->
-    <div v-if="props.question === 0" style="padding: 0px 12px 32px 12px">
+    <div
+      v-if="props.question === 0"
+      style="padding: 0px 12px 32px 12px; margin-top: 24px"
+    >
       <a-typography-title
         :heading="5"
-        style="margin-top: 16px; margin-bottom: 32px; font-weight: bold"
+        style="margin-top: 0px; margin-bottom: 32px; font-weight: bold"
       >
         <span v-if="paymentForm.paymentPurpose === 'Paying a friend'">
           Are you paying someone you've met online?
@@ -49,10 +52,13 @@
       </a-button>
     </div>
     <!-- Q2 PART 1 -->
-    <div v-if="props.question === 1" style="padding: 12px 12px 32px 12px">
+    <div
+      v-if="props.question === 1"
+      style="padding: 0px 12px 32px 12px; margin-top: 24px"
+    >
       <a-typography-title
         :heading="5"
-        style="margin-top: 16px; margin-bottom: 32px; font-weight: bold"
+        style="margin-top: 0px; margin-bottom: 32px; font-weight: bold"
       >
         <span v-if="paymentForm.paymentPurpose === 'Paying a friend'">
           Have you received the payment request from your friend by email or
@@ -90,10 +96,13 @@
       </a-button>
     </div>
     <!-- Q3 PART 1 -->
-    <div v-if="props.question === 2" style="padding: 12px 12px 32px 12px">
+    <div
+      v-if="props.question === 2"
+      style="padding: 0px 12px 32px 12px; margin-top: 24px"
+    >
       <a-typography-title
         :heading="5"
-        style="margin-top: 16px; margin-bottom: 32px; font-weight: bold"
+        style="margin-top: 0px; margin-bottom: 32px; font-weight: bold"
       >
         Have you been asked to make an urgent payment?
       </a-typography-title>

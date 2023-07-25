@@ -6,7 +6,7 @@
       class="warning-sign-container"
     >
       <img
-        style="width: 80px; height: 80px"
+        style="width: 64px; height: 64px"
         src="@/assets/images/warning-sign.png"
         alt="Warning Sign"
       />
@@ -15,8 +15,8 @@
     <a-typography-title
       :heading="5"
       style="
-        margin-top: 32px;
-        margin-bottom: 32px;
+        margin-top: 16px;
+        margin-bottom: 16px;
         text-align: center;
         font-weight: bold;
       "
@@ -74,126 +74,269 @@
       </span>
     </a-typography-title>
     <!-- WARNING MESSAGE ONE -->
-    <!-- <a-typography-paragraph
+    <a-typography-paragraph
       v-if="group[currentScenario].charAt(0) === '1'"
-      style="margin-bottom: 32px; padding: 0px 12px"
+      style="margin-bottom: 16px; padding: 0px 12px"
+    >
+      You've informed us:
+    </a-typography-paragraph>
+    <div
+      v-if="group[currentScenario].charAt(0) === '1'"
+      style="margin-bottom: 16px; padding: 0px 12px"
+    >
+      <ul style="margin: 0px 0px; padding-left: 20px">
+        <li
+          v-for="(itemQuestion, indexQuestion) in questionOrder"
+          :key="indexQuestion"
+        >
+          <a-typography-paragraph
+            v-if="itemQuestion === 0"
+            style="margin-bottom: 0px"
+          >
+            <span
+              v-if="
+                paymentForm.paymentPurpose === 'Paying a friend' &&
+                warningGuideUserChoice[0] === 0
+              "
+            >
+              You're paying someone you've met online.
+            </span>
+            <span
+              v-if="
+                paymentForm.paymentPurpose === 'Paying a friend' &&
+                warningGuideUserChoice[0] === 1
+              "
+            >
+              You're not paying someone you've met online.
+            </span>
+            <span
+              v-if="
+                paymentForm.paymentPurpose === 'Paying family' &&
+                warningGuideUserChoice[0] === 0
+              "
+            >
+              you're paying someone who claims to represent your family.
+            </span>
+            <span
+              v-if="
+                paymentForm.paymentPurpose === 'Paying family' &&
+                warningGuideUserChoice[0] === 1
+              "
+            >
+              It's not the case that you're paying someone who claims to
+              represent your family.
+            </span>
+            <span
+              v-if="
+                paymentForm.paymentPurpose === 'Paying for a service' &&
+                warningGuideUserChoice[0] === 0
+              "
+            >
+              You've been asked to pay before receiving the service.
+            </span>
+            <span
+              v-if="
+                paymentForm.paymentPurpose === 'Paying for a service' &&
+                warningGuideUserChoice[0] === 1
+              "
+            >
+              It's not the case that you've been asked to pay before receiving
+              the service.
+            </span>
+            <span
+              v-if="
+                paymentForm.paymentPurpose === 'Buying goods' &&
+                warningGuideUserChoice[0] === 0
+              "
+            >
+              You're currently on a phone call.
+            </span>
+            <span
+              v-if="
+                paymentForm.paymentPurpose === 'Buying goods' &&
+                warningGuideUserChoice[0] === 1
+              "
+            >
+              You're not currently on a phone call.
+            </span>
+            <span
+              v-if="
+                paymentForm.paymentPurpose === 'Transfer to an investment' &&
+                warningGuideUserChoice[0] === 0
+              "
+            >
+              You're currently on a phone call.
+            </span>
+            <span
+              v-if="
+                paymentForm.paymentPurpose === 'Transfer to an investment' &&
+                warningGuideUserChoice[0] === 1
+              "
+            >
+              You're not currently on a phone call.
+            </span>
+            <span
+              v-if="
+                paymentForm.paymentPurpose === 'Anything else' &&
+                warningGuideUserChoice[0] === 0
+              "
+            >
+              You're paying someone who claims to represent a government agency
+              or other organisation.
+            </span>
+            <span
+              v-if="
+                paymentForm.paymentPurpose === 'Anything else' &&
+                warningGuideUserChoice[0] === 1
+              "
+            >
+              You're not paying someone who claims to represent a government
+              agency or other organisation.
+            </span>
+          </a-typography-paragraph>
+          <a-typography-paragraph
+            v-if="itemQuestion === 1"
+            style="margin-bottom: 0px"
+          >
+            <span
+              v-if="
+                paymentForm.paymentPurpose === 'Paying a friend' &&
+                warningGuideUserChoice[1] === 0
+              "
+            >
+              Your friend emailed or texted you the payment request.
+            </span>
+            <span
+              v-if="
+                paymentForm.paymentPurpose === 'Paying a friend' &&
+                warningGuideUserChoice[1] === 1
+              "
+            >
+              It's not the case that your friend emailed or texted you the
+              payment request.
+            </span>
+            <span
+              v-if="
+                paymentForm.paymentPurpose === 'Paying family' &&
+                warningGuideUserChoice[1] === 0
+              "
+            >
+              Your family emailed or texted you the payment request.
+            </span>
+            <span
+              v-if="
+                paymentForm.paymentPurpose === 'Paying family' &&
+                warningGuideUserChoice[1] === 1
+              "
+            >
+              It's not the case that Your family emailed or texted you the
+              payment request.
+            </span>
+            <span
+              v-if="
+                paymentForm.paymentPurpose === 'Paying for a service' &&
+                warningGuideUserChoice[1] === 0
+              "
+            >
+              The invoice or bank account details were emailed or texted to you.
+            </span>
+            <span
+              v-if="
+                paymentForm.paymentPurpose === 'Paying for a service' &&
+                warningGuideUserChoice[1] === 1
+              "
+            >
+              It's not the case that the invoice or bank account details were
+              emailed or texted to you.
+            </span>
+            <span
+              v-if="
+                paymentForm.paymentPurpose === 'Buying goods' &&
+                warningGuideUserChoice[1] === 0
+              "
+            >
+              You've been asked to pay without seeing the item.
+            </span>
+            <span
+              v-if="
+                paymentForm.paymentPurpose === 'Buying goods' &&
+                warningGuideUserChoice[1] === 1
+              "
+            >
+              It's not the case that you've been asked to pay without seeing the
+              item.
+            </span>
+            <span
+              v-if="
+                paymentForm.paymentPurpose === 'Transfer to an investment' &&
+                warningGuideUserChoice[1] === 0
+              "
+            >
+              You've been cold-called about an investment opportunity.
+            </span>
+            <span
+              v-if="
+                paymentForm.paymentPurpose === 'Transfer to an investment' &&
+                warningGuideUserChoice[1] === 1
+              "
+            >
+              It's not the case that you've been cold-called about an investment
+              opportunity.
+            </span>
+            <span
+              v-if="
+                paymentForm.paymentPurpose === 'Anything else' &&
+                warningGuideUserChoice[1] === 0
+              "
+            >
+              You've received the payment request by email or text message.
+            </span>
+            <span
+              v-if="
+                paymentForm.paymentPurpose === 'Anything else' &&
+                warningGuideUserChoice[1] === 1
+              "
+            >
+              It's not the case that you've received the payment request by
+              email or text message.
+            </span>
+          </a-typography-paragraph>
+          <a-typography-paragraph
+            v-if="itemQuestion === 2"
+            style="margin-bottom: 0px"
+          >
+            <span v-if="warningGuideUserChoice[2] === 0">
+              You've been asked to make an urgent payment.
+            </span>
+            <span v-if="warningGuideUserChoice[2] === 1">
+              It's not the case that you've been asked to make an urgent
+              payment.
+            </span>
+          </a-typography-paragraph>
+        </li>
+      </ul>
+    </div>
+    <a-typography-paragraph
+      v-if="group[currentScenario].charAt(0) === '1'"
+      style="margin-bottom: 16px; padding: 0px 12px"
     >
       <span
         v-if="
-          paymentForm.paymentPurpose === 'Paying a friend' &&
-          warningGuideUserChoice === 0
+          warningGuideUserChoice[0] === 0 ||
+          warningGuideUserChoice[1] === 0 ||
+          warningGuideUserChoice[2] === 0
         "
       >
-        You've informed us you're paying someone you've met online. Please be
-        aware that this could be a scam.
+        You answered yes to some or all of the three questions. Please be aware
+        that this could be a scam.
       </span>
-      <span
-        v-if="
-          paymentForm.paymentPurpose === 'Paying a friend' &&
-          warningGuideUserChoice === 1
-        "
-      >
-        You've informed us you're not paying someone you've met online. If this
-        is not the case, please be aware that it could be a scam.
+      <span v-else>
+        You answered no to all the three questions. If this is not the case,
+        please be aware that it could be a scam.
       </span>
-      <span
-        v-if="
-          paymentForm.paymentPurpose === 'Paying family' &&
-          warningGuideUserChoice === 0
-        "
-      >
-        You've informed us your family emailed or texted you the payment
-        request. Please be aware that this could be a scam.
-      </span>
-      <span
-        v-if="
-          paymentForm.paymentPurpose === 'Paying family' &&
-          warningGuideUserChoice === 1
-        "
-      >
-        You've informed us it's not the case that your family emailed or texted
-        you the payment request. If this is the case, please be aware that it
-        could be a scam.
-      </span>
-      <span
-        v-if="
-          paymentForm.paymentPurpose === 'Paying for a service' &&
-          warningGuideUserChoice === 0
-        "
-      >
-        You've informed us the invoice or bank account details were emailed or
-        texted to you. Please be aware that this could be a scam.
-      </span>
-      <span
-        v-if="
-          paymentForm.paymentPurpose === 'Paying for a service' &&
-          warningGuideUserChoice === 1
-        "
-      >
-        You've informed us it's not the case that the invoice or bank account
-        details were emailed or texted to you. If this is the case, please be
-        aware that this could be a scam.
-      </span>
-      <span
-        v-if="
-          paymentForm.paymentPurpose === 'Buying goods' &&
-          warningGuideUserChoice === 0
-        "
-      >
-        You've informed us you've been asked to pay without seeing the item.
-        Please be aware that this could be a scam.
-      </span>
-      <span
-        v-if="
-          paymentForm.paymentPurpose === 'Buying goods' &&
-          warningGuideUserChoice === 1
-        "
-      >
-        You've informed us it's not the case that you've been asked to pay
-        without seeing the item. If this is the case, please be aware that it
-        could be a scam.
-      </span>
-      <span
-        v-if="
-          paymentForm.paymentPurpose === 'Transfer to an investment' &&
-          warningGuideUserChoice === 0
-        "
-      >
-        You've informed us you've been cold-called about an investment
-        opportunity. Please be aware that this could be a scam.
-      </span>
-      <span
-        v-if="
-          paymentForm.paymentPurpose === 'Transfer to an investment' &&
-          warningGuideUserChoice === 1
-        "
-      >
-        You've informed us it's not the case that you've been cold-called about
-        an investment opportunity. If this is the case, please be aware that it
-        could be a scam.
-      </span>
-      <span
-        v-if="
-          paymentForm.paymentPurpose === 'Anything else' &&
-          warningGuideUserChoice === 0
-        "
-      >
-        You've informed us you've been contacted and asked to make an urgent
-        payment. Please be aware that this could be a scam.
-      </span>
-      <span
-        v-if="
-          paymentForm.paymentPurpose === 'Anything else' &&
-          warningGuideUserChoice === 1
-        "
-      >
-        You've informed us it's not the case that you've been contacted and
-        asked to make an urgent payment. If this is the case, please be aware
-        that it could be a scam.
-      </span>
-    </a-typography-paragraph> -->
+    </a-typography-paragraph>
     <!-- WARNING MESSAGE TWO -->
-    <div style="margin-bottom: 32px; padding: 0px 12px">
+    <div style="margin-bottom: 16px; padding: 0px 12px">
       <a-typography-title
         :heading="6"
         style="margin-top: 0px; margin-bottom: 16px; font-weight: bold"
@@ -212,8 +355,8 @@
         <li
           :style="
             group[currentScenario].charAt(2) === '1'
-              ? 'color: #f53f3f; margin-bottom: 16px'
-              : 'color: #1d2129; margin-bottom: 16px'
+              ? 'color: #f53f3f'
+              : 'color: #1d2129'
           "
         >
           <a-typography-paragraph style="color: #1d2129; margin-bottom: 0px">
@@ -353,7 +496,7 @@
       </ul>
     </div>
     <!-- CHECKBOX -->
-    <div style="background-color: #f2f3f5; margin-bottom: 32px; padding: 12px">
+    <div style="background-color: #f2f3f5; margin-bottom: 16px; padding: 12px">
       <a-typography-paragraph style="margin-bottom: 16px">
         Please don't ignore this as we're unlikely to be able to recover your
         money if this is a scam.
@@ -402,6 +545,7 @@
   const paymentFormTempAmount: any = inject('paymentFormTempAmount');
   const paymentFormTempDate: any = inject('paymentFormTempDate');
   const drawerTwoVisibleFlag: any = inject('drawerTwoVisibleFlag');
+  const questionOrder: any = inject('questionOrder');
   const warningGuideDrawerVisibleFlag: any = inject(
     'warningGuideDrawerVisibleFlag'
   );
@@ -453,7 +597,7 @@
   }
 
   .warning-sign-container {
-    margin-top: 32px;
+    margin-top: 16px;
     display: flex;
     justify-content: center;
     align-items: center;
