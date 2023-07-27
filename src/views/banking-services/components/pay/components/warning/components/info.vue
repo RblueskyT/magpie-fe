@@ -74,12 +74,6 @@
       </span>
     </a-typography-title>
     <!-- WARNING MESSAGE ONE -->
-    <a-typography-paragraph
-      v-if="group[currentScenario].charAt(0) === '1'"
-      style="margin-bottom: 16px; padding: 0px 12px"
-    >
-      You've informed us:
-    </a-typography-paragraph>
     <div
       v-if="group[currentScenario].charAt(0) === '1'"
       style="margin-bottom: 16px; padding: 0px 12px"
@@ -99,7 +93,9 @@
                 warningGuideUserChoice[0] === 0
               "
             >
-              You're paying someone you've met online.
+              Being asked to pay someone you've met online is likely to be
+              fraudulent as people can easily hide their true identities on the
+              internet.
             </span>
             <span
               v-if="
@@ -107,7 +103,9 @@
                 warningGuideUserChoice[0] === 1
               "
             >
-              You're not paying someone you've met online.
+              While the payee is not someone you've met online, you should still
+              check the payment details with them by phone or in person in case
+              fraudsters impersonate them.
             </span>
             <span
               v-if="
@@ -115,7 +113,10 @@
                 warningGuideUserChoice[0] === 0
               "
             >
-              you're paying someone who claims to represent your family.
+              Fraudsters often pretend to be employees of a government agency or
+              someone you and your family know and falsely claim that your
+              family is in trouble and needs money. If this is the case, please
+              stop the payment and contact us immediately.
             </span>
             <span
               v-if="
@@ -123,8 +124,9 @@
                 warningGuideUserChoice[0] === 1
               "
             >
-              It's not the case that you're paying someone who claims to
-              represent your family.
+              While you're sure that the payee is your family, you should still
+              check the payment details with them by phone or in person in case
+              fraudsters impersonate them.
             </span>
             <span
               v-if="
@@ -132,7 +134,10 @@
                 warningGuideUserChoice[0] === 0
               "
             >
-              You've been asked to pay before receiving the service.
+              Being asked to pay before receiving a service is likely to be
+              fraudulent as fraudsters may try to sell you a service and ask you
+              to pay up front and they will break contact with you after you
+              complete the payment.
             </span>
             <span
               v-if="
@@ -140,8 +145,10 @@
                 warningGuideUserChoice[0] === 1
               "
             >
-              It's not the case that you've been asked to pay before receiving
-              the service.
+              While you're sure that you've received the service, you should
+              still check the payment details with the vendor through a trusted
+              phone number or in person to ensure that they initiated this
+              payment request.
             </span>
             <span
               v-if="
@@ -149,7 +156,9 @@
                 warningGuideUserChoice[0] === 0
               "
             >
-              You're currently on a phone call.
+              It's likely to be a scam if someone is selling you goods over the
+              phone and instruct you to make a payment, since it's difficult for
+              you to verify their true identity with only their phone number.
             </span>
             <span
               v-if="
@@ -157,7 +166,10 @@
                 warningGuideUserChoice[0] === 1
               "
             >
-              You're not currently on a phone call.
+              While you're not currently on a phone call, if you're paying
+              someone who has called you to sell goods, please be aware that
+              this could be a scam as it's difficult for you to verify their
+              true identity with only their phone number.
             </span>
             <span
               v-if="
@@ -165,7 +177,10 @@
                 warningGuideUserChoice[0] === 0
               "
             >
-              You're currently on a phone call.
+              It's likely to be a scam if someone is providing you with an
+              investment opportunity over the phone and instruct you to make a
+              payment, since it's difficult for you to verify their true
+              identity with only their phone number.
             </span>
             <span
               v-if="
@@ -173,7 +188,10 @@
                 warningGuideUserChoice[0] === 1
               "
             >
-              You're not currently on a phone call.
+              While you're not currently on a phone call, if you're paying
+              someone who has called you with investment opportunities, please
+              be aware that this could be a scam as it's difficult for you to
+              verify their true identity with only their phone number.
             </span>
             <span
               v-if="
@@ -181,8 +199,10 @@
                 warningGuideUserChoice[0] === 0
               "
             >
-              You're paying someone who claims to represent a government agency
-              or other organisation.
+              Fraudsters often pretend to be employees of a government agency or
+              other organisation and use this false identity to intimidate you
+              into paying them. If this is the case, please stop the payment and
+              contact us immediately.
             </span>
             <span
               v-if="
@@ -190,8 +210,9 @@
                 warningGuideUserChoice[0] === 1
               "
             >
-              You're not paying someone who claims to represent a government
-              agency or other organisation.
+              While you're not paying someone who claims to represent a
+              government agency or other organisation, you should still verify
+              their true identity in case they are a fraudster.
             </span>
           </a-typography-paragraph>
           <a-typography-paragraph
@@ -204,7 +225,10 @@
                 warningGuideUserChoice[1] === 0
               "
             >
-              Your friend emailed or texted you the payment request.
+              Fraudsters often send people emails or text messages pretending to
+              be their friend and ask them to pay to the account they've
+              provided. Please verify the authenticity of the email or text
+              message with your friend by phone or in person.
             </span>
             <span
               v-if="
@@ -212,8 +236,10 @@
                 warningGuideUserChoice[1] === 1
               "
             >
-              It's not the case that your friend emailed or texted you the
-              payment request.
+              While you didn't receive your friend's payment request via email
+              or text message, you should still check the payment details with
+              your friend by phone or in person to ensure that the payment
+              details are correct.
             </span>
             <span
               v-if="
@@ -221,7 +247,10 @@
                 warningGuideUserChoice[1] === 0
               "
             >
-              Your family emailed or texted you the payment request.
+              Fraudsters often send people emails or text messages pretending to
+              be their family and ask them to pay to the account they've
+              provided. Please verify the authenticity of the email or text
+              message with your family by phone or in person.
             </span>
             <span
               v-if="
@@ -229,8 +258,10 @@
                 warningGuideUserChoice[1] === 1
               "
             >
-              It's not the case that Your family emailed or texted you the
-              payment request.
+              While you didn't receive your family's payment request via email
+              or text message, you should still check the payment details with
+              your family by phone or in person to ensure that the payment
+              details are correct.
             </span>
             <span
               v-if="
@@ -238,7 +269,10 @@
                 warningGuideUserChoice[1] === 0
               "
             >
-              The invoice or bank account details were emailed or texted to you.
+              Fraudsters often send people emails or text messages pretending to
+              be an existing vendor and ask them to pay to the account they've
+              provided. Please verify the authenticity of the email or text
+              message with the vendor by phone or in person.
             </span>
             <span
               v-if="
@@ -246,8 +280,10 @@
                 warningGuideUserChoice[1] === 1
               "
             >
-              It's not the case that the invoice or bank account details were
-              emailed or texted to you.
+              While you didn't receive the invoice or bank account details via
+              email or text message, you should still check the payment details
+              with the vendor by phone or in person to ensure that the payment
+              details are correct.
             </span>
             <span
               v-if="
@@ -255,7 +291,10 @@
                 warningGuideUserChoice[1] === 0
               "
             >
-              You've been asked to pay without seeing the item.
+              Being asked to pay without seeing the item is likely to be
+              fraudulent as fraudsters may try to sell you goods and ask you to
+              pay up front and they will break contact with you after you
+              complete the payment.
             </span>
             <span
               v-if="
@@ -263,8 +302,9 @@
                 warningGuideUserChoice[1] === 1
               "
             >
-              It's not the case that you've been asked to pay without seeing the
-              item.
+              While you're sure that you've seen the item, you should still
+              check the payment details with the vendor by phone or in person to
+              ensure that the payment details are correct.
             </span>
             <span
               v-if="
@@ -272,7 +312,10 @@
                 warningGuideUserChoice[1] === 0
               "
             >
-              You've been cold-called about an investment opportunity.
+              It's likely to be a scam if someone has cold-called you with
+              investment opportunities as fraudsters often pretend to be
+              employees of an existing bank or investment company and lure
+              victims over the phone.
             </span>
             <span
               v-if="
@@ -280,8 +323,11 @@
                 warningGuideUserChoice[1] === 1
               "
             >
-              It's not the case that you've been cold-called about an investment
-              opportunity.
+              While you haven't been cold-called about an investment
+              opportunity, you should still verify the details of your chosen
+              bank or investment company, since fraudsters can easily make up a
+              fake bank or investment company through various means, such as
+              setting up a fake official website.
             </span>
             <span
               v-if="
@@ -289,7 +335,10 @@
                 warningGuideUserChoice[1] === 0
               "
             >
-              You've received the payment request by email or text message.
+              Fraudsters often send you an email or text message pretending to
+              be the payee and ask you to pay to the account they've provided.
+              Please verify the authenticity of the email or text message with
+              the payee by phone or in person.
             </span>
             <span
               v-if="
@@ -297,8 +346,10 @@
                 warningGuideUserChoice[1] === 1
               "
             >
-              It's not the case that you've received the payment request by
-              email or text message.
+              While you didn't receive the payee's payment request via email or
+              text message, you should still check the payment details with the
+              payee by phone or in person to ensure that the payment details are
+              correct.
             </span>
           </a-typography-paragraph>
           <a-typography-paragraph
@@ -306,35 +357,20 @@
             style="margin-bottom: 0px"
           >
             <span v-if="warningGuideUserChoice[2] === 0">
-              You've been asked to make an urgent payment.
+              Fraudsters often use high-pressure tactics to force victims to
+              send money quickly that they have no time to check payment details
+              (e.g., the money is needed urgently). Please don't feel pressured
+              into sending money to someone before you are confident that it's
+              not a scam.
             </span>
             <span v-if="warningGuideUserChoice[2] === 1">
-              It's not the case that you've been asked to make an urgent
-              payment.
+              While you did not state that the payment was urgent, you should
+              still take time to check whether this payment is genuine.
             </span>
           </a-typography-paragraph>
         </li>
       </ul>
     </div>
-    <a-typography-paragraph
-      v-if="group[currentScenario].charAt(0) === '1'"
-      style="margin-bottom: 16px; padding: 0px 12px"
-    >
-      <span
-        v-if="
-          warningGuideUserChoice[0] === 0 ||
-          warningGuideUserChoice[1] === 0 ||
-          warningGuideUserChoice[2] === 0
-        "
-      >
-        You answered yes to some or all of the three questions. Please be aware
-        that this could be a scam.
-      </span>
-      <span v-else>
-        You answered no to all the three questions. If this is not the case,
-        please be aware that it could be a scam.
-      </span>
-    </a-typography-paragraph>
     <!-- WARNING MESSAGE TWO -->
     <div style="margin-bottom: 16px; padding: 0px 12px">
       <a-typography-title
