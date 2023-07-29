@@ -52,6 +52,7 @@
       :footer="false"
     >
       <Pay v-if="bottomMenuKey[0] === '1'" />
+      <Transfer v-if="bottomMenuKey[0] === '2'" />
     </a-drawer>
   </div>
 </template>
@@ -64,6 +65,7 @@
   import BottomMenu from './components/bottom-menu.vue';
   import AccountDetails from './components/details/index.vue';
   import Pay from './components/pay/index.vue';
+  import Transfer from './components/transfer/index.vue';
 
   const group = computed(() => {
     const rawGroup = getGroup();
@@ -141,6 +143,14 @@
   });
   const paymentFormTempAmount = ref(0);
   const paymentFormTempDate = ref('');
+  const transferForm = ref({
+    from: '',
+    to: '',
+    amount: 0,
+    date: '',
+  });
+  const transferFormTempAmount = ref(0);
+  const transferFormTempDate = ref('');
 
   // Check whether to open the drawer - details
   watch(focusedAccountIdx, () => {
@@ -182,6 +192,9 @@
   provide('paymentForm', paymentForm);
   provide('paymentFormTempAmount', paymentFormTempAmount);
   provide('paymentFormTempDate', paymentFormTempDate);
+  provide('transferForm', transferForm);
+  provide('transferFormTempAmount', transferFormTempAmount);
+  provide('transferFormTempDate', transferFormTempDate);
 </script>
 
 <style lang="less" scoped>

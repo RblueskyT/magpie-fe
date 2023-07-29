@@ -513,7 +513,7 @@ setupMock({
         }
         if (sortCode === '30-90-89' && accountNumber === '20374916') {
           incorrectSCAN = false;
-          if (name.trim().toUpperCase() === 'LIBRA INVESTMENTS') {
+          if (name.trim().toUpperCase() === 'MAGPIE INVESTMENTS') {
             incorrectNameFlag = false;
           }
           if (type === 'Business') {

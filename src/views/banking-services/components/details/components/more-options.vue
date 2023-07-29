@@ -10,7 +10,7 @@
         </a-button>
       </a-list-item>
       <a-list-item>
-        <a-button type="text" size="large" long>
+        <a-button type="text" size="large" long @click="goToTransfer()">
           <template #icon>
             <icon-swap />
           </template>
@@ -49,9 +49,16 @@
   const bottomMenuKey: any = inject('bottomMenuKey');
   const drawerTwoVisibleFlag: any = inject('drawerTwoVisibleFlag');
   const paymentForm: any = inject('paymentForm');
+  const transferForm: any = inject('transferForm');
   const goToPay = () => {
     paymentForm.value.from = focusedAccountIdx.value;
     bottomMenuKey.value[0] = '1';
+    drawerTwoVisibleFlag.value = true;
+    moreOptionsDrawerVisibleFlag.value = false;
+  };
+  const goToTransfer = () => {
+    transferForm.value.from = focusedAccountIdx.value;
+    bottomMenuKey.value[0] = '2';
     drawerTwoVisibleFlag.value = true;
     moreOptionsDrawerVisibleFlag.value = false;
   };
