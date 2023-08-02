@@ -618,7 +618,7 @@
     drawerTwoVisibleFlag.value = false;
     bottomMenuKey.value[0] = '0';
     // update the current scenario
-    currentScenario.value = (currentScenario.value + 1) % 3;
+    currentScenario.value = (currentScenario.value + 1) % 4;
   };
   const continuePayment = () => {
     warningCheckboxFlag.value = false;

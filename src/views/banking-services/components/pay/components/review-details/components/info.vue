@@ -375,7 +375,7 @@
         paymentForm.value.paymentPurpose = '';
         disableContinueFlag.value = true;
         // update the current scenario
-        currentScenario.value = (currentScenario.value + 1) % 3;
+        currentScenario.value = (currentScenario.value + 1) % 4;
         // open the payment success drawer
         paymentSuccessDrawerVisibleFlag.value = true;
       } else {
