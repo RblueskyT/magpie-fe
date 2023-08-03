@@ -534,7 +534,7 @@ setupMock({
           if (name.trim().toUpperCase() === 'NEO GORDON') {
             incorrectNameFlag = false;
           }
-          if (type === 'Business') {
+          if (type === 'Personal') {
             incorrectTypeFlag = false;
           }
         }
