@@ -265,7 +265,6 @@
                   },
                   pendingBillingRecords.value[accountIdx][props.panel][i]
                 );
-                break;
               }
               if (
                 billingRecords.value[accountIdx][props.panel][0].title ===
@@ -276,7 +275,6 @@
                   0,
                   pendingBillingRecords.value[accountIdx][props.panel][i]
                 );
-                break;
               }
             }
           }
