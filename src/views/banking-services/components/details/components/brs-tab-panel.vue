@@ -252,6 +252,16 @@
               }
             } else {
               if (
+                billingRecords.value[accountIdx][props.panel][0].title ===
+                pendingBillingRecords.value[accountIdx][props.panel][i].date
+              ) {
+                billingRecords.value[accountIdx][props.panel].splice(
+                  1,
+                  0,
+                  pendingBillingRecords.value[accountIdx][props.panel][i]
+                );
+              }
+              if (
                 billingRecords.value[accountIdx][props.panel][0].title !==
                 pendingBillingRecords.value[accountIdx][props.panel][i].date
               ) {
@@ -263,16 +273,6 @@
                       pendingBillingRecords.value[accountIdx][props.panel][i]
                         .date,
                   },
-                  pendingBillingRecords.value[accountIdx][props.panel][i]
-                );
-              }
-              if (
-                billingRecords.value[accountIdx][props.panel][0].title ===
-                pendingBillingRecords.value[accountIdx][props.panel][i].date
-              ) {
-                billingRecords.value[accountIdx][props.panel].splice(
-                  1,
-                  0,
                   pendingBillingRecords.value[accountIdx][props.panel][i]
                 );
               }
